@@ -1,0 +1,62 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+				xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+				xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                template="/WEB-INF/template.xhtml">
+
+	<ui:define name="header">
+		<h1>#{i18n['title.createCharacter']}</h1>
+	</ui:define>
+    <ui:define name="content">
+		<h:form>
+			<h:panelGrid columns="3">
+				<h:outputText value="#{i18n['character.name']}"></h:outputText>
+				<h:inputText id="characterName"
+					value="#{characterBean.name}"
+					required="true"
+					requiredMessage="#{i18n['character.name.validation']}">
+				</h:inputText>
+				<h:message for="characterName" styleClass="errorMessage"/>
+				
+				
+				<h:outputText value="#{i18n['character.sexe']}"></h:outputText>
+				<h:selectOneMenu value = "#{characterBean.sexe}" id="sexe" 	
+				required="true"
+				requiredMessage="#{i18n['character.sexe.validation']}">
+				> 
+					<f:selectItem itemValue = "0" itemLabel = "#{i18n['character.sexe']}" /> 
+   					<f:selectItem itemValue = "1" itemLabel = "#{i18n['character.sexe.male']}" /> 
+   					<f:selectItem itemValue = "2" itemLabel = "#{i18n['character.sexe.female']}" />
+				</h:selectOneMenu>
+				<h:message for="sexe" styleClass="errorMessage"/>
+			 	
+			 	<h:outputText value="#{i18n['character.race']}"></h:outputText>
+				<h:selectOneMenu value = "#{characterBean.race}" id="race" 	
+				required="true"
+				requiredMessage="#{i18n['character.race.validation']}">
+				> 
+					<f:selectItem itemValue = "0" itemLabel = "#{i18n['character.race']}" /> 
+   					<f:selectItem itemValue = "1" itemLabel = "#{i18n['character.race']}" /> 
+   					<f:selectItem itemValue = "2" itemLabel = "#{i18n['character.race']}" />
+				</h:selectOneMenu>
+				<h:message for="race" styleClass="errorMessage"/>
+				 
+				<h:outputText value="#{i18n['character.classe']}"></h:outputText>
+				<h:selectOneMenu value = "#{characterBean.classe}" id="classe" 	
+				required="true"
+				requiredMessage="#{i18n['character.classe.validation']}">
+				> 
+					<f:selectItem itemValue = "0" itemLabel = "#{i18n['character.classe']}" /> 
+   					<f:selectItem itemValue = "1" itemLabel = "#{i18n['character.classe']}" /> 
+   					<f:selectItem itemValue = "2" itemLabel = "#{i18n['character.classe']}" />
+				</h:selectOneMenu>
+				<h:message for="race" styleClass="errorMessage"/>	
+			</h:panelGrid>
+			<h:commandButton value="#{i18n['user.registration']}" action="#{userBean.submitNewUser}">
+			</h:commandButton>
+		</h:form>
+    </ui:define>
+
+</ui:composition>

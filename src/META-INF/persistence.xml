@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="rolePlayingGame" transaction-type="JTA">
+		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+		<jta-data-source>java:comp/env/jdbc/mydb</jta-data-source>
+		
+		<class>entities.Achievement</class>
+		<class>entities.AchievementOfCharacter</class>
+		<class>entities.AchievementOfCharacterPK</class>
+		<class>entities.Category</class>
+		<class>entities.Character</class>
+		<class>entities.Classe</class>
+		<class>entities.HallOfFame</class>
+		<class>entities.HallOfFamePK</class>
+		<class>entities.Inventory</class>
+		<class>entities.InventoryPK</class>
+		<class>entities.Item</class>
+		<class>entities.Race</class>
+		<class>entities.Role</class>
+		<class>entities.SecretQuestion</class>
+		<class>entities.Title</class>
+		<class>entities.TypeItem</class>
+		<class>entities.User</class>
+		
+		<properties>
+			<property name="eclipselink.ddl-generation.output-mode" value="database"/>
+			<property name="eclipselink.ddl-generation" value="create-tables"/>				
+		</properties>
+	</persistence-unit>
+</persistence>
