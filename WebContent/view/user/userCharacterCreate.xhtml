@@ -6,7 +6,7 @@
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
                 template="/WEB-INF/template.xhtml">
 
-	<ui:define name="header">
+	<ui:define name="header">  
 		<h1>#{i18n['title.createCharacter']}</h1>
 	</ui:define>
     <ui:define name="content">
@@ -19,7 +19,6 @@
 					requiredMessage="#{i18n['character.name.validation']}">
 				</h:inputText>
 				<h:message for="characterName" styleClass="errorMessage"/>
-				
 				
 				<h:outputText value="#{i18n['character.sexe']}"></h:outputText>
 				<h:selectOneMenu value = "#{characterBean.sexe}" id="sexe" 	
