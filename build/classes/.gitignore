@@ -3,5 +3,6 @@
 /converters/
 /entities/
 /language/
+/log4j.properties
 /managedBean/
 /services/

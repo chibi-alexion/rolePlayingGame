@@ -7,36 +7,39 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 import javax.inject.Named;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import org.apache.log4j.Logger;
 
 import entities.SecretQuestion;
 import services.SecretQuestionService;
 
 @Named
 public class SecretQuestionConverter implements Converter {
-
-	@PersistenceContext(unitName = "rolePlayingGame")
-    // I include this because you will need to 
-    // lookup  your entities based on submitted values
-    private transient EntityManager em;
+	
+	
+	private static final Logger	log	= Logger.getLogger(SecretQuestionConverter.class);
+	
+	
 
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String submittedValue) {
-        /*if(submittedValue == null || submittedValue.isEmpty()) {
-            System.out.println("converter null");
-        	return null;
-        }*/
-		try {
-            System.out.println("converter pre init service");
+		if(submittedValue == null || submittedValue.isEmpty()) {
+			log.info("submitted value =null");
 
-			//SecretQuestionService sqService = new SecretQuestionService();
-            System.out.println("converter post init service");
-            return em.find(SecretQuestion.class, Integer.parseInt(submittedValue)); 
-			//	return sqService.findSecretQuestionByID(Integer.parseInt(submittedValue));
+			return null;
+        }
+		try {
+			
+            log.info(submittedValue);
+            //log.info("secret question converter");
+
+            //SecretQuestion squser = new SecretQuestion();
+            SecretQuestionService sqService = new SecretQuestionService();
+			//log.info("converter post init service");
+            //log.info(sqService.findSecretQuestionByID(Integer.parseInt(submittedValue)));
+            return sqService.findSecretQuestionByID(Integer.parseInt(submittedValue));
 			
 	    } catch (NumberFormatException e) {
-	        throw new ConverterException(new FacesMessage(String.format("%s is not a valid User ID", submittedValue)), e);
+	        throw new ConverterException(new FacesMessage(String.format("%s is not a valid ID", submittedValue)), e);
 	    }
 	}	
 
@@ -47,9 +50,10 @@ public class SecretQuestionConverter implements Converter {
         }
 
         if (modelValue instanceof SecretQuestion) {
+        	
             return String.valueOf(((SecretQuestion) modelValue).getIdSecretQuestion());
         } else {
-            throw new ConverterException(new FacesMessage(String.format("%s is not a valid TypeLocal", modelValue)));
+            throw new ConverterException(new FacesMessage(String.format("%s is not a valid secret question", modelValue)));
         }
     }
 

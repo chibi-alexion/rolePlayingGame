@@ -2,6 +2,8 @@ package entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+
 import java.util.List;
 
 
@@ -12,13 +14,13 @@ import java.util.List;
 @Entity
 @NamedQueries({
 @NamedQuery(name="SecretQuestion.findAll", query="SELECT s FROM SecretQuestion s"),
-@NamedQuery(name="Personnage.findAllById", query="SELECT s FROM SecretQuestion s where s.idSecretQuestion = :id"),
+@NamedQuery(name="SecretQuestion.findAllById", query="SELECT s FROM SecretQuestion s where s.idSecretQuestion = :id"),
 })
 public class SecretQuestion implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private int idSecretQuestion;
+	private Integer idSecretQuestion;
 
 	private String question;
 
@@ -66,5 +68,19 @@ public class SecretQuestion implements Serializable {
 
 		return user;
 	}
+	
+	@Override
+    public boolean equals(Object other) {
+        return (other != null && getClass() == other.getClass() && idSecretQuestion != null)
+            ? idSecretQuestion.equals(((SecretQuestion) other).idSecretQuestion)
+            : (other == this);
+    }
+
+    @Override
+    public int hashCode() {
+        return (idSecretQuestion != null) 
+            ? (getClass().hashCode() + idSecretQuestion.hashCode())
+            : super.hashCode();
+    }
 
 }

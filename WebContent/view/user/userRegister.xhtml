@@ -11,64 +11,58 @@
 	</ui:define>
     <ui:define name="content">
 		<h:form>
+		
+		 
+			<h:commandLink value="#{secretQuestionBean.loadSecretQuestion()}" />
+		
 			<h:panelGrid columns="3">
-				<h:outputText value="#{i18n['user.login']}"></h:outputText>
+				<h:outputText value="#{i18n['user.login']}"/>
 				<h:inputText id="userLogin"
 					value="#{userBean.user.login}"
 					required="true"
-					requiredMessage="#{i18n['user.login.validation']}">
-				</h:inputText>
+					requiredMessage="#{i18n['user.login.validation']}"/>
 				<h:message for="userLogin" styleClass="errorMessage"/>
 				
-				<h:outputText value="#{i18n['user.password']}"></h:outputText>
+				<h:outputText value="#{i18n['user.password']}"/>
 				<h:inputSecret id="password"
 					value="#{userBean.user.password}"
 					required="true"
-					requiredMessage="#{i18n['user.password.validation']}">
-				</h:inputSecret>
+					requiredMessage="#{i18n['user.password.validation']}"/>
 				<h:message for="password" styleClass="errorMessage"/>
 				
-				<h:outputText value="#{i18n['user.mail']}"></h:outputText>
+				<h:outputText value="#{i18n['user.mail']}"/>
 				<h:inputText id="userMail"
 					value="#{userBean.user.e_mail}"
 					required="true"
-					requiredMessage="#{i18n['user.mail.validation']}">
-				</h:inputText>
+					requiredMessage="#{i18n['user.mail.validation']}"/>
 				<h:message for="userMail" styleClass="errorMessage"/>
 				
-				<h:outputText value="#{i18n['user.secretQ']}"></h:outputText>
 				
-				<!-- <h:commandLink value="#{secretQuestionBean.loadSecretQuestion()}" /> -->
+				<h:outputText value="#{i18n['user.secretQ']}"/>
 				<h:selectOneMenu id="secretquestion"
 				value = "#{userBean.user.secretquestion}" 	
 				required="true"
 				requiredMessage="#{i18n['user.question.validation']}"
 				converterId="#{SecretQuestionConverter}">
-				
 					<f:selectItem itemLabel="Selectionner la question secrete" itemValue="" />
    					<f:selectItems 	value = "#{secretQuestionBean.listSecretQuestion}" 
-   					var="sq1" 
-   					itemValue="#{sq1}" 
-   					itemLabel="#{sq1.question}" />   
+   					var="sq" 
+   					itemValue="#{sq}" 
+   					itemLabel="#{sq.question}"/>   
 				</h:selectOneMenu>
-				
-				
-				
 				<h:message for="secretquestion" styleClass="errorMessage"/>
 
-				<h:outputText value="#{i18n['user.answer']}"></h:outputText>
+
+
+				<h:outputText value="#{i18n['user.answer']}"/>
 				<h:inputText id="userAnswer"
 					value="#{userBean.user.answer}"
 					required="true"
-					requiredMessage="#{i18n['user.answer.validation']}">
-				</h:inputText>
+					requiredMessage="#{i18n['user.answer.validation']}"/>
 				<h:message for="userAnswer" styleClass="errorMessage"/>
 				
 			</h:panelGrid>
-			<h:commandButton value="#{i18n['user.registration']}" action="#{userBean.submitNewUser}">
-			</h:commandButton>
+			<h:commandButton value="#{i18n['user.registration']}" action="#{userBean.submitNewUser}"/>
 		</h:form>
-		
     </ui:define>
-
 </ui:composition>

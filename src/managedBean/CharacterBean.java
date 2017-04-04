@@ -1,143 +1,54 @@
+/**
+ * 
+ */
 package managedBean;
 
 import java.io.Serializable;
 import java.util.List;
 
-import javax.enterprise.context.RequestScoped;
-/*import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.inject.Inject;*/
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
-import connexion.EMF;
 
 import org.apache.log4j.Logger;
 
-
-
+import connexion.EMF;
 import entities.Character;
-import entities.Classe;
-import services.CharacterService;
+import entities.SecretQuestion;
+import services.SecretQuestionService;
 
 /**
- * @author 
+ * @author S
  *
  */
 @Named
-@RequestScoped
-public class CharacterBean implements Serializable {
-
+@SessionScoped
+public class CharacterBean implements Serializable{
+	
 	private static final long serialVersionUID = 1L;
+	private static final Logger	log	= Logger.getLogger(CharacterBean.class);
+
+	private List <Character> listCharacter;
+	private Character Character;
 	
-	// Log4j
-	private static final Logger	log	= Logger.getLogger(UserBean.class);
-	
-	
-	private Character character;
-	private Classe classe;
-	private List <Classe> listClasse;
-	
-	
-	/**
-	 * Default constructor
-	 */	
-	public CharacterBean() {
-		// TODO Auto-generated constructor stub
+	@PostConstruct
+	public void init(){
 	}
 	
+	public List<Character> loadUserCharacter(){
+		
+		//System.out.print("secretquestion bean load secretquestion");
+		EntityManager em = EMF.getEM();
+		CharacterService cService = new CharacterService(em);
+		//System.out.print("secretquestion bean init service");
+		listCharacter = cService.findAllCharacterByUser(em);
+		//System.out.print("secretquestion bean retour service");
+		log.info(listCharacter);
+		log.info("Récuperation des entites depuis la db ok");
 
-public void submitNewCharacter(){
+		return listCharacter;
+		
+	}
 
-	Character newCharacter = new Character();
-    EntityManager em = EMF.getEM();
-    CharacterService service = new CharacterService();
-
-    em.getTransaction().begin(); 
-    try{
-    
-    	service.characterCreate(newCharacter);
-    	em.getTransaction().commit();
-
-    	System.out.println("Character created");
-    }
-    catch(Exception e){
-    	
-    	log.error(e,e);
-		log.info("Charater not created !"); 	
-    }
 }
-
-public  void update(){
-	
-	Character CharacterUpdate = new Character();
-
-	EntityManager em = EMF.getEM();
-    CharacterService service = new CharacterService();
-
-    em.getTransaction().begin();
-
-    try{
-    
-    	service.characterUpdate(CharacterUpdate);
-        em.getTransaction().commit();
-
-
-    	System.out.println("Character updated");
-    }
-    catch(Exception e){
-    	
-    	log.error(e,e);
-		log.info("Charater not updated !"); 	
-    }
-}
-
-
-/**
- * @return the character
- */
-public Character getCharacter() {
-	return character;
-}
-
-
-/**
- * @param character the character to set
- */
-public void setCharacter(Character character) {
-	this.character = character;
-}
-
-
-/**
- * @return the classe
- */
-public Classe getClasse() {
-	return classe;
-}
-
-
-/**
- * @param classe the classe to set
- */
-public void setClasse(Classe classe) {
-	this.classe = classe;
-}
-
-
-/**
- * @return the listClasse
- */
-public List <Classe> getListClasse() {
-	return listClasse;
-}
-
-
-/**
- * @param listClasse the listClasse to set
- */
-public void setListClasse(List <Classe> listClasse) {
-	this.listClasse = listClasse;
-}
-}
-
-
