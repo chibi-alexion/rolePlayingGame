@@ -20,16 +20,24 @@
     </h:head>
 
     <h:body>
-    	<div>
-        	<ui:insert name="header">
-        		Header
-        	</ui:insert>
-        </div>
+    	<h:outputStylesheet name="bootstrap-3.3.7-dist/css/bootstrap.css" />
+            
+        <h:outputStylesheet name="css/dashboard.css" />
+            
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" />
+            
+        <h:outputScript name="bootstrap-3.3.7-dist/js/bootstrap.js" />
+        
+    	<div id="header">
+       
+    </div>
         
         <div>
 		 
             <ui:insert name="content">
-                Template
+         	   
+            		<ui:include src="http://localhost:8080/rolePlayingGame/WebContent/view/navBar/navBarAdmin.xhtml" />
+        		 
             </ui:insert>
             
             <ui:insert name="footer">
@@ -37,8 +45,6 @@
         	</ui:insert>
 
         </div>
-	
-        <h:outputStylesheet name="simple.css" library="css" />
        
     </h:body>
 
