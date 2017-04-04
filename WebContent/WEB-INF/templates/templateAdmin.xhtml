@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<f:view locale="#{languageBean.locale}">
+
+	<h:head id="header" class="header">
+			
+		<meta charset="utf-8"></meta>
+		<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+			
+	</h:head>
+		
+	<h:body>
+		<nav class="navbar navbar-inverse">
+  			<div class="container-fluid">
+	   	    	<ul class="nav navbar-nav">
+	    			<li class="active"><a href="#">Accueil</a></li>
+	      			<li class="active"><a href="#">Paramètres</a></li>
+	      			<li class="active"><a href="/rolePlayingGame/WebContent/view/admin/player.xhtml">Joueurs</a></li>
+	      			<li class="dropdown">
+	        			<a class="dropdown-toggle" data-toggle="dropdown" href="#">Objets
+	        			<span class="caret"></span></a>
+	        			<ul class="dropdown-menu">
+	          				<li><a href="#">Modifier un objet</a></li>
+	       					<li><a href="#">Créer un objet</a></li>
+	       				</ul>
+	      			</li>
+	      			<li class="dropdown">
+	        			<a class="dropdown-toggle" data-toggle="dropdown" href="#">Succès
+	        			<span class="caret"></span></a>
+	        			<ul class="dropdown-menu">
+	          				<li><a href="#">Modifier un succès</a></li>
+	          				<li><a href="#">Créer un succès</a></li>
+	        			</ul>
+	      				</li>
+	      			<li class="dropdown">
+	        			<a class="dropdown-toggle" data-toggle="dropdown" href="#">Classes
+	        			<span class="caret"></span></a>
+	        			<ul class="dropdown-menu">
+	          				<li><a href="#">Modifier une classe</a></li>
+	          				<li><a href="#">Créer une classe</a></li>
+	        			</ul>
+	      			</li>
+	      			<li class="dropdown">
+	        			<a class="dropdown-toggle" data-toggle="dropdown" href="#">Race
+	        			<span class="caret"></span></a>
+	        			<ul class="dropdown-menu">
+	         		 		<li><a href="#">Modifier une race</a></li>
+	          				<li><a href="#">Créer une race</a></li>
+	        			</ul>
+	      			</li>
+	      			<li class="dropdown">
+	        			<a class="dropdown-toggle" data-toggle="dropdown" href="#">Titres
+	        			<span class="caret"></span></a>
+	        			<ul class="dropdown-menu">
+	       		   			<li><a href="#">Modifier un titre</a></li>
+	          				<li><a href="#">Créer un titre</a></li>
+	       				</ul>
+	      			</li>
+	    		</ul>
+    			<ul class="nav navbar-nav navbar-right">
+    			<li><h:selectOneMenu value="#{languageBean.language}" onchange="submit()" class="form-control">
+				<f:selectItem itemValue="en" itemLabel="English" />
+				<f:selectItem itemValue="fr" itemLabel="Français" />
+			</h:selectOneMenu></li>
+      				<li><a href="#"><span class="glyphicon glyphicon-log-in"></span>Déconnexion</a></li>
+    			</ul>
+  			</div>
+		</nav>
+		
+		<div id="content">
+			<ui:insert name="content">#{bundle['application.defaultpage.body.content']}</ui:insert>
+		</div>
+	
+		<div class="container">
+			<div style="margin: auto; text-align: center; padding: 5px;">
+				<div id="footer">
+					<ui:insert name="footer">
+						<p>créé par des fans pour les fans</p>
+						#{bundle['application.defaultpage.footer.content']}
+					</ui:insert>
+				</div>
+			</div>
+		</div>
+		
+	</h:body>
+
+	</f:view>
+
+</html>
