@@ -35,6 +35,7 @@ public class CharacterBean implements Serializable{
 	@PostConstruct
 	public void init(){
 	}
+
 	
 	public List<Character> loadUserCharacter(){
 		
