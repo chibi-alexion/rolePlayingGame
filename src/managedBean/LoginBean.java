@@ -6,14 +6,21 @@ package managedBean;
 import java.io.Serializable;
 
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import managedBean.SessionUser;
 import org.apache.log4j.Logger;
 
 import connexion.EMF;
 import entities.User;
+import services.UserService;
 
 /**
  * @author S
@@ -33,10 +40,47 @@ public class LoginBean implements Serializable {
 	private String password;
 	private User userSession;
 	
-	
 	public LoginBean() {
 		// TODO Auto-generated constructor stub
 	}
+	
+public String login(){
+		
+		
+	    try {
+	    	log.info("name " +name);
+	    	log.info("password " +password);
+			EntityManager em = EMF.getEM();
+
+	    	UserService us = new UserService(em);
+	    	userSession = us.findUserSession(name,password);
+	    	
+	    	log.info("user found " +userSession);
+	    	if(userSession != null){
+	    		HttpSession session = SessionUser.getSession();
+				session.setAttribute("username", name);
+				
+				log.info("Session crée "+session);
+	    		
+				return "success";}
+	    	else {
+				FacesContext.getCurrentInstance().addMessage(
+						null,
+						new FacesMessage(FacesMessage.SEVERITY_WARN,
+								"Incorrect Username and Passowrd",
+								"Please enter correct username and Password"));}
+	    		return "fail";
+	    	
+	      } catch (NoResultException e) {
+	    	  System.out.println("erreur");
+	        return "fail";
+	      }
+	}
+public String logout() {
+	HttpSession session = SessionUser.getSession();
+	session.invalidate();
+	return "login";
+}
 	
 	public String getName() {
 		return name;
@@ -58,34 +102,7 @@ public class LoginBean implements Serializable {
 		this.userSession = user;
 	}
 	
-	public User login(){
-		
-		EntityManager em =EMF.getEM();
-		
-	    try {
-	    	log.info("name" +name);
-	    	log.info("password" +password);
-	         
-			userSession = (User) em.createNamedQuery("User.findLogin").setParameter("login", name).setParameter("password", password)
-	            .getSingleResult();
-			return userSession;
-	      } catch (NoResultException e) {
-	    	  System.out.println("erreur");
-	        return null;
-	      }
-		
-		
-	}
 	
-	public void test(){
-		
-		log.info(name);
-		System.out.println(name);
-    	log.info(password);
-		System.out.println(password);
-
-    	return;
-	}
 
 	
 	

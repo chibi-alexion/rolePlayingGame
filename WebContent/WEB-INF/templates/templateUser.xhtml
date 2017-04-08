@@ -23,7 +23,8 @@
 		<nav class="navbar navbar-inverse">
   			<div class="container-fluid">
 	   	    	<ul class="nav navbar-nav">
-	    			<li><a href="#">Accueil</a></li>
+	   	    			<li>Bienvenu #{sessionScope['username']}</li>
+	    				<li><a href="#">Accueil</a></li>
                         <li><a href="#">Inventaire</a></li>
                         <li><a href="#">Boutique</a></li>
                         <li><a href="#">Classement</a></li>
@@ -31,6 +32,7 @@
                         <li><a href="#">Paramètres</a></li>
                         <li><a href="#">Déconnexion</a></li>
 	    		</ul>
+	    		
     			<ul class="nav navbar-nav navbar-right">
     			<li><h:selectOneMenu value="#{languageBean.language}" onchange="submit()" class="form-control">
 				<f:selectItem itemValue="en" itemLabel="English" />

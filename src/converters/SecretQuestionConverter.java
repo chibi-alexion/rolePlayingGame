@@ -1,18 +1,25 @@
 
 package converters;
 
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
+import javax.faces.convert.FacesConverter;
 import javax.inject.Named;
+import javax.persistence.EntityManager;
+
 import org.apache.log4j.Logger;
 
+import connexion.EMF;
 import entities.SecretQuestion;
 import services.SecretQuestionService;
 
 @Named
+@RequestScoped
+@FacesConverter("secretQuestionConverter")
 public class SecretQuestionConverter implements Converter {
 	
 	
@@ -28,15 +35,18 @@ public class SecretQuestionConverter implements Converter {
 			return null;
         }
 		try {
+			EntityManager em = EMF.getEM();
+            log.info("idSecretQuestion: " + submittedValue);
+            
+            SecretQuestionService sqService = new SecretQuestionService(em);
 			
-            log.info(submittedValue);
-            //log.info("secret question converter");
-
-            //SecretQuestion squser = new SecretQuestion();
-            SecretQuestionService sqService = new SecretQuestionService();
-			//log.info("converter post init service");
-            //log.info(sqService.findSecretQuestionByID(Integer.parseInt(submittedValue)));
-            return sqService.findSecretQuestionByID(Integer.parseInt(submittedValue));
+            SecretQuestion sq = sqService.findSecretQuestionByID(Integer.parseInt(submittedValue));
+            log.debug("Question after retrieving by id: "+ sq.getQuestion());
+            
+            //************** CLOSE EM ******************
+            em.close();
+            
+            return sq;
 			
 	    } catch (NumberFormatException e) {
 	        throw new ConverterException(new FacesMessage(String.format("%s is not a valid ID", submittedValue)), e);
@@ -53,7 +63,8 @@ public class SecretQuestionConverter implements Converter {
         	
             return String.valueOf(((SecretQuestion) modelValue).getIdSecretQuestion());
         } else {
-            throw new ConverterException(new FacesMessage(String.format("%s is not a valid secret question", modelValue)));
+        	
+        	throw new ConverterException(new FacesMessage(String.format("%s is not a valid secret question", modelValue)));
         }
     }
 

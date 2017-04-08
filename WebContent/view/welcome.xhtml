@@ -4,7 +4,7 @@
 				xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-                template="/WEB-INF/template.xhtml">
+                template="/WEB-INF/templates/templateUser.xhtml">
 
 	<ui:define name="header">
 		<h1>#{i18n['title.sample']}</h1>
@@ -12,8 +12,8 @@
     <ui:define name="content">
 		<h:form>
 			<h:panelGrid columns="2">
-				<h:outputText value="#{i18n['user.name']}"></h:outputText>
-				<h:outputText value="#{user.name}"></h:outputText>
+				<h:outputText value="#{i18n['user.login']}"></h:outputText>
+				<h:outputText value="#{user.login}"></h:outputText>
 				<h:outputText value="#{i18n['user.password']}"></h:outputText>
 				<h:outputText value="#{user.password}"></h:outputText>
 			</h:panelGrid>

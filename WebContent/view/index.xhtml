@@ -1,10 +1,35 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+				xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+				xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                template="/WEB-INF/template.xhtml">
 
-</body>
-</html>
+	<ui:define name="header">
+		<h1>#{i18n['title.login']}</h1>
+	</ui:define>
+    <ui:define name="content">
+		<h:form>
+			<h:panelGrid columns="3">
+				<h:outputText value="#{i18n['name']}"></h:outputText>
+				<h:inputText id="name"
+					value="#{loginBean.name}"
+					required="true"
+					requiredMessage="#{i18n['user.name.validation']}">
+				</h:inputText>
+				<h:message for="name" styleClass="errorMessage"/>
+				<h:outputText value="#{i18n['user.password']}"></h:outputText>
+				<h:inputSecret id="password"
+					value="#{loginBean.password}"
+					required="true"
+					requiredMessage="#{i18n['user.password.validation']}">
+				</h:inputSecret>
+				<h:message for="password" styleClass="errorMessage"/>
+			</h:panelGrid>
+			
+			<h:commandButton value="#{i18n['user.login.submit']}" action="#{loginBean.login}"></h:commandButton>
+		</h:form>
+    </ui:define>
+
+</ui:composition>

@@ -32,6 +32,7 @@ public class UserBean implements Serializable {
 	private User user;
 	private List <SecretQuestion> listSecretQuestion;
 	private List <Role> listRole;
+	private EntityManager em;
 
 	/*
 	private String answer;
@@ -57,18 +58,14 @@ public class UserBean implements Serializable {
 	
 	public String submitNewUser(){
 
-		
-		EntityManager em = EMF.getEM();
 	    UserService service = new UserService(em);
 
-	    em.getTransaction().begin();  		
 	    try{
 	    
 	    	user.setRole(em.find(Role.class, 1));
 	    	
 	    	System.out.println(user.getSecretquestion());
 	    	service.userCreate(user);
-	    	em.getTransaction().commit();
 
 	    	System.out.println("User created");
 	    }

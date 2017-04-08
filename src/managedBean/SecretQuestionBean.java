@@ -30,46 +30,35 @@ public class SecretQuestionBean implements Serializable {
 
 	private List <SecretQuestion> listSecretQuestion;
 	private SecretQuestion secretQuestion;
+	private EntityManager em;
 
 	public SecretQuestionBean(){
+
 	}
 	
 	@PostConstruct
 	public void init(){
-	}
-	
-	public List<SecretQuestion> loadSecretQuestion(){
 		
-		//System.out.print("secretquestion bean load secretquestion");
 		EntityManager em = EMF.getEM();
-		SecretQuestionService tlService = new SecretQuestionService(em);
-		//System.out.print("secretquestion bean init service");
-		listSecretQuestion = tlService.findAllSecretQuestion(em);
-		//System.out.print("secretquestion bean retour service");
+
+		SecretQuestionService sqService = new SecretQuestionService(em);
+		listSecretQuestion = sqService.findAllSecretQuestion();
 		log.info(listSecretQuestion);
 		log.info("Récuperation des entites depuis la db ok");
+		for(SecretQuestion sq : listSecretQuestion)
+			log.debug("Question: " + sq.getQuestion());
+		em.close();
 
-		return listSecretQuestion;
-		
 	}
-	
-
-	
-	
 	
 public String submitNewSecretQuestion(){
 
-		
-		EMF.getEMF();
-		EntityManager em = EMF.getEM();
-	    SecretQuestionService service = new SecretQuestionService(em);
 
-	    em.getTransaction().begin();  		
+	    SecretQuestionService service = new SecretQuestionService(em);
 	    try{
 	    
 	    	service.secretQuestionCreate(secretQuestion);
-	    	em.getTransaction().commit();
-
+	    	em.close();
 	    	System.out.println("User created");
 	    }
 	    catch(Exception e){
@@ -82,17 +71,13 @@ public String submitNewSecretQuestion(){
 
 public String secretQuestionUpdate(){
 
-	
-	EMF.getEMF();
-	EntityManager em = EMF.getEM();
+
     SecretQuestionService service = new SecretQuestionService(em);
 
-    em.getTransaction().begin();  		
     try{
     
     	service.secretQuestionUpdate(secretQuestion);
-    	em.getTransaction().commit();
-
+    	em.close();
     	System.out.println("Secret Question created");
     }
     catch(Exception e){
@@ -105,6 +90,8 @@ public String secretQuestionUpdate(){
 	/**
 	 * @return the listSecretQuestion
 	 */
+
+
 	public List <SecretQuestion> getListSecretQuestion() {
 		return listSecretQuestion;
 	}

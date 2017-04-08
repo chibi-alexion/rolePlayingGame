@@ -4,16 +4,14 @@
 				xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-                template="/WEB-INF/template.xhtml">
+                template="/WEB-INF/templates/templateUser.xhtml">
 
 	<ui:define name="header">
 		<h1>#{i18n['title.registration']}</h1>
 	</ui:define>
     <ui:define name="content">
     
-    <h:form>
-			<h:commandLink value="#{characterBean.load()}" />
-</h:form>
+    
 	
 		<h:dataTable class="table table-striped" id="contact"
 			value="#{secretQuestionBean.listSecretQuestion}" var="listSecretQuestion">

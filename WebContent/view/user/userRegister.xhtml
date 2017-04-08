@@ -11,10 +11,7 @@
 	</ui:define>
     <ui:define name="content">
 		<h:form>
-		
-		 
-			<h:commandLink value="#{secretQuestionBean.loadSecretQuestion()}" />
-		
+				
 			<h:panelGrid columns="3">
 				<h:outputText value="#{i18n['user.login']}"/>
 				<h:inputText id="userLogin"
@@ -44,7 +41,7 @@
 				required="true"
 				requiredMessage="#{i18n['user.question.validation']}"
 				converterId="#{SecretQuestionConverter}">
-					<f:selectItem itemLabel="Selectionner la question secrete" itemValue="" />
+					<f:selectItem itemLabel="Selectionnez la question secrete" itemValue="" />
    					<f:selectItems 	value = "#{secretQuestionBean.listSecretQuestion}" 
    					var="sq" 
    					itemValue="#{sq}" 

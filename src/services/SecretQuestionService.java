@@ -63,12 +63,11 @@ public class SecretQuestionService implements Serializable {
 	
 			return s;
 		}
-	public List<SecretQuestion> findAllSecretQuestion (EntityManager em){
+	public List<SecretQuestion> findAllSecretQuestion (){
 	    try {
-			
-			
+			log.info(em);
+			log.info("service find all secret question");
 	        TypedQuery<SecretQuestion> query = em.createNamedQuery("SecretQuestion.findAll", SecretQuestion.class);
-	        //log.info(query.getResultList());
 	        return query.getResultList();
 
 	      } catch (NoResultException e) {
@@ -81,12 +80,11 @@ public class SecretQuestionService implements Serializable {
 	
 public SecretQuestion findSecretQuestionByID(int idSecretQuestion) {
 		
-		EntityManager em =EMF.getEM();
 		
 	    try {
-	    	log.info(idSecretQuestion);
+	    	log.debug(idSecretQuestion);
 	         
-			SecretQuestion secret = (SecretQuestion) em.createNamedQuery("SecretQuestion.findSecretQuestionByID").setParameter("id", idSecretQuestion)
+			SecretQuestion secret = (SecretQuestion) em.createNamedQuery("SecretQuestion.findAllById").setParameter("id", idSecretQuestion)
 	            .getSingleResult();
 	         return secret;
 	      } catch (NoResultException e) {
