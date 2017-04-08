@@ -24,8 +24,9 @@ import services.SecretQuestionService;
 @Named
 @SessionScoped
 public class SecretQuestionBean implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
-	private static final Logger	log	= Logger.getLogger(SecretQuestionService.class);
+	private static final Logger	log	= Logger.getLogger(SecretQuestionBean.class);
 
 	private List <SecretQuestion> listSecretQuestion;
 	private SecretQuestion secretQuestion;
@@ -45,10 +46,14 @@ public class SecretQuestionBean implements Serializable {
 		//System.out.print("secretquestion bean init service");
 		listSecretQuestion = tlService.findAllSecretQuestion(em);
 		//System.out.print("secretquestion bean retour service");
+		log.info(listSecretQuestion);
+		log.info("Récuperation des entites depuis la db ok");
 
 		return listSecretQuestion;
 		
 	}
+	
+
 	
 	
 	

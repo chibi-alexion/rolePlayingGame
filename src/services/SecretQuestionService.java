@@ -5,16 +5,30 @@ package services;
 
 import entities.SecretQuestion;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.*;
+
+import org.apache.log4j.Logger;
+
+import connexion.EMF;
 
 
 /**
  * @author S
  *
  */
-public class SecretQuestionService {
+public class SecretQuestionService implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+
+	private static final Logger	log	= Logger.getLogger(SecretQuestionService.class);
+
 	
 	private  EntityManager em;
 	private SecretQuestion secretQuestionUser;
@@ -51,13 +65,10 @@ public class SecretQuestionService {
 		}
 	public List<SecretQuestion> findAllSecretQuestion (EntityManager em){
 	    try {
-			//System.out.print("secretquestion service préquery");
 			
 			
 	        TypedQuery<SecretQuestion> query = em.createNamedQuery("SecretQuestion.findAll", SecretQuestion.class);
-			//System.out.print("secretquestion service postquery");
-
-	        //System.out.println(query.getResultList());
+	        //log.info(query.getResultList());
 	        return query.getResultList();
 
 	      } catch (NoResultException e) {
@@ -66,20 +77,25 @@ public class SecretQuestionService {
 
 	        return null;
 	      }
+	}
+	
+public SecretQuestion findSecretQuestionByID(int idSecretQuestion) {
+		
+		EntityManager em =EMF.getEM();
+		
+	    try {
+	    	log.info(idSecretQuestion);
+	         
+			SecretQuestion secret = (SecretQuestion) em.createNamedQuery("SecretQuestion.findSecretQuestionByID").setParameter("id", idSecretQuestion)
+	            .getSingleResult();
+	         return secret;
+	      } catch (NoResultException e) {
+	    	  System.out.println("erreur");
+	        return null;
+	      }
 }
 
-	public SecretQuestion findSecretQuestionByID(int idSecretQuestion) {
-		
-		
-		    try {
-		         SecretQuestion secret = (SecretQuestion) em.createNamedQuery("SecretQuestion.findSecretQuestionByID").setParameter("id", secretQuestionUser.getIdSecretQuestion())
-		            .getSingleResult();
-		         return secret;
-		      } catch (NoResultException e) {
-		    	  System.out.println("erreur");
-		        return null;
-		      }
-	}
+	
 	
 	
 }

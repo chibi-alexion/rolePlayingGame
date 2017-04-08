@@ -12,23 +12,22 @@
     <ui:define name="content">
 		<h:form>
 			<h:panelGrid columns="3">
-				<h:outputText value="#{i18n['user.name']}"></h:outputText>
-				<h:inputText id="userName"
-					value="#{user.name}"
+				<h:outputText value="#{i18n['name']}"></h:outputText>
+				<h:inputText id="name"
+					value="#{loginBean.name}"
 					required="true"
 					requiredMessage="#{i18n['user.name.validation']}">
 				</h:inputText>
-				<h:message for="userName" styleClass="errorMessage"/>
+				<h:message for="name" styleClass="errorMessage"/>
 				<h:outputText value="#{i18n['user.password']}"></h:outputText>
 				<h:inputSecret id="password"
-					value="#{user.password}"
+					value="#{loginBean.password}"
 					required="true"
 					requiredMessage="#{i18n['user.password.validation']}">
 				</h:inputSecret>
 				<h:message for="password" styleClass="errorMessage"/>
 			</h:panelGrid>
-			<h:commandButton value="#{i18n['user.login.submit']}" action="welcome">
-			</h:commandButton>
+			<h:commandButton value="#{i18n['user.login.submit']}" action="#{loginBean.login()}"></h:commandButton>
 		</h:form>
     </ui:define>
 

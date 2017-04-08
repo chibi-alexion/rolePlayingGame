@@ -1,13 +1,19 @@
-
+/**
+ * 
+ */
 package services;
 
-import java.util.List;
+import entities.SecretQuestion;
+
 import java.io.Serializable;
+import java.util.List;
+
 import javax.persistence.*;
 
-import entities.Character;
+import org.apache.log4j.Logger;
 
 import connexion.EMF;
+
 
 /**
  * @author S
@@ -15,71 +21,81 @@ import connexion.EMF;
  */
 public class CharacterService implements Serializable {
 	
-	private Character character;
-		
-	private static final long serialVersionUID = 1L;
-	protected EntityManager em;
-		
 	/**
 	 * 
-	 * @param em (EntityManager)
 	 */
+	private static final long serialVersionUID = 1L;
+
+
+	private static final Logger	log	= Logger.getLogger(CharacterService.class);
+
+	
+	private  EntityManager em;
+	private SecretQuestion secretQuestionUser;
+	
+	public CharacterService(EntityManager em)
+	{
+		this.em = em;
+	}
+	
 	public CharacterService() {
-		 this.em = EMF.getEM();
-}
-	
-	public Character getCharacter() {
-		return character;
+		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * @param user the character to set
-	 */
-	public void setCharacter(Character character) {
-		this.character = character;
-	}
-	
-	public void characterCreate(Character character) {
-		
-
+	public Character characterCreate(Character c) {
 		
 	    em.getTransaction().begin();  		
 
-		em.persist(character);
-		
-    	em.getTransaction().commit();
-        em.close();
-
+		em.persist(c);
+	    em.getTransaction().commit();  		
 
 		System.out.println("persist ok");
 
+		return c;
+	}
+	public Character characterUpdate(Character c) {
+			
+		em.getTransaction().begin();  		
+
+		em.persist(c);
+	    em.getTransaction().commit(); 
+	    System.out.println("persist ok");
+	
+			return c;
+		}
+	public List<Character> findAllCharacterAlive (EntityManager em){
+	    try {
+			
+			
+	        TypedQuery<Character> query = em.createNamedQuery("SecretQuestion.findAll", Character.class);
+	        //log.info(query.getResultList());
+	        return query.getResultList();
+
+	      } catch (NoResultException e) {
+	    	  
+	    	  System.out.print("secretquestion service no shit found");
+
+	        return null;
+	      }
 	}
 	
-public void characterUpdate(Character character) {
+public Character findidCharacterByID(int idCharacter) {
 		
-
-		
-	    em.getTransaction().begin();  		
-
-		em.persist(character);
-		
-    	em.getTransaction().commit();
-        em.close();
-
-
-		System.out.println("persist ok");
-
-	}
-	
-	public List<Character> pool(){
-		
+		EntityManager em =EMF.getEM();
 		
 	    try {
-	        TypedQuery<Character> query = em.createNamedQuery("Local.findAllCharacterById", Character.class);
-	        return query.getResultList();
+	    	log.info(idCharacter);
+	         
+	    	Character secret = (Character) em.createNamedQuery("Character.findSecretQuestionByID").setParameter("id", idCharacter)
+	            .getSingleResult();
+	         return secret;
 	      } catch (NoResultException e) {
+	    	  System.out.println("erreur");
 	        return null;
 	      }
 }
 
+	
+	
+	
 }

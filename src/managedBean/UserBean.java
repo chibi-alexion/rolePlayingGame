@@ -8,7 +8,6 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import connexion.EMF;
-import services.SecretQuestionService;
 import services.UserService;
 
 import org.apache.log4j.Logger;
@@ -32,7 +31,8 @@ public class UserBean implements Serializable {
 		
 	private User user;
 	private List <SecretQuestion> listSecretQuestion;
-	private SecretQuestion secret;
+	private List <Role> listRole;
+
 	/*
 	private String answer;
 	private String e_mail;
@@ -65,7 +65,8 @@ public class UserBean implements Serializable {
 	    try{
 	    
 	    	user.setRole(em.find(Role.class, 1));
-	    	user.setSecretquestion(em.find(SecretQuestion.class, 1));
+	    	
+	    	System.out.println(user.getSecretquestion());
 	    	service.userCreate(user);
 	    	em.getTransaction().commit();
 
@@ -105,16 +106,16 @@ public class UserBean implements Serializable {
 	}
 
 	/**
-	 * @return the secret
+	 * @return the listRole
 	 */
-	public SecretQuestion getSecret() {
-		return secret;
+	public List <Role> getListRole() {
+		return listRole;
 	}
 
 	/**
-	 * @param secret the secret to set
+	 * @param listRole the listRole to set
 	 */
-	public void setSecret(SecretQuestion secret) {
-		this.secret = secret;
+	public void setListRole(List <Role> listRole) {
+		this.listRole = listRole;
 	}
 }
