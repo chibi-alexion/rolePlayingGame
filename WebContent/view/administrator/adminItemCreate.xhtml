@@ -5,7 +5,7 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
     xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
     xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-    template="/WEB-INF/templates/templateGameMaster.xhtml">
+    template="/WEB-INF/templates/templateAdmin.xhtml">
 
 	<ui:define name="header">
 		<h1>#{i18n['title.createItem']}</h1>
@@ -31,19 +31,6 @@
 			<h:message for="itemDescription" styleClass="errorMessage"/>
 				
 	  	    <h:outputText value="item.typeItem"></h:outputText>
-				<h:selectOneMenu 
-					value = "userBean.typeItem" 
-					id="typeItem" 	
-					required="true"
-					requiredMessage="item.typeItem.validation">
-				 	
-				 	<f:selectItem itemValue = "1" itemLabel = "user.typeItem1" /> 
-   					<f:selectItem itemValue = "2" itemLabel = "user.typeItem2" />
-     				<f:selectItem itemValue = "3" itemLabel = "user.typeItem3" />
-     				<f:selectItem itemValue = "3" itemLabel = "#user.typeItem4" /> 
-				</h:selectOneMenu>
-			<h:message for="typeItem" styleClass="errorMessage"/> 
-				
 			<h:selectOneMenu 
 				id="typeitem"
 				value = "#{typeItemBean.item.typeitem}" 	

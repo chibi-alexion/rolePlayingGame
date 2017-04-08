@@ -16,63 +16,64 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-			
 	</h:head>
 		
 	<h:body>
-		<nav class="navbar navbar-inverse">
+		<nav class="navbar navbar-default">
   			<div class="container-fluid">
 	   	    	<ul class="nav navbar-nav">
-	    			<li class="active"><a href="#">Accueil</a></li>
-	      			<li class="active"><a href="#">Paramètres</a></li>
-	      			<li class="active"><a href="/rolePlayingGame/WebContent/view/admin/player.xhtml">Joueurs</a></li>
+	    			<li class="active"><a href="#">#{i18n['welcome']}</a></li>
+	      			<li class="active"><a href="#">#{i18n['parameter']}</a></li>
+	      			<li class="active"><a href="/rolePlayingGame/WebContent/view/admin/player.xhtml">#{i18n['player']}</a></li>
 	      			<li class="dropdown">
-	        			<a class="dropdown-toggle" data-toggle="dropdown" href="#">Objets
+	        			<a class="dropdown-toggle" data-toggle="dropdown" href="#">#{i18n['item']}
 	        			<span class="caret"></span></a>
 	        			<ul class="dropdown-menu">
-	          				<li><a href="#">Modifier un objet</a></li>
-	       					<li><a href="#">Créer un objet</a></li>
+	          				<li><a href="#">#{i18n['item_update']}</a></li>
+	       					<li><a href="#">#{i18n['item_create']}</a></li>
 	       				</ul>
 	      			</li>
 	      			<li class="dropdown">
-	        			<a class="dropdown-toggle" data-toggle="dropdown" href="#">Succès
+	        			<a class="dropdown-toggle" data-toggle="dropdown" href="#">#{i18n['achievement']}
 	        			<span class="caret"></span></a>
 	        			<ul class="dropdown-menu">
-	          				<li><a href="#">Modifier un succès</a></li>
-	          				<li><a href="#">Créer un succès</a></li>
+	          				<li><a href="#">#{i18n['achievement_update']}</a></li>
+	          				<li><a href="#">#{i18n['achievement_create']}</a></li>
 	        			</ul>
 	      				</li>
 	      			<li class="dropdown">
-	        			<a class="dropdown-toggle" data-toggle="dropdown" href="#">Classes
+	        			<a class="dropdown-toggle" data-toggle="dropdown" href="#">#{i18n['class']}
 	        			<span class="caret"></span></a>
 	        			<ul class="dropdown-menu">
-	          				<li><a href="#">Modifier une classe</a></li>
-	          				<li><a href="#">Créer une classe</a></li>
+	          				<li><a href="#">#{i18n['class_update']}</a></li>
+	          				<li><a href="#">#{i18n['class_create']}</a></li>
 	        			</ul>
 	      			</li>
 	      			<li class="dropdown">
-	        			<a class="dropdown-toggle" data-toggle="dropdown" href="#">Race
+	        			<a class="dropdown-toggle" data-toggle="dropdown" href="#">#{i18n['race']}
 	        			<span class="caret"></span></a>
 	        			<ul class="dropdown-menu">
-	         		 		<li><a href="#">Modifier une race</a></li>
-	          				<li><a href="#">Créer une race</a></li>
+	         		 		<li><a href="#">#{i18n['race_update']}</a></li>
+	          				<li><a href="#">#{i18n['race_create']}</a></li>
 	        			</ul>
 	      			</li>
 	      			<li class="dropdown">
-	        			<a class="dropdown-toggle" data-toggle="dropdown" href="#">Titres
+	        			<a class="dropdown-toggle" data-toggle="dropdown" href="#">#{i18n['title']}
 	        			<span class="caret"></span></a>
 	        			<ul class="dropdown-menu">
-	       		   			<li><a href="#">Modifier un titre</a></li>
-	          				<li><a href="#">Créer un titre</a></li>
+	       		   			<li><a href="#">#{i18n['title_update']}</a></li>
+	          				<li><a href="#">#{i18n['title_create']}</a></li>
 	       				</ul>
 	      			</li>
 	    		</ul>
     			<ul class="nav navbar-nav navbar-right">
-    			<li><h:selectOneMenu value="#{languageBean.language}" onchange="submit()" class="form-control">
-				<f:selectItem itemValue="en" itemLabel="English" />
-				<f:selectItem itemValue="fr" itemLabel="Français" />
-			</h:selectOneMenu></li>
-      				<li><a href="#"><span class="glyphicon glyphicon-log-in"></span>Déconnexion</a></li>
+    			<h:form> 
+    				<li><h:selectOneMenu value="#{languageBean.language}" onchange="submit()" class="form-control">
+					<f:selectItem itemValue="en" itemLabel="English" />
+					<f:selectItem itemValue="fr" itemLabel="Français" />
+					</h:selectOneMenu></li>
+				</h:form>	
+      				<li><a href="#"><span class="glyphicon glyphicon-log-in"></span>#{i18n['logout']}</a></li>
     			</ul>
   			</div>
 		</nav>
@@ -85,8 +86,7 @@
 			<div style="margin: auto; text-align: center; padding: 5px;">
 				<div id="footer">
 					<ui:insert name="footer">
-						<p>créé par des fans pour les fans</p>
-						#{bundle['application.defaultpage.footer.content']}
+						<p>#{i18n['footer']}</p>
 					</ui:insert>
 				</div>
 			</div>
