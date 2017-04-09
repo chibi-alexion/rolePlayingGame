@@ -23,9 +23,16 @@
 		<nav class="navbar navbar-default">
   			<div class="container-fluid">
 	   	    	<ul class="nav navbar-nav">
-						<li>#{i18n['welcome']} #{sessionScope['username']}</li>
+						<li>#{i18n['welcome']} #{sessionScope['login']}</li>
 	    				<li><a href="#">#{i18n['home']}</a></li>
-                        <li><a href="#">#{i18n['inventory']}</a></li>
+						<li class="dropdown">
+	        				<a class="dropdown-toggle" data-toggle="dropdown" href="#">#{i18n['character']}
+	        				<span class="caret"></span></a>
+	        				<ul class="dropdown-menu">
+	          					<li><a href="#">#{i18n['caracter.active']}</a></li>
+	       						<li><a href="user/userCharacterListing.xhtml">#{i18n['caracter.history']}</a></li>
+	       					</ul>
+	      			</li>                        <li><a href="#">#{i18n['inventory']}</a></li>
                         <li><a href="#">#{i18n['store']}</a></li>
                         <li><a href="#">#{i18n['hof']}</a></li>
                         <li><a href="#">#{i18n['achievement']}</a></li>
@@ -33,19 +40,24 @@
 	    		</ul>
 	    		
     			<ul class="nav navbar-nav navbar-right">
-    			<h:form>
-    			<li><h:selectOneMenu value="#{languageBean.language}" onchange="submit()" class="form-control">
-				<f:selectItem itemValue="en" itemLabel="English" />
-				<f:selectItem itemValue="fr" itemLabel="Français" />
-			</h:selectOneMenu></li>
-			</h:form>
-      				<li><a href="#">#{i18n['logout']}</a></li>
-    			</ul>
+	    			<h:form>
+	    			<li><h:selectOneMenu value="#{languageBean.language}" onchange="submit()" class="form-control">
+							<f:selectItem itemValue="en" itemLabel="English" />
+							<f:selectItem itemValue="fr" itemLabel="Français" />
+						</h:selectOneMenu></li>
+					</h:form>
+				
+					<li>
+      				<h:form>
+      					<h:commandButton class="btn btn-default" value="#{i18n['logout']}" action="#{loginBean.logout}"/>
+      				</h:form>
+      				</li>    			
+      			</ul>
   			</div>
 		</nav>
 		
 		<div id="content">
-			<ui:insert name="content">#{bundle['application.defaultpage.body.content']}</ui:insert>
+			<ui:insert name="content"></ui:insert>
 		</div>
 	
 		<div class="container">

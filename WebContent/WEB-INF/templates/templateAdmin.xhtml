@@ -75,13 +75,20 @@
 					<f:selectItem itemValue="fr" itemLabel="Français" />
 					</h:selectOneMenu></li>
 				</h:form>	
-      				<li><a href="#"><span class="glyphicon glyphicon-log-in"></span>#{i18n['logout']}</a></li>
+      				<li>
+      				<h:form>
+      				<h:commandButton class="btn btn-default" value="#{i18n['logout']}" action="#{loginBean.logout}"/>
+      				</h:form>
+      				</li>
     			</ul>
+      			
+
+  			
   			</div>
 		</nav>
 		
 		<div id="content">
-			<ui:insert name="content">#{bundle['application.defaultpage.body.content']}</ui:insert>
+			<ui:insert name="content"></ui:insert>
 		</div>
 	
 		<div class="container">

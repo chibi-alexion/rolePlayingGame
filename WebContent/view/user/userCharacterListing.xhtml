@@ -7,17 +7,24 @@
                 template="/WEB-INF/templates/templateUser.xhtml">
 
 	<ui:define name="header">
-		<h1>#{i18n['title.registration']}</h1>
+		<h1>#{i18n['title.caracter.history']}</h1>
 	</ui:define>
     <ui:define name="content">
     
     
 	
 		<h:dataTable class="table table-striped" id="contact"
-			value="#{secretQuestionBean.listSecretQuestion}" var="listSecretQuestion">
+			value="#{characterBean.listCharacter}" var="listCharacter">
 			<h:column style="width: 500px">
 				
-				<h:outputText value="#{listSecretQuestion.question}" />
+				<h:outputText value="#{listCharacter.nameCharacter}" />
+				<h:outputText value="#{listCharacter.race.nameRace}" />
+				<h:outputText value="#{listCharacter.classe.nameClasse}" />	
+				<h:outputText value="#{listCharacter.sexe}" />
+				<h:outputText value="#{listCharacter.lvl}" />
+				<h:outputText value="#{listCharacter.gold}" />
+				<h:outputText value="#{listCharacter.hitPointCharacter}" />
+				
 			</h:column>
 			
 			

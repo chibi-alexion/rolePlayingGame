@@ -55,10 +55,13 @@ public String login(){
 	    	UserService us = new UserService(em);
 	    	userSession = us.findUserSession(name,password);
 	    	
-	    	log.info("user found " +userSession);
+	    	log.info("user found " + userSession.getLogin());
 	    	if(userSession != null){
 	    		HttpSession session = SessionUser.getSession();
-				session.setAttribute("username", name);
+				session.setAttribute("idUser", userSession.getIdUser());
+				session.setAttribute("login", userSession.getLogin());
+				log.info("idUser "+userSession.getIdUser());
+				log.info("idUser "+userSession.getLogin());
 				
 				log.info("Session crée "+session);
 	    		
@@ -78,6 +81,7 @@ public String login(){
 	}
 public String logout() {
 	HttpSession session = SessionUser.getSession();
+	log.info("logout");
 	session.invalidate();
 	return "login";
 }

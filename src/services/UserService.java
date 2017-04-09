@@ -71,6 +71,12 @@ public User userCreate(User u) {
 		        return null;
 		      }		
 	}
+	public User findUserById(int userId){
+		log.info("findUserById");
+		User user = (User) em.createNamedQuery("User.findUserById").setParameter("id", userId).getSingleResult();
+	         return user;
+	}
+	
 	
 	public User getUser() {
 		return user;

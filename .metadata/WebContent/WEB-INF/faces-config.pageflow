@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14884270515850" configfile="/rolePlayingGame/WebContent/WEB-INF/faces-config.xml">
   <nodes xsi:type="pageflow:PFPage" name="index.xhtml" id="pf14916682797559" referenceLink="//@navigationRule.1/@fromViewId|" outlinks="pf149166848997912" path="/index.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="welcome.xhtml" id="pf149166827975511" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf149166848997912" path="/welcome.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="welcome.xhtml" id="pf149166827975511" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" inlinks="pf149166848997912" path="/welcome.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="view/index.xhtml" id="pf149167051981418" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf149167051981519" path="/view/index.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="view/welcome.xhtml" id="pf149167051981520" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf149167051981519" path="/view/welcome.xhtml"/>
   <links id="pf149166848997912" target="pf149166827975511" source="pf14916682797559" outcome="fail" fromaction="#{LoginBean.login}"/>

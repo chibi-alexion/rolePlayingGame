@@ -4,9 +4,11 @@
 package services;
 
 import entities.SecretQuestion;
+import entities.User;
 
 import java.io.Serializable;
 import java.util.List;
+import entities.Character;
 
 import javax.persistence.*;
 
@@ -30,7 +32,7 @@ public class CharacterService implements Serializable {
 	private static final Logger	log	= Logger.getLogger(CharacterService.class);
 
 	
-	private  EntityManager em;
+	private EntityManager em;
 	private SecretQuestion secretQuestionUser;
 	
 	public CharacterService(EntityManager em)
@@ -63,7 +65,7 @@ public class CharacterService implements Serializable {
 	
 			return c;
 		}
-	public List<Character> findAllCharacterAlive (EntityManager em){
+	public List<Character> findAllCharacterAlive (){
 	    try {
 			
 			
@@ -81,7 +83,6 @@ public class CharacterService implements Serializable {
 	
 public Character findidCharacterByID(int idCharacter) {
 		
-		EntityManager em =EMF.getEM();
 		
 	    try {
 	    	log.info(idCharacter);
@@ -93,6 +94,26 @@ public Character findidCharacterByID(int idCharacter) {
 	    	  System.out.println("erreur");
 	        return null;
 	      }
+}
+public List<Character> findAllCharacterByUser(User user) {
+	
+	
+    try {
+    	log.info("findAllCharacterByUser");
+    	log.info(user.getIdUser());
+    	
+    	TypedQuery<Character> query = em.createNamedQuery("Character.findAllCharacterByUser", Character.class);
+    	log.info(query);
+    	query.setParameter("user", user);
+    	log.info(query);
+    	log.info(query.getResultList());
+    	
+    	return query.getResultList(); 
+    	
+      } catch (NoResultException e) {
+    	  System.out.println("erreur");
+        return null;
+      }
 }
 
 	

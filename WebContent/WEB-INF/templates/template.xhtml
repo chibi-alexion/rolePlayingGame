@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<f:view locale="#{languageBean.locale}">
+
+	<h:head id="header" class="header">
+			
+		<meta charset="utf-8"></meta>
+		<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	</h:head>
+		
+	<h:body>
+		<nav class="navbar navbar-default">
+  			<div class="container-fluid">
+  			<!-- <span class="navbar-brand" href="#"><img src="https://static.esea.net/global/images/users/567181.1462004420.jpg" width="210" height="60" alt="My Logo"/></span> -->
+    			<ul class="nav navbar-nav navbar-right">
+    			<h:form> 
+    				<li><h:selectOneMenu value="#{languageBean.language}" onchange="submit()" class="form-control">
+					<f:selectItem itemValue="en" itemLabel="English" />
+					<f:selectItem itemValue="fr" itemLabel="Français" />
+					</h:selectOneMenu></li>
+				</h:form>	
+      				<li>
+      				<h:form>
+   							<h:commandButton class="btn btn-default" value="#{i18n['logout']}" action="#{loginBean.logout}"/>
+      				</h:form>
+      				</li>
+    			</ul>
+      			  			
+  			</div>
+		</nav>
+		
+		<div id="content">
+			<ui:insert name="content">#{bundle['application.defaultpage.body.content']}</ui:insert>
+		</div>
+	
+		<div class="container">
+			<div style="margin: auto; text-align: center; padding: 5px;">
+				<div id="footer">
+					<ui:insert name="footer">
+						<p>#{i18n['footer']}</p>
+					</ui:insert>
+				</div>
+			</div>
+		</div>
+	</h:body>
+	</f:view>
+</html>

@@ -21,7 +21,10 @@ public class LanguageBean {
     public Locale getLocale() {
         return locale;
     }
-
+	public void setLocale(Locale locale) {
+			this.locale = locale;
+		}
+	
     public String getLanguage() {
         return locale.getLanguage();
     }
@@ -31,9 +34,7 @@ public class LanguageBean {
         FacesContext.getCurrentInstance().getViewRoot().setLocale(locale);
     }
 
-	public void setLocale(Locale locale) {
-		this.locale = locale;
-	}
+	
 
     
 }
