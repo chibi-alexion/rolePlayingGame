@@ -1,0 +1,39 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+				xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+				xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+	<h:panelGrid columns="3" class="modal-dialog" >
+		<h:form  style=" text-align: center;">
+			<div class="loginmodal-container">
+				<div class="input-group">
+				    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"/></span>
+					<h:inputText 
+						class="form-control" 
+						id="mail"
+						value="#{userBean.mail}"
+						pt:placeholder="#{sessionScope['mail']}"
+						required="true"
+						requiredMessage="#{i18n['user.mail.validation']}"/>
+					<h:message for="mail" styleClass="errorMessage"/>
+				</div>
+				
+				<div class="input-group">	
+	                   <span class="input-group-addon"><i class="glyphicon glyphicon-lock"/></span>
+					<h:inputText
+						class="form-control"
+						id="password"
+						value="#{userBean.password}"
+						pt:placeholder="#{sessionScope['password']}"
+						required="true"
+						requiredMessage="#{i18n['user.password.validation']}"/>
+					<h:message for="password" styleClass="errorMessage"/>
+				</div>
+				<h:commandButton class="btn btn-default" value="#{i18n['user.update.submit']}" action="#{userBean.updateUserInfo}"/>
+			</div>
+		</h:form>	
+	</h:panelGrid>
+</ui:composition>
+

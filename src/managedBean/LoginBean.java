@@ -11,8 +11,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
-import javax.persistence.TypedQuery;
-import javax.servlet.http.HttpServletRequest;
+
 import javax.servlet.http.HttpSession;
 
 import managedBean.SessionUser;
@@ -60,10 +59,10 @@ public String login(){
 	    		HttpSession session = SessionUser.getSession();
 				session.setAttribute("idUser", userSession.getIdUser());
 				session.setAttribute("login", userSession.getLogin());
-				log.info("idUser "+userSession.getIdUser());
-				log.info("idUser "+userSession.getLogin());
+				session.setAttribute("mail", userSession.getE_mail());
+				session.setAttribute("password", userSession.getPassword());
 				
-				log.info("Session crée "+session);
+				log.info("Session crée " +userSession.getLogin() +session);
 	    		
 				return "success";}
 	    	else {
@@ -105,11 +104,4 @@ public String logout() {
 	public void setUser(User user) {
 		this.userSession = user;
 	}
-	
-	
-
-	
-	
-	
-
 }

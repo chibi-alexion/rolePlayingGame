@@ -47,6 +47,7 @@ public User userCreate(User u) {
 	}
 	public User userUpdate(User u) {
 			
+		log.info("User service "+u); 
 		em.getTransaction().begin();  		
 
 		em.persist(u);
