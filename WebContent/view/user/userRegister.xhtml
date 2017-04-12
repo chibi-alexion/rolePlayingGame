@@ -62,7 +62,7 @@
 							id="secretquestion"
 			                value = "#{userBean.user.secretquestion}"    
 			                required="true"
-			                requiredMessage="#{i18n['user.question.validation']}"
+			                requiredMessage="#{i18n['user.question.empty']}"
 			                converter="#{secretQuestionConverter}">
 			                    <f:selectItem itemLabel="Selectionnez la question secrete" />
 			                       <f:selectItems     value = "#{secretQuestionBean.listSecretQuestion}"
