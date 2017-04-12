@@ -10,49 +10,27 @@
 	<ui:define name="content">
 
 		<h:dataTable class="table table-striped" id="typeLocal"
-			value="#{itemBean.listItem}" var="listItem">
+			value="#{raceBean.listRace}" var="listRace">
 			<f:facet name="header">
-				<h:outputText value="Liste des objets" />
+				<h:outputText value="Liste des races" />
 			</f:facet>
 
 			<h:column style="width: 500px">
 				<f:facet name="header">
 					<h:outputText value="Nom" />
 				</f:facet>
-				<h:outputText value="#{listItem.nameItem}" />
+				<h:outputText value="#{listRace.nameRace}" />
 			</h:column>
 			  
-			  
-			<h:column style="width: 500px">
-				<f:facet name="header">
-					<h:outputText value="Description" />
-				</f:facet>
-				<h:outputText value="#{listItem.descriptionItem}" />
-			</h:column>
-			
-			<h:column style="width: 500px">
-				<f:facet name="header">
-					<h:outputText value="Prix d'Achat" />
-				</f:facet>
-				<h:outputText value="#{listItem.buyPrice}" />
-			</h:column>
-			
-			<h:column style="width: 500px">
-				<f:facet name="header">
-					<h:outputText value="Prix de vente" />
-				</f:facet>
-				<h:outputText value="#{listItem.sellPrice}" />
-			</h:column>
-			
 			<h:column>
 				<f:facet name="header">
 					<h:outputText value="" />
 				</f:facet>
 			  	<h:form>
-					<h:commandLink class="btn btn-primary" id="modifItem"
-						action="ItemUpdate">
+					<h:commandLink class="btn btn-primary" id="modifRace"
+						action="UpdateRace">
 						<f:setPropertyActionListener
-							target="#{itemBean.item}" value="#{list}" />
+							target="#{raceBean.race}" value="#{list}" />
 						<span class="glyphicon glyphicon-pencil"></span>
 					</h:commandLink>
 				</h:form> 
