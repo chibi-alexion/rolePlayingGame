@@ -1,8 +1,5 @@
-/META-INF/
-/connexion/
-/converters/
 /entities/
 /language/
-/log4j.properties
 /managedBean/
 /services/
+/validation/

@@ -21,20 +21,24 @@
 	<h:body>
 		<nav class="navbar navbar-default">
   			<div class="container-fluid">
-  			<!-- <span class="navbar-brand" href="#"><img src="https://static.esea.net/global/images/users/567181.1462004420.jpg" width="210" height="60" alt="My Logo"/></span> -->
+  				<div class="navbar-header">
+					<h:outputText class="navbar-brand" value="EzGame"/>
+  			    </div>
     			<ul class="nav navbar-nav navbar-right">
-    			<h:form> 
-    				<li><h:selectOneMenu value="#{languageBean.language}" onchange="submit()" class="form-control">
-					<f:selectItem itemValue="en" itemLabel="English" />
-					<f:selectItem itemValue="fr" itemLabel="Français" />
-					</h:selectOneMenu></li>
-				</h:form>	
-      				<li>
-      				<h:form>
-   							<h:commandButton class="btn btn-default" value="#{i18n['logout']}" action="#{loginBean.logout}"/>
-      				</h:form>
-      				</li>
-    			</ul>
+    				<li>
+	    				<h:form>
+		    				<h:selectOneMenu value="#{languageBean.language}" onchange="submit()" class="form-control">
+									<f:selectItem itemValue="en" itemLabel="English" />
+									<f:selectItem itemValue="fr" itemLabel="Français" />
+							</h:selectOneMenu>
+						</h:form>
+					</li>
+					<li>
+	      			<h:form>
+	      				<h:commandButton class="btn btn-default" value="#{i18n['logout']}" action="#{loginBean.logout}"/>
+	      			</h:form>
+      				</li>	
+      			</ul>
       			  			
   			</div>
 		</nav>

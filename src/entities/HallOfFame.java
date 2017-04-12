@@ -9,7 +9,11 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@NamedQuery(name="HallOfFame.findAll", query="SELECT h FROM HallOfFame h")
+@NamedQueries({
+@NamedQuery(name="HallOfFame.findAll", query="SELECT h FROM HallOfFame h"),
+@NamedQuery(name="HallOfFame.findRankingByCategory", query="SELECT h FROM HallOfFame h where h.category = :category"),
+})
+
 public class HallOfFame implements Serializable {
 	private static final long serialVersionUID = 1L;
 

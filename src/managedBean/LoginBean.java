@@ -18,6 +18,7 @@ import managedBean.SessionUser;
 import org.apache.log4j.Logger;
 
 import connexion.EMF;
+import entities.Role;
 import entities.User;
 import services.UserService;
 
@@ -37,7 +38,7 @@ public class LoginBean implements Serializable {
 	
 	private String name;
 	private String password;
-	private User userSession;
+	private User userSession=null;
 	
 	public LoginBean() {
 		// TODO Auto-generated constructor stub
@@ -54,28 +55,27 @@ public String login(){
 	    	UserService us = new UserService(em);
 	    	userSession = us.findUserSession(name,password);
 	    	
-	    	log.info("user found " + userSession.getLogin());
 	    	if(userSession != null){
 	    		HttpSession session = SessionUser.getSession();
 				session.setAttribute("idUser", userSession.getIdUser());
 				session.setAttribute("login", userSession.getLogin());
 				session.setAttribute("mail", userSession.getE_mail());
 				session.setAttribute("password", userSession.getPassword());
-				
-				log.info("Session crée " +userSession.getLogin() +session);
+				Role roleUser=userSession.getRole();
+				log.info("Role user session " +roleUser.getNameRole());
 	    		
-				return "success";}
+				return roleUser.getNameRole();}
 	    	else {
 				FacesContext.getCurrentInstance().addMessage(
-						null,
+						"submitLogin",
 						new FacesMessage(FacesMessage.SEVERITY_WARN,
 								"Incorrect Username and Passowrd",
 								"Please enter correct username and Password"));}
-	    		return "fail";
+	    		return "login";
 	    	
 	      } catch (NoResultException e) {
-	    	  System.out.println("erreur");
-	        return "fail";
+	    	  log.info("erreur");
+	        return "login";
 	      }
 	}
 public String logout() {

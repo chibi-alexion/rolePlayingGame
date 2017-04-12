@@ -3,18 +3,15 @@
  */
 package services;
 
-import entities.SecretQuestion;
-import entities.User;
 
 import java.io.Serializable;
 import java.util.List;
 import entities.Character;
+import entities.User;
 
 import javax.persistence.*;
 
 import org.apache.log4j.Logger;
-
-import connexion.EMF;
 
 
 /**
@@ -33,17 +30,12 @@ public class CharacterService implements Serializable {
 
 	
 	private EntityManager em;
-	private SecretQuestion secretQuestionUser;
 	
 	public CharacterService(EntityManager em)
 	{
 		this.em = em;
 	}
 	
-	public CharacterService() {
-		// TODO Auto-generated constructor stub
-	}
-
 	public Character characterCreate(Character c) {
 		
 	    em.getTransaction().begin();  		
@@ -65,17 +57,21 @@ public class CharacterService implements Serializable {
 	
 			return c;
 		}
-	public List<Character> findAllCharacterAlive (){
+	public Character findCharacterAlive (int idUser){
 	    try {
+			log.info(idUser);
+			log.info(em);
 			
-			
-	        TypedQuery<Character> query = em.createNamedQuery("SecretQuestion.findAll", Character.class);
-	        //log.info(query.getResultList());
-	        return query.getResultList();
+			Character user = (Character) em.createNamedQuery("Character.findAllAliveByUser").setParameter("id", idUser)
+		            .getSingleResult();
+	        //TypedQuery<Character> query = em.createNamedQuery("Character.findAllAliveByUser", Character.class);
+	        //query.setParameter("id", idUser);
+	        log.info(user);
+	        return user;
 
 	      } catch (NoResultException e) {
 	    	  
-	    	  System.out.print("secretquestion service no shit found");
+	    	  System.out.print(" no character alive found");
 
 	        return null;
 	      }
@@ -87,24 +83,23 @@ public Character findidCharacterByID(int idCharacter) {
 	    try {
 	    	log.info(idCharacter);
 	         
-	    	Character secret = (Character) em.createNamedQuery("Character.findSecretQuestionByID").setParameter("id", idCharacter)
+	    	Character character = (Character) em.createNamedQuery("Character.findSecretQuestionByID").setParameter("id", idCharacter)
 	            .getSingleResult();
-	         return secret;
+	         return character;
 	      } catch (NoResultException e) {
-	    	  System.out.println("erreur");
+	    	  log.info("no character found");
 	        return null;
 	      }
 }
-public List<Character> findAllCharacterByUser(User user) {
+public List<Character> findAllCharacterDeadByUser(int idUser) {
 	
 	
     try {
     	log.info("findAllCharacterByUser");
-    	log.info(user.getIdUser());
+    	log.info("Id utilisateur "+idUser);
     	
-    	TypedQuery<Character> query = em.createNamedQuery("Character.findAllCharacterByUser", Character.class);
-    	log.info(query);
-    	query.setParameter("user", user);
+    	TypedQuery<Character> query = em.createNamedQuery("Character.findAllCharacterDeadByUser", Character.class);
+    	query.setParameter("id", idUser);
     	log.info(query);
     	log.info(query.getResultList());
     	
@@ -115,6 +110,20 @@ public List<Character> findAllCharacterByUser(User user) {
         return null;
       }
 }
+
+public Character characterTest(int idUser) {
+	
+	log.info("characterTest find all");
+	
+	Character userChar = (Character) em.createNamedQuery("Character.findAllAliveByUser").setParameter("id", idUser)
+            .getSingleResult();
+		log.info(userChar);
+		
+         return userChar;
+	
+}
+
+
 
 	
 	

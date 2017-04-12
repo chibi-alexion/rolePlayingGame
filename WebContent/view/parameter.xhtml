@@ -16,9 +16,14 @@
 						value="#{userBean.mail}"
 						pt:placeholder="#{sessionScope['mail']}"
 						required="true"
-						requiredMessage="#{i18n['user.mail.validation']}"/>
-					<h:message for="mail" styleClass="errorMessage"/>
+						requiredMessage="#{i18n['user.mail.empty']}"
+						validatorMessage="#{i18n['user.mail.validation']}">
+						
+						<f:validator validatorId="ValidationMail" />
+					</h:inputText>
 				</div>
+				<h:message for="mail" styleClass="errorMessage"/>
+				<br/>
 				
 				<div class="input-group">	
 	                   <span class="input-group-addon"><i class="glyphicon glyphicon-lock"/></span>
@@ -28,9 +33,15 @@
 						value="#{userBean.password}"
 						pt:placeholder="#{sessionScope['password']}"
 						required="true"
-						requiredMessage="#{i18n['user.password.validation']}"/>
-					<h:message for="password" styleClass="errorMessage"/>
+						requiredMessage="#{i18n['user.password.empty']}"
+						validatorMessage="#{i18n['user.password.validation']}">
+						<f:validateRegex pattern="((?=.*[0-9]+)(?=.*[a-z]+)(?=.*[A-Z]+).{4,45})" />
+						</h:inputText>
+						
+					
 				</div>
+				<h:message for="password" styleClass="errorMessage"/>
+				<br/>
 				<h:commandButton class="btn btn-default" value="#{i18n['user.update.submit']}" action="#{userBean.updateUserInfo}"/>
 			</div>
 		</h:form>	

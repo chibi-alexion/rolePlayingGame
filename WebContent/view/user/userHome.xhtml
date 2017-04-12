@@ -6,11 +6,11 @@
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
                 template="/WEB-INF/templates/templateUser.xhtml">
 
-	
-<ui:define name="content" class="modal">
-		<h1>#{i18n['title.parameter']}</h1>
-
-		<ui:include src="../parameter.xhtml" />    
+	<ui:define name="header">
+		<h1>#{i18n['title.home']}</h1>
+	</ui:define>
+<ui:define name="content" >
+		    
 	</ui:define>	  
     
 </ui:composition>

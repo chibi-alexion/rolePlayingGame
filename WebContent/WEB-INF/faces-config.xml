@@ -15,24 +15,38 @@
 			<var>i18n</var>
 		</resource-bundle>
 	</application>
+	
 	<navigation-rule>
 		<from-view-id>/view/index.xhtml</from-view-id>
 		<navigation-case>
 		    <from-action>#{loginBean.login}</from-action>
-			<from-outcome>success</from-outcome>
-			<to-view-id>/view/welcome.xhtml</to-view-id>
+			<from-outcome>administrator</from-outcome>
+			<to-view-id>/view/administrator/adminHome.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
 	
 	<navigation-rule>
-		<from-view-id>/index.xhtml</from-view-id>
+		<from-view-id>/view/index.xhtml</from-view-id>
 		<navigation-case>
-			<from-action>#{LoginBean.login}</from-action>
-			<from-outcome>fail</from-outcome>
-			<to-view-id>/welcome.xhtml</to-view-id>
+		    <from-action>#{loginBean.login}</from-action>
+			<from-outcome>game master</from-outcome>
+			<to-view-id>/view/gameMaster/gameMasterHome.xhtml</to-view-id>
+			<redirect />
 		</navigation-case>
 	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/view/index.xhtml</from-view-id>
+		<navigation-case>
+		    <from-action>#{loginBean.login}</from-action>
+			<from-outcome>user</from-outcome>
+			<to-view-id>/view/user/userHome.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
+	
 	
 	<navigation-rule>
 		<from-view-id>/*</from-view-id>

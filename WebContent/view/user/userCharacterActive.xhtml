@@ -8,27 +8,30 @@
 
 	
     <ui:define name="content">
-    	<h1>#{i18n['title.caracter.history']}</h1>
+    	<h1>#{i18n['title.caracter.active']}</h1>
     	
 		<h:dataTable class="table table-striped"
-			value="#{characterBean.listCharacter}" var="listCharacter">
+			value="#{characterBean.character}" var="character">
 			<h:column style="width: 500px">
-				<h:outputText value="#{listCharacter.nameCharacter}" />
+				<h:outputText value="#{character.nameCharacter}" />
 			</h:column>
 			<h:column style="width: 500px">
-			<h:outputText value="#{listCharacter.race.nameRace}" />
+			<h:outputText value="#{character.race.nameRace}" />
 			</h:column>
 			<h:column style="width: 500px">
-				<h:outputText value="#{listCharacter.classe.nameClasse}" />	
+				<h:outputText value="#{character.classe.nameClasse}" />	
 			</h:column>
 			<h:column style="width: 500px">
-				<h:outputText value="#{listCharacter.sexe}" />
+				<h:outputText value="#{character.sexe}" />
 			</h:column>
 			<h:column style="width: 500px">
-				<h:outputText value="#{listCharacter.lvl}" />
+				<h:outputText value="#{character.lvl}" />
 			</h:column>
 			<h:column style="width: 500px">
-				<h:outputText value="#{listCharacter.gold}" />
+				<h:outputText value="#{character.gold}" />
+			</h:column>
+			<h:column style="width: 500px">
+				<h:outputText value="#{character.hitPointCharacter}" />
 			</h:column>
 		</h:dataTable>
     </ui:define>

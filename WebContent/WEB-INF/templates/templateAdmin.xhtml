@@ -21,12 +21,13 @@
 	<h:body>
 		<nav class="navbar navbar-default">
   			<div class="container-fluid">
+				<div class="navbar-header">
+					<h:outputText class="navbar-brand" value="EzGame"/>
+					<h:outputText class="navbar-brand" value="#{i18n['welcome']} #{sessionScope['login']}"/>   
+  			    </div>
 	   	    	<ul class="nav navbar-nav">
-				<li class="active">
-				<a href="#">"#{i18n['home']}"</a></li>
-	    			<li class="active"><a href="#">#{i18n['welcome']}</a></li>
-	      			<li class="active"><a href="#">#{i18n['parameter']}</a></li>
-	      			<li class="active"><a href="/rolePlayingGame/WebContent/view/admin/player.xhtml">#{i18n['player']}</a></li>
+					<li><a href="adminHome.xhtml">"#{i18n['home']}"</a></li>
+	      			<li><a href="/rolePlayingGame/WebContent/view/admin/player.xhtml">#{i18n['player']}</a></li>
 	      			<li class="dropdown">
 	        			<a class="dropdown-toggle" data-toggle="dropdown" href="#">#{i18n['item']}
 	        			<span class="caret"></span></a>
@@ -67,23 +68,24 @@
 	          				<li><a href="#">#{i18n['title_create']}</a></li>
 	       				</ul>
 	      			</li>
+	      			<li><a href="adminParameter.xhtml">#{i18n['parameter']}</a></li>
+	      			
 	    		</ul>
     			<ul class="nav navbar-nav navbar-right">
-    			<h:form> 
-    				<li><h:selectOneMenu value="#{languageBean.language}" onchange="submit()" class="form-control">
-					<f:selectItem itemValue="en" itemLabel="English" />
-					<f:selectItem itemValue="fr" itemLabel="Français" />
-					</h:selectOneMenu></li>
-				</h:form>	
-      				<li>
-      				<h:form>
-      				<h:commandButton class="btn btn-default" value="#{i18n['logout']}" action="#{loginBean.logout}"/>
-      				</h:form>
-      				</li>
-    			</ul>
-      			
-
-  			
+    				<li>
+	    				<h:form>
+		    				<h:selectOneMenu value="#{languageBean.language}" onchange="submit()" class="form-control">
+									<f:selectItem itemValue="en" itemLabel="English" />
+									<f:selectItem itemValue="fr" itemLabel="Français" />
+							</h:selectOneMenu>
+						</h:form>
+					</li>
+					<li>
+		      			<h:form>
+		      				<h:commandButton class="btn btn-default" value="#{i18n['logout']}" action="#{loginBean.logout}"/>
+		      			</h:form>
+      				</li>	
+      			</ul>
   			</div>
 		</nav>
 		

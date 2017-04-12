@@ -7,6 +7,7 @@ import entities.SecretQuestion;
 import entities.User;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -41,7 +42,7 @@ public User userCreate(User u) {
 		em.persist(u);
 	    em.getTransaction().commit();  		
 
-		System.out.println("persist ok");
+		System.out.println("persist user ok");
 
 		return u;
 	}
@@ -66,18 +67,38 @@ public User userCreate(User u) {
 		         
 				User user = (User) em.createNamedQuery("User.findUserSession").setParameter("login", name).setParameter("password", password)
 		            .getSingleResult();
+				log.info(user);
 		         return user;
 		      } catch (NoResultException e) {
-		    	  System.out.println("erreur");
+		    	  log.info("user non trouvé");
 		        return null;
 		      }		
 	}
 	public User findUserById(int userId){
-		log.info("findUserById");
-		User user = (User) em.createNamedQuery("User.findUserById").setParameter("id", userId).getSingleResult();
-	         return user;
+		log.info("findUserById " +userId);
+		log.info(em);
+		TypedQuery<User> query = em.createNamedQuery("User.findUserById", User.class);
+		query.setParameter("id", userId);		
+		log.info(query);
+		log.info(query.getSingleResult());
+        return query.getSingleResult();		
 	}
 	
+	public List<User> findUserByLogin(String login){
+		log.info("findUserByLogin " +login);
+		log.info(em);
+		try{
+		TypedQuery<User> query = em.createNamedQuery("User.findUserByLogin", User.class);
+		query.setParameter("login", login);		
+		log.info(query);
+		log.info(query.getResultList());
+        return query.getResultList();
+        }
+		catch (NoResultException e) {
+	    	  log.info("user bug");
+	        return null;
+	      }
+	}
 	
 	public User getUser() {
 		return user;

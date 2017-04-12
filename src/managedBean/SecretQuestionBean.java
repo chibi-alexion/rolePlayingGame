@@ -6,6 +6,7 @@ package managedBean;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import javax.persistence.*;
@@ -22,7 +23,7 @@ import services.SecretQuestionService;
  *
  */
 @Named
-@SessionScoped
+@RequestScoped
 public class SecretQuestionBean implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -39,7 +40,7 @@ public class SecretQuestionBean implements Serializable {
 	@PostConstruct
 	public void init(){
 		
-		EntityManager em = EMF.getEM();
+		 em = EMF.getEM();
 
 		SecretQuestionService sqService = new SecretQuestionService(em);
 		listSecretQuestion = sqService.findAllSecretQuestion();

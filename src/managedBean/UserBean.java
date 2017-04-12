@@ -7,6 +7,9 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
+import javax.servlet.http.HttpSession;
+import javax.validation.constraints.Size;
+
 import connexion.EMF;
 
 import org.apache.log4j.Logger;
@@ -31,10 +34,10 @@ public class UserBean implements Serializable {
 	// Log4j
 	private static final Logger	log	= Logger.getLogger(UserBean.class);
 		
+	
 	private User user;
 	private List <SecretQuestion> listSecretQuestion;
-	private List <Role> listRole;
-	private EntityManager em=EMF.getEM();
+	private EntityManager em;
 	private String mail;
 	private String password;
 	/*
@@ -63,13 +66,13 @@ public class UserBean implements Serializable {
 	
 	public String submitNewUser(){
 
+		em=EMF.getEM();
 	    UserService service = new UserService(em);
+	    log.info(em);
 
 	    try{
-	    
 	    	user.setRole(em.find(Role.class, 1));
 	    	
-	    	System.out.println(user.getSecretquestion());
 	    	service.userCreate(user);
 
 	    	System.out.println("User created");
@@ -83,18 +86,16 @@ public class UserBean implements Serializable {
 	}
 	public String updateUserInfo(){
 
-	    UserService uservice = new UserService(em);
+		em=EMF.getEM();
+
+		UserService uservice = new UserService(em);
 
 	    try{
 	    	log.info(mail);
 	    	log.info(password);
+	    	log.info(em);
 			User u = uservice.findUserById(SessionUser.getUserId());
-	    	log.info(u.getAnswer());
-	    	log.info(u.getIdUser());
-	    	log.info(u.getRole());
-	    	log.info(u.getSecretquestion());
-	    	log.info(u.getPassword());
-	    	log.info(u.getE_mail());
+	    	
 	    	u.setE_mail(mail);
 	    	u.setPassword(password);
 	    	
@@ -107,7 +108,12 @@ public class UserBean implements Serializable {
 	    	User user= uservice.userUpdate(u);
 	    	log.info(u);
 
-	    	System.out.println("User created");
+	    	log.info("User updated");
+	    	HttpSession session = SessionUser.getSession();
+			
+			session.setAttribute("mail", u.getE_mail());
+			session.setAttribute("password", u.getPassword());
+			log.info("Session updated");
 	    }
 	    catch(Exception e){
 	    	log.error(e,e);
@@ -142,19 +148,6 @@ public class UserBean implements Serializable {
 		this.listSecretQuestion = listSecretQuestion;
 	}
 
-	/**
-	 * @return the listRole
-	 */
-	public List <Role> getListRole() {
-		return listRole;
-	}
-
-	/**
-	 * @param listRole the listRole to set
-	 */
-	public void setListRole(List <Role> listRole) {
-		this.listRole = listRole;
-	}
 	public String getMail() {
 		return mail;
 	}

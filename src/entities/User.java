@@ -13,7 +13,9 @@ import java.util.List;
 @NamedQueries({
 @NamedQuery(name="UserBean.findAll", query="SELECT u FROM User u"),
 @NamedQuery(name="User.findUserSession", query="SELECT u FROM User u where u.login = :login AND u.password = :password"),
-@NamedQuery(name="User.findUserById", query="SELECT u FROM User u where u.idUser = :id")
+@NamedQuery(name="User.findUserById", query="SELECT u FROM User u where u.idUser = :id"),
+@NamedQuery(name="User.findUserByLogin", query="SELECT u FROM User u where u.login = :login")
+
 })
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;

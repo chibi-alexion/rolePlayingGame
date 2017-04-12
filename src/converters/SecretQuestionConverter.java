@@ -56,11 +56,13 @@ public class SecretQuestionConverter implements Converter {
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object modelValue) {
         if (modelValue == null) {
+        	log.info("model value null");
             return "";
         }
-
+        log.info(modelValue);
         if (modelValue instanceof SecretQuestion) {
-        	
+        	log.info("block if model value secret question");
+
             return String.valueOf(((SecretQuestion) modelValue).getIdSecretQuestion());
         } else {
         	

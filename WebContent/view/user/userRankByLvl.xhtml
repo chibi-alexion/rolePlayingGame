@@ -1,0 +1,35 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+				xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+				xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                template="/WEB-INF/templates/templateUser.xhtml">
+
+	
+    <ui:define name="content">
+    	<h1>#{i18n['title.rank.lvl']}</h1>
+   
+		<h:dataTable class="table table-striped"
+			value="#{rankBean.listingRank}" var="listingRank">
+			<h:column style="width: 500px">
+				
+				
+				<h:outputText value="#{listingRank.nameCharacter}" />
+				<!-- 
+				<h:outputText value="#{listingRank.nameCharacter}" />
+				<h:outputText value="#{listingRank.race.nameRace}" />
+				<h:outputText value="#{listingRank.classe.nameClasse}" />	
+				<h:outputText value="#{listingRank.sexe}" />
+				<h:outputText value="#{listingRank.lvl}" />
+				<h:outputText value="#{listingRank.hitPointCharacter}" /> -->
+				
+				
+			</h:column>
+			
+			
+		</h:dataTable>
+		
+    </ui:define>
+
+</ui:composition>
