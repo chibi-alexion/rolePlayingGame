@@ -3,4 +3,9 @@
 /managedBean/
 /services/
 /validation/
+<<<<<<< HEAD
+=======
+/META-INF/
+/connexion/
+>>>>>>> branch 'master' of https://github.com/chibi-alexion/rolePlayingGame.git
 /converters/
