@@ -16,6 +16,7 @@ import org.apache.log4j.Logger;
 
 import connexion.EMF;
 import entities.Character;
+import entities.Role;
 import entities.User;
 import services.CharacterService;
 import services.RankService;
@@ -35,9 +36,13 @@ public class CharacterBean implements Serializable{
 	private List<Character> listCharacter;
 	private Character character;
 	private User userSession;
+	EntityManager em;
 	
 	@PostConstruct
 	public void init(){
+		
+		character= new Character();
+		/*
 		EntityManager em = EMF.getEM();
 		//log.info(SessionUser.getUser());
 		int idUser =SessionUser.getUserId();
@@ -60,7 +65,26 @@ public class CharacterBean implements Serializable{
 
 		for(Character c : listCharacter)
 		log.debug("Personnage: " + c.getNameCharacter());
-		em.close();
+		em.close();*/
+	}
+	
+	public String submitNewCharacter(){
+
+		em=EMF.getEM();
+	    CharacterService service = new CharacterService(em);
+	    log.info(em);
+
+	    try{
+	    	
+	    	service.characterCreate(character);
+
+	    	System.out.println("Character created");
+	    }
+	    catch(Exception e){
+	    	log.error(e,e);
+			log.info("Character not created !"); 	
+	    }
+	    return "home";
 	}
 
 	/**

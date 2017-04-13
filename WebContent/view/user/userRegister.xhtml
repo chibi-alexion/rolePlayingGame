@@ -21,11 +21,14 @@
 								value="#{userBean.user.login}"
 								required="true"
 								requiredMessage="#{i18n['user.login.empty']}"
-								validatorMessage="#{i18n['user.login.validation']}">
+								validatorMessage="#{facesContext.messageList}">
 								<f:validator validatorId="ValidationLogin" />
-							</h:inputText>
+							</h:inputText>							
 						</div>
 						<h:message for="userLogin" styleClass="errorMessage"/>
+						<h:message for="userLogin" value="#{facesContext.messageList}" styleClass="errorMessage"/>
+						
+						
 						<br/>
 						<br/>
 						<div class="input-group">

@@ -68,18 +68,15 @@ public class UserBean implements Serializable {
 
 		em=EMF.getEM();
 	    UserService service = new UserService(em);
-	    log.info(em);
 
 	    try{
 	    	user.setRole(em.find(Role.class, 1));
-	    	
 	    	service.userCreate(user);
-
 	    	System.out.println("User created");
 	    }
 	    catch(Exception e){
 	    	log.error(e,e);
-			log.info("User not created !"); 	
+			log.info("User not created !");	
 	    }
 	    
 	    return "";

@@ -14,16 +14,16 @@ import javax.persistence.EntityManager;
 import org.apache.log4j.Logger;
 
 import connexion.EMF;
-import entities.SecretQuestion;
-import services.SecretQuestionService;
+import entities.Race;
+import services.RaceService;
 
 @Named
 @RequestScoped
-@FacesConverter("secretQuestionConverter")
-public class SecretQuestionConverter implements Converter {
+@FacesConverter("raceConverter")
+public class RaceConverter implements Converter {
 	
 	
-	private static final Logger	log	= Logger.getLogger(SecretQuestionConverter.class);
+	private static final Logger	log	= Logger.getLogger(RaceConverter.class);
 	
 	
 
@@ -36,17 +36,17 @@ public class SecretQuestionConverter implements Converter {
         }
 		try {
 			EntityManager em = EMF.getEM();
-            log.info("idSecretQuestion: " + submittedValue);
+            log.info("id submitted Race: " + submittedValue);
             
-            SecretQuestionService sqService = new SecretQuestionService(em);
+            RaceService rService = new RaceService(em);
 			
-            SecretQuestion sq = sqService.findSecretQuestionByID(Integer.parseInt(submittedValue));
-            log.debug("Question after retrieving by id: "+ sq.getQuestion());
+            Race race = rService.findRaceById(Integer.parseInt(submittedValue));
+            log.debug("Classe after retrieving by id: "+ race.getNameRace());
             
             //************** CLOSE EM ******************
             em.close();
             
-            return sq;
+            return race;
 			
 	    } catch (NumberFormatException e) {
 	        throw new ConverterException(new FacesMessage(String.format("%s is not a valid ID", submittedValue)), e);
@@ -55,22 +55,19 @@ public class SecretQuestionConverter implements Converter {
 
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object modelValue) {
-        log.info(modelValue);
+       log.info("converter get as string");
     	if (modelValue == null) {
-        	log.info("model value null");
+        	log.info("model value "+modelValue);
             return "";
         }
-        log.info(modelValue);
-        if (modelValue instanceof SecretQuestion) {
-        	log.info("block if model value secret question");
+        log.info("Model value "+modelValue);
+        if (modelValue instanceof Race) {
+        	log.info("block if model value classe");
 
-            return String.valueOf(((SecretQuestion) modelValue).getIdSecretQuestion());
+            return String.valueOf(((Race) modelValue).getIdRace());
         } else {
         	
-        	throw new ConverterException(new FacesMessage(String.format("%s is not a valid secret question", modelValue)));
+        	throw new ConverterException(new FacesMessage(String.format("%s is not a valid Race", modelValue)));
         }
     }
-
-
-
 }

@@ -37,9 +37,14 @@
 						</h:inputSecret>						
 					</div>
 					<br/>
+					
 					<h:commandButton  id="submitLogins" class="btn btn-default" value="#{i18n['user.login.submit']}" action="#{loginBean.login}"/>
 				</div>
 			</h:form>	
-		</h:panelGrid>	
+				
+		</h:panelGrid>
+		<h:form style=" text-align: center;">
+				<h:commandLink class="btn btn-default" value="#{i18n['user.create.submit']}" action="user/userRegister.xhtml"/>
+		</h:form>		
     </ui:define>
 </ui:composition>

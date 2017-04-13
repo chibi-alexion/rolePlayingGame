@@ -3,9 +3,9 @@ package validation;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.FacesValidator;
@@ -16,12 +16,11 @@ import javax.persistence.EntityManager;
 import org.apache.log4j.Logger;
 
 import connexion.EMF;
-import managedBean.UserBean;
 import services.UserService;
 
 
 @ManagedBean
-@SessionScoped
+@RequestScoped
 @FacesValidator("ValidationLogin")
 
 
@@ -35,53 +34,66 @@ public class ValidationLogin implements Validator  {
 	private Matcher matcher;
 	private EntityManager em;
 
-	private static final String ROLE_PATTERN ="[A-Za-z]";
+	private static final String LOGIN_PATTERN ="^[_A-Za-z0-9-]+";
 
 	public ValidationLogin(){
-		setPattern(Pattern.compile(ROLE_PATTERN));
-
+		  pattern = Pattern.compile(LOGIN_PATTERN);
 	}
+	@Override
 
-	public void validate(FacesContext context, UIComponent component, Object submittedValue) 
+	public void validate(FacesContext context, UIComponent component, Object submittedValue){ 
 			
-		throws ValidatorException {
 
 			matcher = pattern.matcher(submittedValue.toString());
-
-			String name = (String)submittedValue;
+			log.info("Patern "+pattern);
+			log.info("Matcher "+matcher);
+			String name = submittedValue.toString();
+			log.info("submitted value "+name);
 			em=EMF.getEM();
 			
 			UserService us=new UserService(em);
 			log.info(us.findUserByLogin(name));
 			if (us.findUserByLogin(name) == null) 
 			{
-				log.info("Block if us.findUserByLogin(name) == null ");
+				log.info("Login not used ");
+				log.info(!matcher.matches());
 				if (!matcher.matches()){
-	
-					FacesMessage msg =
-							new FacesMessage("Login validation failed.",
-									"Invalid Login format.");
-						msg.setSeverity(FacesMessage.SEVERITY_ERROR);
-						
-						throw new ValidatorException(msg);	
+					
+					FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Username already taken",
+							"Invalid login format.");
+
+					FacesContext.getCurrentInstance().addMessage("SubmitUser:userLogin", msg);
+
+					throw new ValidatorException(msg);
+					
 				}
-				return;
-	
+				else{return;}
 			}
-	
 			else {
 				log.info("Login found ");
 				
-				FacesMessage msg =
-						new FacesMessage("Username already taken",
-								"Invalid E-mail format.");
-					msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Username already taken",
+													"Invalid E-mail.");
+				
+				FacesContext.getCurrentInstance().addMessage("userLogin", msg);
 					
 					throw new ValidatorException(msg);}
 			}
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	
-
+/*
 	public String getName() {
 		return name;
 	}
@@ -107,9 +119,9 @@ public class ValidationLogin implements Validator  {
 		this.matcher = matcher;
 	}
 
-	public static String getRolePattern() {
-		return ROLE_PATTERN;
+	public static String getLoginPattern() {
+		return LOGIN_PATTERN;
 	}
-
+*/
 
 }

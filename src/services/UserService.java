@@ -90,9 +90,16 @@ public User userCreate(User u) {
 		try{
 		TypedQuery<User> query = em.createNamedQuery("User.findUserByLogin", User.class);
 		query.setParameter("login", login);		
-		log.info(query);
+		log.info("query "+query);
 		log.info(query.getResultList());
-        return query.getResultList();
+		List<User> list=query.getResultList();
+		if(list.isEmpty()){
+			return null;
+        }
+		else{
+			return query.getResultList();
+		}
+			
         }
 		catch (NoResultException e) {
 	    	  log.info("user bug");
