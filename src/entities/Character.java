@@ -9,12 +9,12 @@ import java.util.List;
  * The persistent class for the character database table.
  * 
  */
-@Entity
+@Entity(name="Characters")
 @NamedQueries({
-		@NamedQuery(name="Character.findAll", query="SELECT c FROM Character c"),
-		@NamedQuery(name="Character.findAllCharacterDeadByUser", query="SELECT c FROM Character c where c.user.idUser = :id AND c.hitPointCharacter = 0"),
-		@NamedQuery(name="Character.findRankingByLevel", query="SELECT c from Character c ORDER BY c.lvl DESC"),
-		@NamedQuery(name="Character.findAllAliveByUser", query="SELECT c FROM Character c where c.user.idUser = :id AND c.hitPointCharacter > 0"),
+		@NamedQuery(name="Character.findAll", query="SELECT c FROM Characters c"),
+		@NamedQuery(name="Character.findAllCharacterDeadByUser", query="SELECT c FROM Characters c where c.user.idUser = :id AND c.hitPointCharacter = 0"),
+		@NamedQuery(name="Character.findRankingByLevel", query="SELECT c from Characters c ORDER BY c.lvl DESC"),
+		@NamedQuery(name="Character.findAllAliveByUser", query="SELECT c FROM Characters c where c.user.idUser = :id AND c.hitPointCharacter > 0"),
 })
 
 public class Character implements Serializable {

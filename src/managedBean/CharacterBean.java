@@ -38,8 +38,6 @@ public class CharacterBean implements Serializable{
 	private static final Logger	log	= Logger.getLogger(CharacterBean.class);
 
 	private List<Character> listCharacter;
-	private List<Race> listRace;
-	private List<Classe> listClasse;
 	private Character character;
 	private User userSession;
 	EntityManager em;
@@ -81,15 +79,17 @@ public class CharacterBean implements Serializable{
 	    log.info(em);
 	    UserService uservice = new UserService(em);
 	    User user = uservice.findUserById(SessionUser.getUserId());
+	    log.info(user);
+	    log.info(character.getRace());
+	    log.info(character.getClasse());
+	    log.info("Name character "+character.getNameCharacter());
 	    character.setUser(user);
 	    character.setGold(0);
 	    character.setExperience(0);
 	    character.setHitPointCharacter(character.getClasse().getHitPointClasse());
 	    character.setLvl(1);
 	    character.setStatusCharacter(true);
-	    log.info(character.getRace());
-	    log.info(character.getClasse());
-	    log.info(character.getNameCharacter());
+	    
 	    log.info(character.getHitPointCharacter());
 
 	    try{
@@ -150,28 +150,4 @@ public class CharacterBean implements Serializable{
 	/**
 	 * @return the listRace
 	 */
-	public List<Race> getListRace() {
-		return listRace;
-	}
-
-	/**
-	 * @param listRace the listRace to set
-	 */
-	public void setListRace(List<Race> listRace) {
-		this.listRace = listRace;
-	}
-
-	/**
-	 * @return the listClasse
-	 */
-	public List<Classe> getListClasse() {
-		return listClasse;
-	}
-
-	/**
-	 * @param listClasse the listClasse to set
-	 */
-	public void setListClasse(List<Classe> listClasse) {
-		this.listClasse = listClasse;
-	}
 }
