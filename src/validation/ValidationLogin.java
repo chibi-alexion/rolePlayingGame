@@ -59,8 +59,8 @@ public class ValidationLogin implements Validator  {
 				log.info(!matcher.matches());
 				if (!matcher.matches()){
 					
-					FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Username already taken",
-							"Invalid login format.");
+					FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Invalid login format.",
+							"The login must contain only letters and numbers");
 
 					FacesContext.getCurrentInstance().addMessage("SubmitUser:userLogin", msg);
 
@@ -73,9 +73,9 @@ public class ValidationLogin implements Validator  {
 				log.info("Login found ");
 				
 				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Username already taken",
-													"Invalid E-mail.");
-				
-				FacesContext.getCurrentInstance().addMessage("userLogin", msg);
+													"Chose another username ");
+				//Le SubmitUser:userLogin c'est d'une par l id du form 'SubmitUser' login et d'autre part l'id du champ 'userLogin' 
+				FacesContext.getCurrentInstance().addMessage("SubmitUser:userLogin", msg);
 					
 					throw new ValidatorException(msg);}
 			}
