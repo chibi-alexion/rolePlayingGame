@@ -7,6 +7,8 @@ import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Named;
 import javax.persistence.*;
 
@@ -24,7 +26,7 @@ import services.SecretQuestionService;
  *
  */
 @Named
-@RequestScoped
+@ViewScoped
 public class ClasseBean implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -43,16 +45,15 @@ public class ClasseBean implements Serializable {
 	@PostConstruct
 	public void init(){
 		
-		log.info("jose");
 		em = EMF.getEM();
 
 		ClasseService cService = new ClasseService(em);
 		log.info("init post init service");
 		listClasse = cService.findAllClasse();
 		log.info(listClasse);
-		log.info("Récuperation des entites depuis la db ok");
+		log.info("Récuperation des Classes depuis la db");
 		for(Classe c : listClasse)
-			log.debug("Question: " + c.getStrength());
+			log.debug("Classe: " + c.getNameClasse());
 		em.close();
 
 	}

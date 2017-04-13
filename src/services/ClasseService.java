@@ -12,6 +12,7 @@ import javax.persistence.*;
 import org.apache.log4j.Logger;
 
 import entities.Classe;
+import entities.SecretQuestion;
 
 
 /**
@@ -59,19 +60,27 @@ public Classe classeCreate(Classe cl) {
 		}
 
 	public List<Classe> findAllClasse(){
-		log.info(em);
 		TypedQuery<Classe> query = em.createNamedQuery("Classe.findAll", Classe.class);		
 		log.info(query);
         return query.getResultList();		
 	}
 	
 	public Classe findClasseById(int classeId){
-		log.info("findUserById " +classeId);
-		log.info(em);
+		/*
+		log.info("findClasseById " +classeId);
 		TypedQuery<Classe> query = em.createNamedQuery("Classe.findClasseById", Classe.class);
 		query.setParameter("id", classeId);		
-		log.info(query);
-		log.info(query.getSingleResult());
-        return query.getSingleResult();		
+		log.info("findClasseById result"+query.getSingleResult());
+        return query.getSingleResult();	
+        */
+        try {
+	    	log.debug(classeId);    
+	    	Classe classe = (Classe) em.createNamedQuery("Classe.findClasseById").setParameter("id", classeId)
+	            .getSingleResult();
+	         return classe;
+	      } catch (NoResultException e) {
+	    	  System.out.println("erreur");
+	        return null;
+	      }
 	}
 }

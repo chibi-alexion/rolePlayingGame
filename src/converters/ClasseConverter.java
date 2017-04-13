@@ -3,6 +3,7 @@ package converters;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -15,10 +16,11 @@ import org.apache.log4j.Logger;
 
 import connexion.EMF;
 import entities.Classe;
+import managedBean.ClasseBean;
 import services.ClasseService;
 
 @Named
-@RequestScoped
+@ViewScoped
 @FacesConverter("classeConverter")
 public class ClasseConverter implements Converter {
 	
@@ -29,6 +31,9 @@ public class ClasseConverter implements Converter {
 
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String submittedValue) {
+		
+		log.info("get classe as object "+submittedValue);
+		
 		if(submittedValue == null || submittedValue.isEmpty()) {
 			log.info("submitted value =null");
 
@@ -40,13 +45,14 @@ public class ClasseConverter implements Converter {
             
             ClasseService cService = new ClasseService(em);
 			
-            Classe classe = cService.findClasseById(Integer.parseInt(submittedValue));
-            log.debug("Classe after retrieving by id: "+ classe.getNameClasse());
-            
+            Classe cl = cService.findClasseById(Integer.parseInt(submittedValue));
+            log.debug("Classe after retrieving by id: "+ cl.getNameClasse());
+            if(cl !=null){
+            }
             //************** CLOSE EM ******************
             em.close();
             
-            return classe;
+            return cl;
 			
 	    } catch (NumberFormatException e) {
 	        throw new ConverterException(new FacesMessage(String.format("%s is not a valid ID", submittedValue)), e);
@@ -55,18 +61,13 @@ public class ClasseConverter implements Converter {
 
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object modelValue) {
-       log.info("converter get as string");
+       log.info("converter get Race as string");
     	if (modelValue == null) {
-        	log.info("model value "+modelValue);
             return "";
         }
-        log.info("Model value "+modelValue);
         if (modelValue instanceof Classe) {
-        	log.info("block if model value classe");
-
             return String.valueOf(((Classe) modelValue).getIdClasse());
         } else {
-        	
         	throw new ConverterException(new FacesMessage(String.format("%s is not a valid Classe", modelValue)));
         }
     }

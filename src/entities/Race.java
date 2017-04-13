@@ -18,7 +18,7 @@ public class Race implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private int idRace;
+	private Integer idRace;
 
 	private String nameRace;
 
@@ -66,5 +66,11 @@ public class Race implements Serializable {
 
 		return character;
 	}
+	@Override
+    public boolean equals(Object other) {
+        return (other != null && getClass() == other.getClass() && idRace != null)
+            ? idRace.equals(((Race) other).idRace)
+            : (other == this);
+    }
 
 }

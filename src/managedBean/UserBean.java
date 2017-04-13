@@ -67,6 +67,7 @@ public class UserBean implements Serializable {
 	public String submitNewUser(){
 
 		em=EMF.getEM();
+		log.info(user.getSecretquestion());
 	    UserService service = new UserService(em);
 
 	    try{

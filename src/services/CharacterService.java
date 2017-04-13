@@ -7,6 +7,7 @@ package services;
 import java.io.Serializable;
 import java.util.List;
 import entities.Character;
+import entities.Race;
 import entities.User;
 
 import javax.persistence.*;
@@ -123,9 +124,27 @@ public Character characterTest(int idUser) {
 	
 }
 
-
-
+public List<Character> findCharacterByName(String characterName){
 	
+	log.info("findCharacterByName " +characterName);
+	log.info(em);
 	
-	
+	try{
+		TypedQuery<Character> query = em.createNamedQuery("Character.findCharacterByName", Character.class);
+		query.setParameter("login", characterName);		
+		log.info("query "+query);
+		log.info(query.getResultList());
+		List<Character> list=query.getResultList();
+		if(list.isEmpty()){
+			return null;
+	    }
+		else{
+			return query.getResultList();
+		}
+    	}
+	catch (NoResultException e) {
+    	  log.info("character error service");
+        return null;
+      }
+}
 }

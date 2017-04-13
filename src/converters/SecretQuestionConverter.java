@@ -41,7 +41,7 @@ public class SecretQuestionConverter implements Converter {
             SecretQuestionService sqService = new SecretQuestionService(em);
 			
             SecretQuestion sq = sqService.findSecretQuestionByID(Integer.parseInt(submittedValue));
-            log.debug("Question after retrieving by id: "+ sq.getQuestion());
+            log.debug("Question after retrieving by id: "+ sq);
             
             //************** CLOSE EM ******************
             em.close();
@@ -55,14 +55,11 @@ public class SecretQuestionConverter implements Converter {
 
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object modelValue) {
-        log.info(modelValue);
     	if (modelValue == null) {
         	log.info("model value null");
             return "";
         }
-        log.info(modelValue);
         if (modelValue instanceof SecretQuestion) {
-        	log.info("block if model value secret question");
 
             return String.valueOf(((SecretQuestion) modelValue).getIdSecretQuestion());
         } else {

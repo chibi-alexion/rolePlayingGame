@@ -19,7 +19,8 @@ public class Classe implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private int idClasse;
+	//convertir en Integer car equals() ne peut ce faire sur un int ... 
+	private Integer idClasse;
 
 	private int armor;
 
@@ -117,5 +118,14 @@ public class Classe implements Serializable {
 
 		return character;
 	}
+	//Implementer cette methode qui va permettre de faire la comparaison
+	//entre l'objet selectionné et le contenu de la liste que tu affiche (en tout cas je le suppose)
+	@Override
+    public boolean equals(Object other) {
+        return (other != null && getClass() == other.getClass() && idClasse != null)
+            ? idClasse.equals(((Classe) other).idClasse)
+            : (other == this);
+    }
+	
 
 }

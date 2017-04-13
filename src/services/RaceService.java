@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 
 import entities.Classe;
 import entities.Race;
+import entities.SecretQuestion;
 
 
 /**
@@ -60,19 +61,29 @@ public Classe classeCreate(Classe cl) {
 		}
 
 	public List<Race> findAllRace(){
-		log.info(em);
 		TypedQuery<Race> query = em.createNamedQuery("Race.findAll", Race.class);		
-		log.info(query);
+		//log.info(query);
         return query.getResultList();		
 	}
 	
 	public Race findRaceById(int raceId){
-		log.info("findUserById " +raceId);
-		log.info(em);
+		/*
+		log.info("findRaceById " +raceId);
 		TypedQuery<Race> query = em.createNamedQuery("Race.findRaceById", Race.class);
 		query.setParameter("id", raceId);		
-		log.info(query);
-		log.info(query.getSingleResult());
-        return query.getSingleResult();		
+		//log.info("findRaceById "+query.getSingleResult());
+        return query.getSingleResult();	
+        */
+        try {
+	    	log.debug(raceId);    
+	    	Race race = (Race) em.createNamedQuery("Race.findRaceById").setParameter("id", raceId)
+	            .getSingleResult();
+	         return race;
+	      } catch (NoResultException e) {
+	    	  System.out.println("erreur");
+	        return null;
+	      }
+        
+        
 	}
 }

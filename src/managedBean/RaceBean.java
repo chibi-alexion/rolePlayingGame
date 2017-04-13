@@ -7,6 +7,8 @@ import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Named;
 import javax.persistence.*;
 
@@ -26,7 +28,7 @@ import services.SecretQuestionService;
  *
  */
 @Named
-@RequestScoped
+@ViewScoped
 public class RaceBean implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -46,16 +48,14 @@ public class RaceBean implements Serializable {
 	@PostConstruct
 	public void init(){
 		
-		log.info("jose");
 		em = EMF.getEM();
 
 		RaceService rService = new RaceService(em);
-		log.info("init post init service");
 		listRace = rService.findAllRace();
 		log.info(listRace);
-		log.info("Récuperation des entites depuis la db ok");
+		log.info("Récuperation des races depuis la db ok");
 		for(Race c : listRace)
-			log.debug("Question: " + c.getNameRace());
+			log.debug("Race: " + c.getNameRace());
 		em.close();
 
 	}

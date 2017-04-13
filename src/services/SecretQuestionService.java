@@ -65,25 +65,19 @@ public class SecretQuestionService implements Serializable {
 		}
 	public List<SecretQuestion> findAllSecretQuestion (){
 	    try {
-			log.info(em);
 			log.info("service find all secret question");
 	        TypedQuery<SecretQuestion> query = em.createNamedQuery("SecretQuestion.findAll", SecretQuestion.class);
 	        return query.getResultList();
-
 	      } catch (NoResultException e) {
-	    	  
 	    	  System.out.print("secretquestion service no shit found");
-
 	        return null;
 	      }
 	}
 	
 public SecretQuestion findSecretQuestionByID(int idSecretQuestion) {
 		
-		
 	    try {
-	    	log.debug(idSecretQuestion);
-	         
+	    	log.debug(idSecretQuestion);    
 			SecretQuestion secret = (SecretQuestion) em.createNamedQuery("SecretQuestion.findAllById").setParameter("id", idSecretQuestion)
 	            .getSingleResult();
 	         return secret;

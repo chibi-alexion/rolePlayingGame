@@ -40,14 +40,13 @@ public class SecretQuestionBean implements Serializable {
 	@PostConstruct
 	public void init(){
 		
-		 em = EMF.getEM();
-
+		em = EMF.getEM();
 		SecretQuestionService sqService = new SecretQuestionService(em);
 		listSecretQuestion = sqService.findAllSecretQuestion();
 		log.info(listSecretQuestion);
-		log.info("Récuperation des entites depuis la db ok");
+		log.info("Récuperation des question secretes depuis la db ok");
 		for(SecretQuestion sq : listSecretQuestion)
-			log.debug("Question: " + sq.getQuestion());
+			log.debug("Question: "+ sq + sq.getQuestion());
 		em.close();
 
 	}

@@ -3,6 +3,7 @@ package converters;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -18,7 +19,7 @@ import entities.Race;
 import services.RaceService;
 
 @Named
-@RequestScoped
+@ViewScoped
 @FacesConverter("raceConverter")
 public class RaceConverter implements Converter {
 	
@@ -29,6 +30,7 @@ public class RaceConverter implements Converter {
 
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String submittedValue) {
+		log.info("Get Race as object "+submittedValue);
 		if(submittedValue == null || submittedValue.isEmpty()) {
 			log.info("submitted value =null");
 
@@ -40,13 +42,13 @@ public class RaceConverter implements Converter {
             
             RaceService rService = new RaceService(em);
 			
-            Race race = rService.findRaceById(Integer.parseInt(submittedValue));
-            log.debug("Classe after retrieving by id: "+ race.getNameRace());
+            Race ra = rService.findRaceById(Integer.parseInt(submittedValue));
+            log.debug("Race after retrieving by id: "+ ra);
             
             //************** CLOSE EM ******************
             em.close();
             
-            return race;
+            return ra;
 			
 	    } catch (NumberFormatException e) {
 	        throw new ConverterException(new FacesMessage(String.format("%s is not a valid ID", submittedValue)), e);
@@ -57,12 +59,9 @@ public class RaceConverter implements Converter {
     public String getAsString(FacesContext context, UIComponent component, Object modelValue) {
        log.info("converter get as string");
     	if (modelValue == null) {
-        	log.info("model value "+modelValue);
             return "";
         }
-        log.info("Model value "+modelValue);
         if (modelValue instanceof Race) {
-        	log.info("block if model value classe");
 
             return String.valueOf(((Race) modelValue).getIdRace());
         } else {
