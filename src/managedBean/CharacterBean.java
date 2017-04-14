@@ -76,11 +76,11 @@ public class CharacterBean implements Serializable{
 
 		em=EMF.getEM();
 	    CharacterService service = new CharacterService(em);
-	    log.info(em);
 	    UserService uservice = new UserService(em);
 	    User user = uservice.findUserById(SessionUser.getUserId());
 	    log.info(user);
-	    log.info(character.getRace());
+	    log.info(character);
+	    log.info(em);
 	    log.info(character.getClasse());
 	    log.info("Name character "+character.getNameCharacter());
 	    character.setUser(user);

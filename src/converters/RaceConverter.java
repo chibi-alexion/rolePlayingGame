@@ -47,7 +47,7 @@ public class RaceConverter implements Converter {
             
             //************** CLOSE EM ******************
             em.close();
-            
+            log.info("Race envoyéparle converter "+ra.getNameRace());
             return ra;
 			
 	    } catch (NumberFormatException e) {

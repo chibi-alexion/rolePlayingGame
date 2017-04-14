@@ -1,0 +1,89 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	template="/WEB-INF/templates/templateAdmin.xhtml">
+
+	<ui:define name="content">
+		<h1>#{i18n['classe.listing']}</h1>
+
+		<h:dataTable class="table table-striped" id="listClasse"
+		value="#{classeBean.listClasse}" var="listClasse">
+					    
+			<h:column style="width: 500px">
+				<f:facet name="header">
+					<h:outputText value="#{i18n['classe.name']}" />
+				</f:facet>
+				<h:outputText value="#{listClasse.nameClasse}" />
+			</h:column>
+			
+			<h:column style="width: 500px">
+				<f:facet name="header">
+					<h:outputText value="#{i18n['classe.strength']}" />
+				</f:facet>
+				<h:outputText value="#{listClasse.strength}" />
+			</h:column>
+			
+			<h:column style="width: 500px">
+				<f:facet name="header">
+					<h:outputText value="#{i18n['classe.armor']}" />
+				</f:facet>
+				<h:outputText value="#{listClasse.armor}" />
+			</h:column>
+			
+			<h:column style="width: 500px">
+				<f:facet name="header">
+					<h:outputText value="#{i18n['classe.magic']}" />
+				</f:facet>
+				<h:outputText value="#{listClasse.magic}" />
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="#{i18n['classe.intelligence']}" />
+				</f:facet>
+				<h:outputText value="#{listClasse.intelligence}" />
+				 
+			</h:column>
+			
+			<h:column>
+				<h:form>
+					<h:commandLink value="#{i18n['classe.update']}" action="#{classeBean.classeToUpdate(listClasse.idClasse)}"
+	    				onclick="$('#modalUpdateClasse').modal('show');" immediate="true">
+	    				<f:ajax execute="@this" render=":updateClasse"/>
+					</h:commandLink>		
+				</h:form>
+			</h:column>
+		</h:dataTable>
+		<div class="modal fade" id="modalUpdateClasse" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+		    <div class="modal-dialog modal-sm">
+		        <div class="modal-content">
+		            <h:form id="updateClasse">
+		                <div class="modal-header">
+		                    <h4 class="modal-title">#{classeBean.classe.nameClasse}</h4>
+		                </div>
+		                <div class="modal-body">
+		                    <div class="input-group">
+							<h:outputText value="#{i18n['classe.strength']}" />
+							<h:inputText class="form-control"
+								id="strength"
+								value="#{classeBean.classe.strength}"
+								required="true"
+								requiredMessage="#{i18n['classe.empty']}"
+								validatorMessage="#{i18n['classe.strength.validation']}">
+								<f:convertNumber integerOnly="true"/>
+								<!-- <f:validateRegex pattern="((?=.*[0-9]+).{1,45})" /> -->
+							</h:inputText>
+						</div>
+		                </div>
+		                <h:panelGroup layout="block" styleClass="modal-footer">
+		                    <h:commandLink value="Close" immediate="true" styleClass="btn btn-default" oncomplete="$('#myModal').modal('hide');" />
+		                </h:panelGroup>
+		            </h:form>
+		        </div>
+		    </div>
+		</div>
+	</ui:define>
+</ui:composition>

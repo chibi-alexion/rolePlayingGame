@@ -3,6 +3,7 @@
  */
 package managedBean;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -26,20 +27,18 @@ import services.SecretQuestionService;
  *
  */
 @Named
-@ViewScoped
+@RequestScoped
 public class ClasseBean implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	private static final Logger	log	= Logger.getLogger(ClasseBean.class);
 
 	private List <Classe> listClasse;
-	private SecretQuestion secretQuestion;
-	
-
+	private Classe classe =new Classe();
+	private int idClasse =0;
 	private EntityManager em;
 
 	public ClasseBean(){
-
 	}
 	
 	@PostConstruct
@@ -48,7 +47,6 @@ public class ClasseBean implements Serializable {
 		em = EMF.getEM();
 
 		ClasseService cService = new ClasseService(em);
-		log.info("init post init service");
 		listClasse = cService.findAllClasse();
 		log.info(listClasse);
 		log.info("Récuperation des Classes depuis la db");
@@ -58,38 +56,52 @@ public class ClasseBean implements Serializable {
 
 	}
 	
-public String submitNewSecretQuestion(){
+public String submitNewClasse(){
 
+		em = EMF.getEM();
+		log.info(classe.getIntelligence());
+		log.info(classe.getNameClasse());
+		log.info(classe.getStrength());
 
-	    SecretQuestionService service = new SecretQuestionService(em);
+	    ClasseService service = new ClasseService(em);
 	    try{
 	    
-	    	service.secretQuestionCreate(secretQuestion);
+	    	service.classeCreate(classe);
 	    	em.close();
-	    	System.out.println("User created");
+	    	System.out.println("Classe created");
 	    }
 	    catch(Exception e){
 	    	log.error(e,e);
-			log.info("User not created !"); 	
+			log.info("Classe not created !"); 	
 	    }
 	    
 	    return "";
 	}
 
-public String secretQuestionUpdate(){
+public Classe classeToUpdate(int idClasse)throws IOException{
+	
+	log.info(idClasse);
+	classe = listClasse.get(idClasse-1);
+	log.info(classe);
+	return classe;
+}
 
+public String classeUpdate(){
 
-    SecretQuestionService service = new SecretQuestionService(em);
+	em = EMF.getEM();
+
+	log.info(listClasse);
+    ClasseService service = new ClasseService(em);
 
     try{
     
-    	service.secretQuestionUpdate(secretQuestion);
+    	service.classeUpdate(classe);
     	em.close();
-    	System.out.println("Secret Question created");
+    	System.out.println("Classe upated");
     }
     catch(Exception e){
     	log.error(e,e);
-		log.info("User not created !"); 	
+		log.info("Classe not upated !"); 	
     }
     
     return "";
@@ -107,5 +119,32 @@ public List<Classe> getListClasse() {
  */
 public void setListClasse(List<Classe> listClasse) {
 	this.listClasse = listClasse;
+}
+/**
+ * @return the classe
+ */
+public Classe getClasse() {
+	return classe;
+}
+
+/**
+ * @param classe the classe to set
+ */
+public void setClasse(Classe classe) {
+	this.classe = classe;
+}
+
+/**
+ * @return the idClasse
+ */
+public int getIdClasse() {
+	return idClasse;
+}
+
+/**
+ * @param idClasse the idClasse to set
+ */
+public void setIdClasse(int idClasse) {
+	this.idClasse = idClasse;
 }
 }

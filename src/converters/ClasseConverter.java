@@ -47,11 +47,9 @@ public class ClasseConverter implements Converter {
 			
             Classe cl = cService.findClasseById(Integer.parseInt(submittedValue));
             log.debug("Classe after retrieving by id: "+ cl.getNameClasse());
-            if(cl !=null){
-            }
             //************** CLOSE EM ******************
             em.close();
-            
+            log.info("Classe envoyé par le converter "+cl.getNameClasse());
             return cl;
 			
 	    } catch (NumberFormatException e) {

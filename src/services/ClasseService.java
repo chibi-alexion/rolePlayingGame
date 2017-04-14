@@ -43,18 +43,18 @@ public Classe classeCreate(Classe cl) {
 		em.persist(cl);
 	    em.getTransaction().commit();  		
 
-		System.out.println("persist user ok");
+		System.out.println("Classe persist ok");
 
 		return cl;
 	}
-	public Classe userUpdate(Classe cl) {
+	public Classe classeUpdate(Classe cl) {
 			
 		log.info("User service "+cl); 
 		em.getTransaction().begin();  		
 
 		em.persist(cl);
 	    em.getTransaction().commit(); 
-	    System.out.println("persist ok");
+	    System.out.println("Classe persist ok");
 	
 			return cl;
 		}
