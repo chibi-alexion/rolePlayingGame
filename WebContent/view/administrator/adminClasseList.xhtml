@@ -57,6 +57,7 @@
 				</h:form>
 			</h:column>
 		</h:dataTable>
+		
 		<div class="modal fade" id="modalUpdateClasse" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true" data-keyboard="false" data-backdrop="static">
 		    <div class="modal-dialog modal-sm">
 		        <div class="modal-content">
@@ -64,26 +65,78 @@
 		                <div class="modal-header">
 		                    <h4 class="modal-title">#{classeBean.classe.nameClasse}</h4>
 		                </div>
+		                
 		                <div class="modal-body">
+		                    
 		                    <div class="input-group">
-							<h:outputText value="#{i18n['classe.strength']}" />
-							<h:inputText class="form-control"
-								id="strength"
-								value="#{classeBean.classe.strength}"
-								required="true"
-								requiredMessage="#{i18n['classe.empty']}"
-								validatorMessage="#{i18n['classe.strength.validation']}">
-								<f:convertNumber integerOnly="true"/>
-								<!-- <f:validateRegex pattern="((?=.*[0-9]+).{1,45})" /> -->
-							</h:inputText>
+								<h:outputText value="#{i18n['classe.strength']}" />
+								<h:inputText 								
+									class="form-control"
+									id="strength"
+									value="#{classeBean.classe.strength}"
+									required="true"
+									requiredMessage="#{i18n['classe.empty']}"
+									validatorMessage="#{i18n['classe.number.validation']}">
+									<f:validateRegex pattern="((?=.*[0-9]+).{1,45})" />
+								</h:inputText>
+							</div>
+							<h:message for="strength" styleClass="errorMessage"/>
+							<br/>
+							<br/>
+							<div class="input-group">
+								<h:outputText value="#{i18n['classe.armor']}" />
+								<h:inputText class="form-control"
+									id="armor"
+									value="#{classeBean.classe.armor}"
+									required="true"
+									requiredMessage="#{i18n['classe.empty']}"
+									validatorMessage="#{i18n['classe.number.validation']}">
+									<f:validateRegex pattern="((?=.*[0-9]+).{1,45})" />
+								</h:inputText>
+							</div>
+							<h:message for="armor" styleClass="errorMessage"/>
+							<br/>
+							<br/>
+
+							<div class="input-group">
+								<h:outputText value="#{i18n['classe.magic']}" />
+								<h:inputText class="form-control"
+									id="magic"
+									value="#{classeBean.classe.magic}"
+									required="true"
+									requiredMessage="#{i18n['classe.empty']}"
+									validatorMessage="#{i18n['classe.number.validation']}">				
+									<f:validateRegex pattern="((?=.*[0-9]+).{1,45})" />
+								</h:inputText>
+							</div>
+							<h:message for="magic" styleClass="errorMessage"/>
+							<br/>
+							<br/> 
+
+							<div class="input-group">
+									<h:outputText value="#{i18n['classe.intelligence']}" />
+	
+									<h:inputText class="form-control"
+									id="intelligence"
+									value="#{classeBean.classe.intelligence}"
+									required="true"
+									requiredMessage="#{i18n['classe.empty']}"
+									validatorMessage="#{i18n['classe.number.validation']}">
+									<f:validateRegex pattern="(([0-9]+).{1,20})" />
+									</h:inputText>
+							</div>
+							<h:message for="intelligence" styleClass="errorMessage"/>
+							<br/>
+							<br/>
 						</div>
-		                </div>
+		                
 		                <h:panelGroup layout="block" styleClass="modal-footer">
+							<h:commandButton class="btn btn-default" value="#{i18n['classe.update']}" action="#{classeBean.classeUpdate}"/>
 		                    <h:commandLink value="Close" immediate="true" styleClass="btn btn-default" oncomplete="$('#myModal').modal('hide');" />
 		                </h:panelGroup>
 		            </h:form>
+		            </div>
 		        </div>
 		    </div>
-		</div>
 	</ui:define>
 </ui:composition>

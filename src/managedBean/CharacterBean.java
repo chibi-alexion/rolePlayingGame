@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
@@ -31,7 +32,7 @@ import services.UserService;
  *
  */
 @Named
-@ViewScoped
+@RequestScoped
 public class CharacterBean implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -46,7 +47,8 @@ public class CharacterBean implements Serializable{
 	public void init(){
 		
 		character= new Character();
-		/*
+
+		
 		EntityManager em = EMF.getEM();
 		//log.info(SessionUser.getUser());
 		int idUser =SessionUser.getUserId();
@@ -58,8 +60,6 @@ public class CharacterBean implements Serializable{
 		//OK user
 		log.info("Id de l'utilisateur session "+idUser);
 		CharacterService cService = new CharacterService(em);
-		character= cService.characterTest(idUser);
-		log.info(character);
 		character=cService.findCharacterAlive(idUser);
 		log.info(character);
 		listCharacter = cService.findAllCharacterDeadByUser(idUser); 
@@ -69,27 +69,23 @@ public class CharacterBean implements Serializable{
 
 		for(Character c : listCharacter)
 		log.debug("Personnage: " + c.getNameCharacter());
-		em.close();*/
+		em.close();
 	}
 	
 	public String submitNewCharacter(){
+
+
+		log.info("Name character "+character.getNameCharacter());
 
 		em=EMF.getEM();
 	    CharacterService service = new CharacterService(em);
 	    UserService uservice = new UserService(em);
 	    User user = uservice.findUserById(SessionUser.getUserId());
 	    log.info(user);
+	    character.setUser(user);
 	    log.info(character);
 	    log.info(em);
-	    log.info(character.getClasse());
-	    log.info("Name character "+character.getNameCharacter());
-	    character.setUser(user);
-	    character.setGold(0);
-	    character.setExperience(0);
-	    character.setHitPointCharacter(character.getClasse().getHitPointClasse());
-	    character.setLvl(1);
-	    character.setStatusCharacter(true);
-	    
+	    log.info(character.getClasse()); 
 	    log.info(character.getHitPointCharacter());
 
 	    try{

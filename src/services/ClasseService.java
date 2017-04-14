@@ -66,13 +66,7 @@ public Classe classeCreate(Classe cl) {
 	}
 	
 	public Classe findClasseById(int classeId){
-		/*
-		log.info("findClasseById " +classeId);
-		TypedQuery<Classe> query = em.createNamedQuery("Classe.findClasseById", Classe.class);
-		query.setParameter("id", classeId);		
-		log.info("findClasseById result"+query.getSingleResult());
-        return query.getSingleResult();	
-        */
+		
         try {
 	    	log.debug(classeId);    
 	    	Classe classe = (Classe) em.createNamedQuery("Classe.findClasseById").setParameter("id", classeId)
@@ -80,6 +74,18 @@ public Classe classeCreate(Classe cl) {
 	         return classe;
 	      } catch (NoResultException e) {
 	    	  System.out.println("erreur");
+	        return null;
+	      }
+	}
+	public Classe findClasseByName(String classeName){
+		
+        try {
+	    	log.debug("Nom de la classe dans service find by name "+classeName);    
+	    	Classe classe = (Classe) em.createNamedQuery("Classe.findClasseByName").setParameter("name", classeName)
+	            .getSingleResult();
+	         return classe;
+	      } catch (NoResultException e) {
+	    	  System.out.println("classe non trouvé");
 	        return null;
 	      }
 	}

@@ -25,9 +25,9 @@
 								<f:validateRegex pattern="((?=.*[a-z]+).{4,45})" />
 							</h:inputText>
 						</div>
-						<h:message for="nameCharacter" styleClass="errorMessage"/>
+						<h:message for="nameCharacter" value="#{facesContext.messageList}" styleClass="errorMessage"/>
 						<br/>
-						<br/><!--  
+						<br/>  
 						<div class="input-group">
 							<h:outputText value="#{i18n['character.sexe']}"/>
 							<h:selectOneMenu class="form-control" 
@@ -35,13 +35,13 @@
 			                value = "#{characterBean.character.sexe}"    
 			                required="true"
 			                requiredMessage="#{i18n['user.question.empty']}">
-			                    <f:selectItem value="1" itemLabel="homme" />
-			                    <f:selectItem value="0" itemLabel="femme" />  
+			                    <f:selectItem itemValue="#{true}" itemLabel="homme" />
+			                    <f:selectItem itemValue="#{false}" itemLabel="femme" />  
 			                </h:selectOneMenu>
 						</div>
 						<h:message for="sexe" styleClass="errorMessage"/>
 						<br/>
-						<br/>-->
+						<br/>
 						<div class="input-group">
 							<h:outputText value="#{i18n['caracter.classe']}"/>
 							<h:selectOneMenu class="form-control" 

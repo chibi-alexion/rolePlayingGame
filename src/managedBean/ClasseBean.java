@@ -88,9 +88,11 @@ public Classe classeToUpdate(int idClasse)throws IOException{
 
 public String classeUpdate(){
 
+	log.info("Force mise a jour "+classe.getStrength());
+
 	em = EMF.getEM();
 
-	log.info(listClasse);
+	log.info("Force mise a jour "+classe.getStrength());
     ClasseService service = new ClasseService(em);
 
     try{

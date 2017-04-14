@@ -16,34 +16,32 @@ import javax.persistence.EntityManager;
 import org.apache.log4j.Logger;
 
 import connexion.EMF;
-import services.UserService;
+import services.ClasseService;
 
 
 @ManagedBean
 @RequestScoped
-@FacesValidator("ValidationLogin")
+@FacesValidator("ValidationClasse")
 
 
-public class ValidationLogin implements Validator  {
+public class ValidationClasse implements Validator  {
 
 
-	private static final Logger	log	= Logger.getLogger(ValidationLogin.class);
+	private static final Logger	log	= Logger.getLogger(ValidationClasse.class);
 
 	private String name;
 	private Pattern pattern;
 	private Matcher matcher;
 	private EntityManager em;
 
-	private static final String LOGIN_PATTERN ="^[_A-Za-z0-9-]+";
+	private static final String CLASSE_PATTERN ="^[_A-Za-z0-9-]+";
 
-	public ValidationLogin(){
-		  pattern = Pattern.compile(LOGIN_PATTERN);
+	public ValidationClasse(){
+		  pattern = Pattern.compile(CLASSE_PATTERN);
 	}
 	@Override
-
 	public void validate(FacesContext context, UIComponent component, Object submittedValue){ 
 			
-
 			matcher = pattern.matcher(submittedValue.toString());
 			log.info("Patern "+pattern);
 			log.info("Matcher "+matcher);
@@ -51,18 +49,18 @@ public class ValidationLogin implements Validator  {
 			log.info("submitted value "+name);
 			em=EMF.getEM();
 			
-			UserService us=new UserService(em);
-			log.info(us.findUserByLogin(name));
-			if (us.findUserByLogin(name) == null) 
+			ClasseService us=new ClasseService(em);
+			if (us.findClasseByName(name) == null) 
 			{
 				em.close();
-				log.info("Login not used ");
-				if (!matcher.matches()|| name.length()>45){
+				log.info("Classe name not used ");
+				log.info(!matcher.matches());
+				if (!matcher.matches() || name.length()>45){
 					
-					FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Invalid login format.",
-							"The login must contain only letters and numbers and be shorter than 45 letters");
+					FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Invalid format.",
+							"The classeName must contain only letters and numbers and be shorter than 45 letters");
 
-					FacesContext.getCurrentInstance().addMessage("SubmitUser:userLogin", msg);
+					FacesContext.getCurrentInstance().addMessage("SubmitClasse:classeName", msg);
 
 					throw new ValidatorException(msg);
 					
@@ -70,12 +68,11 @@ public class ValidationLogin implements Validator  {
 				else{return;}
 			}
 			else {
-				log.info("Login found ");
+				log.info("Classe found found ");
 				em.close();
-				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Username already taken",
-													"Chose another username ");
-				//Le SubmitUser:userLogin c'est d'une par l id du form 'SubmitUser' login et d'autre part l'id du champ 'userLogin' 
-				FacesContext.getCurrentInstance().addMessage("SubmitUser:userLogin", msg);
+				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Classe already taken",
+													"Chose another classeName ");
+				FacesContext.getCurrentInstance().addMessage("SubmitClasse:nameClasse", msg);
 					
 					throw new ValidatorException(msg);}
 			}
@@ -91,8 +88,4 @@ public class ValidationLogin implements Validator  {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	
-
-
 }
