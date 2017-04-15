@@ -11,7 +11,7 @@ import java.util.List;
  */
 @Entity
 @NamedQueries({
-@NamedQuery(name="Classe.findAll", query="SELECT c FROM Classe c"),
+@NamedQuery(name="Classe.findAll", query="SELECT c FROM Classe c ORDER BY c.idClasse"),
 @NamedQuery(name="Classe.findClasseById", query="SELECT c FROM Classe c WHERE c.idClasse = :id"),
 @NamedQuery(name="Classe.findClasseByName", query="SELECT c FROM Classe c WHERE c.nameClasse = :name"),
 })

@@ -37,43 +37,37 @@ public class RaceService implements Serializable {
 
 	}
 	
-public Classe classeCreate(Classe cl) {
+public Race raceCreate(Race r) {
 		
 	    em.getTransaction().begin(); 
 
-		em.persist(cl);
+		em.persist(r);
 	    em.getTransaction().commit();  		
 
-		System.out.println("persist user ok");
+		System.out.println("Classe persist ok");
 
-		return cl;
+		return r;
 	}
-	public Classe userUpdate(Classe cl) {
+	public Race raceUpdate(Race r) {
 			
-		log.info("User service "+cl); 
+		log.info("User service "+r); 
 		em.getTransaction().begin();  		
 
-		em.persist(cl);
+		em.merge(r);
 	    em.getTransaction().commit(); 
-	    System.out.println("persist ok");
+	    System.out.println("Classe persist ok");
 	
-			return cl;
+			return r;
 		}
 
 	public List<Race> findAllRace(){
 		TypedQuery<Race> query = em.createNamedQuery("Race.findAll", Race.class);		
-		//log.info(query);
+		log.info(query);
         return query.getResultList();		
 	}
 	
 	public Race findRaceById(int raceId){
-		/*
-		log.info("findRaceById " +raceId);
-		TypedQuery<Race> query = em.createNamedQuery("Race.findRaceById", Race.class);
-		query.setParameter("id", raceId);		
-		//log.info("findRaceById "+query.getSingleResult());
-        return query.getSingleResult();	
-        */
+		
         try {
 	    	log.debug(raceId);    
 	    	Race race = (Race) em.createNamedQuery("Race.findRaceById").setParameter("id", raceId)
@@ -83,7 +77,17 @@ public Classe classeCreate(Classe cl) {
 	    	  System.out.println("erreur");
 	        return null;
 	      }
-        
-        
+	}
+	public Race findRaceByName(String raceName){
+		
+        try {
+	    	log.debug("Nom de la race dans service find by name "+raceName);    
+	    	Race race = (Race) em.createNamedQuery("Race.findRaceByName").setParameter("name", raceName)
+	            .getSingleResult();
+	         return race;
+	      } catch (NoResultException e) {
+	    	  System.out.println("race non trouvé");
+	        return null;
+	      }
 	}
 }

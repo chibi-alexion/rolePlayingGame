@@ -52,7 +52,7 @@ public Classe classeCreate(Classe cl) {
 		log.info("User service "+cl); 
 		em.getTransaction().begin();  		
 
-		em.persist(cl);
+		em.merge(cl);
 	    em.getTransaction().commit(); 
 	    System.out.println("Classe persist ok");
 	

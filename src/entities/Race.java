@@ -11,8 +11,10 @@ import java.util.List;
  */
 @Entity
 @NamedQueries({
-@NamedQuery(name="Race.findAll", query="SELECT r FROM Race r"),
+@NamedQuery(name="Race.findAll", query="SELECT r FROM Race r ORDER BY r.idRace"),
 @NamedQuery(name="Race.findRaceById", query="SELECT r FROM Race r WHERE r.idRace = :id"),
+@NamedQuery(name="Race.findRaceByName", query="SELECT r FROM Race r WHERE r.nameRace = :name"),
+
 })
 public class Race implements Serializable {
 	private static final long serialVersionUID = 1L;

@@ -63,21 +63,22 @@
 		        <div class="modal-content">
 		            <h:form id="updateClasse">
 		                <div class="modal-header">
-		                    <h4 class="modal-title">#{classeBean.classe.nameClasse}</h4>
+		                    <h4 class="modal-title">#{classeBean.classeUpdate.nameClasse}</h4>
 		                </div>
 		                
 		                <div class="modal-body">
-		                    
+		                	<h:inputHidden   value="#{classeBean.classeUpdate.idClasse}"/>
+		                   <h:inputHidden  value="#{classeBean.classeUpdate.nameClasse}"/> 								
+		                    	
 		                    <div class="input-group">
 								<h:outputText value="#{i18n['classe.strength']}" />
 								<h:inputText 								
 									class="form-control"
 									id="strength"
-									value="#{classeBean.classe.strength}"
+									value="#{classeBean.classeUpdate.strength}"
 									required="true"
 									requiredMessage="#{i18n['classe.empty']}"
 									validatorMessage="#{i18n['classe.number.validation']}">
-									<f:validateRegex pattern="((?=.*[0-9]+).{1,45})" />
 								</h:inputText>
 							</div>
 							<h:message for="strength" styleClass="errorMessage"/>
@@ -87,11 +88,10 @@
 								<h:outputText value="#{i18n['classe.armor']}" />
 								<h:inputText class="form-control"
 									id="armor"
-									value="#{classeBean.classe.armor}"
+									value="#{classeBean.classeUpdate.armor}"
 									required="true"
 									requiredMessage="#{i18n['classe.empty']}"
 									validatorMessage="#{i18n['classe.number.validation']}">
-									<f:validateRegex pattern="((?=.*[0-9]+).{1,45})" />
 								</h:inputText>
 							</div>
 							<h:message for="armor" styleClass="errorMessage"/>
@@ -102,11 +102,10 @@
 								<h:outputText value="#{i18n['classe.magic']}" />
 								<h:inputText class="form-control"
 									id="magic"
-									value="#{classeBean.classe.magic}"
+									value="#{classeBean.classeUpdate.magic}"
 									required="true"
 									requiredMessage="#{i18n['classe.empty']}"
 									validatorMessage="#{i18n['classe.number.validation']}">				
-									<f:validateRegex pattern="((?=.*[0-9]+).{1,45})" />
 								</h:inputText>
 							</div>
 							<h:message for="magic" styleClass="errorMessage"/>
@@ -118,11 +117,10 @@
 	
 									<h:inputText class="form-control"
 									id="intelligence"
-									value="#{classeBean.classe.intelligence}"
+									value="#{classeBean.classeUpdate.intelligence}"
 									required="true"
 									requiredMessage="#{i18n['classe.empty']}"
 									validatorMessage="#{i18n['classe.number.validation']}">
-									<f:validateRegex pattern="(([0-9]+).{1,20})" />
 									</h:inputText>
 							</div>
 							<h:message for="intelligence" styleClass="errorMessage"/>

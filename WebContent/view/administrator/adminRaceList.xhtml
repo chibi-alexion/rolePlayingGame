@@ -1,0 +1,77 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	template="/WEB-INF/templates/templateAdmin.xhtml">
+
+	<ui:define name="content">
+		<h1>#{i18n['race.listing']}</h1>
+		
+		<h:message for="raceName" value="#{facesContext.messageList}" styleClass="errorMessage"/>
+
+		<h:dataTable class="table table-striped" id="listRace"
+		value="#{raceBean.listRace}" var="listRace">
+				
+				    
+			<h:column style="width: 500px">
+				<f:facet name="header">
+					<h:outputText value="#{i18n['race.idRace']}" />
+				</f:facet>
+				<h:outputText value="#{listRace.idRace}" />
+			</h:column>
+			
+			<h:column style="width: 500px">
+				<f:facet name="header">
+					<h:outputText value="#{i18n['race.name']}" />
+				</f:facet>
+				<h:outputText value="#{listRace.nameRace}" />
+			</h:column>
+			
+			<h:column>
+				<h:form>
+					<h:commandLink value="#{i18n['race.update']}" action="#{raceBean.raceToUpdate(listRace.idRace)}"
+	    				onclick="$('#modalUpdateRace').modal('show');" immediate="true">
+	    				<f:ajax execute="@this" render=":updateRace"/>
+					</h:commandLink>		
+				</h:form>
+			</h:column>
+		</h:dataTable>
+
+		<div class="modal fade" id="modalUpdateRace" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+		    <div class="modal-dialog modal-sm">
+		        <div class="modal-content">
+		            <h:form id="updateRace">
+		                <div class="modal-header">
+		                    <h4 class="modal-title">#{raceBean.raceUpdate.nameRace}</h4>
+		                </div>
+		                
+		                <div class="modal-body">
+		                	<h:inputHidden   value="#{raceBean.raceUpdate.idRace}"/>
+		                    	
+		                    <div class="input-group">
+							<h:outputText value="#{i18n['race.name']}" />
+							<h:inputText class="form-control"
+								id="raceName"
+								value="#{raceBean.raceUpdate.nameRace}"
+								required="true"
+								requiredMessage="#{i18n['race.nameRace.empty']}"
+								validatorMessage="#{facesContext.messageList}">
+								<f:validator validatorId="ValidationRaceName" />		
+							</h:inputText>							
+						</div>
+							<br/>
+							
+						</div>
+		                
+		                <h:panelGroup layout="block" styleClass="modal-footer">
+							<h:commandButton class="btn btn-default" value="#{i18n['race.update']}" action="#{raceBean.raceUpdate}"/>
+		                    <h:commandLink value="Close" immediate="true" styleClass="btn btn-default" oncomplete="$('#myModal').modal('hide');" />
+		                </h:panelGroup>
+		            </h:form>
+		            </div>
+		        </div>
+		    </div>
+	</ui:define>
+</ui:composition>

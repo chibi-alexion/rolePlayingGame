@@ -34,7 +34,8 @@ public class ClasseBean implements Serializable {
 	private static final Logger	log	= Logger.getLogger(ClasseBean.class);
 
 	private List <Classe> listClasse;
-	private Classe classe =new Classe();
+	private Classe classeUpdate;
+	private Classe classeCreate;
 	private int idClasse =0;
 	private EntityManager em;
 
@@ -45,28 +46,30 @@ public class ClasseBean implements Serializable {
 	public void init(){
 		
 		em = EMF.getEM();
-
+		classeCreate=new Classe();
+		classeUpdate=new Classe();
 		ClasseService cService = new ClasseService(em);
 		listClasse = cService.findAllClasse();
 		log.info(listClasse);
 		log.info("Récuperation des Classes depuis la db");
 		for(Classe c : listClasse)
-			log.debug("Classe: " + c.getNameClasse());
+			log.debug("Classe: " + c.getStrength());
 		em.close();
-
+		classeUpdate=listClasse.get(1);
 	}
 	
 public String submitNewClasse(){
 
 		em = EMF.getEM();
-		log.info(classe.getIntelligence());
-		log.info(classe.getNameClasse());
-		log.info(classe.getStrength());
+
+		log.info(classeCreate.getIntelligence());
+		log.info(classeCreate.getNameClasse());
+		log.info(classeCreate.getStrength());
 
 	    ClasseService service = new ClasseService(em);
 	    try{
 	    
-	    	service.classeCreate(classe);
+	    	service.classeCreate(classeCreate);
 	    	em.close();
 	    	System.out.println("Classe created");
 	    }
@@ -81,23 +84,19 @@ public String submitNewClasse(){
 public Classe classeToUpdate(int idClasse)throws IOException{
 	
 	log.info(idClasse);
-	classe = listClasse.get(idClasse-1);
-	log.info(classe);
-	return classe;
+	classeUpdate = listClasse.get(idClasse-1);
+	log.info(classeUpdate);
+	return classeUpdate;
 }
 
 public String classeUpdate(){
 
-	log.info("Force mise a jour "+classe.getStrength());
-
+	
 	em = EMF.getEM();
-
-	log.info("Force mise a jour "+classe.getStrength());
     ClasseService service = new ClasseService(em);
 
     try{
-    
-    	service.classeUpdate(classe);
+    	service.classeUpdate(classeUpdate);
     	em.close();
     	System.out.println("Classe upated");
     }
@@ -105,7 +104,7 @@ public String classeUpdate(){
     	log.error(e,e);
 		log.info("Classe not upated !"); 	
     }
-    
+    init();
     return "";
 }
 	
@@ -122,19 +121,7 @@ public List<Classe> getListClasse() {
 public void setListClasse(List<Classe> listClasse) {
 	this.listClasse = listClasse;
 }
-/**
- * @return the classe
- */
-public Classe getClasse() {
-	return classe;
-}
 
-/**
- * @param classe the classe to set
- */
-public void setClasse(Classe classe) {
-	this.classe = classe;
-}
 
 /**
  * @return the idClasse
@@ -149,4 +136,33 @@ public int getIdClasse() {
 public void setIdClasse(int idClasse) {
 	this.idClasse = idClasse;
 }
+
+/**
+ * @return the classeUpdate
+ */
+public Classe getClasseUpdate() {
+	return classeUpdate;
+}
+
+/**
+ * @param classeUpdate the classeUpdate to set
+ */
+public void setClasseUpdate(Classe classeUpdate) {
+	this.classeUpdate = classeUpdate;
+}
+
+/**
+ * @return the classeCreate
+ */
+public Classe getClasseCreate() {
+	return classeCreate;
+}
+
+/**
+ * @param classeCreate the classeCreate to set
+ */
+public void setClasseCreate(Classe classeCreate) {
+	this.classeCreate = classeCreate;
+}
+
 }

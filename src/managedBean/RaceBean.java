@@ -3,6 +3,7 @@
  */
 package managedBean;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -28,72 +29,83 @@ import services.SecretQuestionService;
  *
  */
 @Named
-@ViewScoped
+@RequestScoped
 public class RaceBean implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	private static final Logger	log	= Logger.getLogger(RaceBean.class);
 
 	private List <Race> listRace;
-	
-
-	
-
+	private Race raceUpdate;
+	private Race raceCreate;
 	private EntityManager em;
 
 	public RaceBean(){
-
 	}
 	
 	@PostConstruct
 	public void init(){
 		
 		em = EMF.getEM();
-
+		raceCreate=new Race();
+		raceUpdate=new Race();
 		RaceService rService = new RaceService(em);
 		listRace = rService.findAllRace();
 		log.info(listRace);
-		log.info("Récuperation des races depuis la db ok");
-		for(Race c : listRace)
-			log.debug("Race: " + c.getNameRace());
+		log.info("Récuperation des Race depuis la db");
+		for(Race r : listRace)
+			log.debug("Race: " + r.getNameRace());
 		em.close();
+		raceUpdate=listRace.get(1);
 
 	}
 	
-public String submitNewSecretQuestion(){
+public String submitNewRace(){
 
+		em = EMF.getEM();
 
-	    SecretQuestionService service = new SecretQuestionService(em);
+		//log.info(classeCreate.getIntelligence());
+		
+
+	    RaceService service = new RaceService(em);
 	    try{
 	    
-	    	//service.secretQuestionCreate();
+	    	service.raceCreate(raceCreate);
 	    	em.close();
-	    	System.out.println("User created");
+	    	System.out.println("Race created");
 	    }
 	    catch(Exception e){
 	    	log.error(e,e);
-			log.info("User not created !"); 	
+			log.info("Race not created !"); 	
 	    }
 	    
 	    return "";
 	}
 
-public String secretQuestionUpdate(){
+public Race raceToUpdate(int idRace)throws IOException{
+	
+	log.info(idRace);
+	raceUpdate = listRace.get(idRace-1);
+	log.info(raceUpdate);
+	return raceUpdate;
+}
 
+public String raceUpdate(){
 
-    SecretQuestionService service = new SecretQuestionService(em);
+	
+	em = EMF.getEM();
+    RaceService rservice = new RaceService(em);
 
     try{
-    
-    	//service.secretQuestionUpdate(secretQuestion);
+    	rservice.raceUpdate(raceUpdate);
     	em.close();
-    	System.out.println("Secret Question created");
+    	System.out.println("Race upated");
     }
     catch(Exception e){
     	log.error(e,e);
-		log.info("User not created !"); 	
+		log.info("Race not upated !"); 	
     }
-    
+    init();
     return "";
 }
 
@@ -110,5 +122,34 @@ public List<Race> getListRace() {
 public void setListRace(List<Race> listRace) {
 	this.listRace = listRace;
 }
-	
+
+/**
+ * @return the raceUpdate
+ */
+public Race getRaceUpdate() {
+	return raceUpdate;
+}
+
+/**
+ * @param raceUpdate the raceUpdate to set
+ */
+public void setRaceUpdate(Race raceUpdate) {
+	this.raceUpdate = raceUpdate;
+}
+
+/**
+ * @return the raceCreate
+ */
+public Race getRaceCreate() {
+	return raceCreate;
+}
+
+/**
+ * @param raceCreate the raceCreate to set
+ */
+public void setRaceCreate(Race raceCreate) {
+	this.raceCreate = raceCreate;
+}
+
+
 }

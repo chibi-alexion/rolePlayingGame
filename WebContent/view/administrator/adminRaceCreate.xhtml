@@ -1,0 +1,36 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+				xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+				xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                template="/WEB-INF/templates/templateAdmin.xhtml">
+
+	
+    <ui:define name="content">
+    
+    	<h1>#{i18n['title.race.create']}</h1>
+  
+    	<h:panelGrid columns="3" class="modal-dialog">
+			<h:form id="SubmitRace" style=" text-align: center;">
+	    		<div class="loginmodal-container">
+							
+						<div class="input-group">
+							<h:outputText value="#{i18n['race.name']}" />
+							<h:inputText class="form-control"
+								id="raceName"
+								value="#{raceBean.raceCreate.nameRace}"
+								required="true"
+								requiredMessage="#{i18n['race.nameRace.empty']}"
+								validatorMessage="#{facesContext.messageList}">
+								<f:validator validatorId="ValidationRaceName" />		
+							</h:inputText>							
+						</div>
+						<h:message for="raceName" value="#{facesContext.messageList}" styleClass="errorMessage"/>
+						<br/>
+						<h:commandButton class="btn btn-default" value="#{i18n['race.create']}" action="#{raceBean.submitNewRace}"/>
+					</div>
+			</h:form>
+		</h:panelGrid>
+    </ui:define>
+</ui:composition>

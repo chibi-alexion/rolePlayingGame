@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14884270515850" configfile="/rolePlayingGame/WebContent/WEB-INF/faces-config.xml">
-  <nodes xsi:type="pageflow:PFPage" name="view/index.xhtml" x="338" y="562" id="pf149167051981418" referenceLink="//@navigationRule.1/@fromViewId|" outlinks="pf14917615250490 pf14917615250492 pf14917629472958" inlinks="pf14917615250493" path="/view/index.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="*" x="122" y="562" id="pf14917615250494" referenceLink="//@navigationRule.2/@fromViewId|" outlinks="pf14917615250493" path="/*"/>
-  <nodes xsi:type="pageflow:PFPage" name="view/user/userHome.xhtml" id="pf14917615250495" referenceLink="//@navigationRule.2/@navigationCase.0/@toViewId|" inlinks="pf14917615250490" path="/view/user/userHome.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="view/index.xhtml" x="338" y="562" id="pf149167051981418" referenceLink="//@navigationRule.3/@fromViewId|" outlinks="pf14917615250490 pf14917615250492 pf14917629472958" inlinks="pf14917615250493" path="/view/index.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="*" x="122" y="562" id="pf14917615250494" referenceLink="//@navigationRule.3/@fromViewId|" outlinks="pf14917615250493" path="/*"/>
+  <nodes xsi:type="pageflow:PFPage" name="view/user/userHome.xhtml" id="pf14917615250495" referenceLink="//@navigationRule.3/@navigationCase.0/@toViewId|" inlinks="pf14917615250490" path="/view/user/userHome.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="view/administrator/adminHome.xhtml" id="pf14917615250507" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf14917615250492" path="/view/administrator/adminHome.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="view/gameMaster/gameMasterHome.xhtml" id="pf14917629472969" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" inlinks="pf14917629472958" path="/view/gameMaster/gameMasterHome.xhtml"/>
   <links id="pf14917615250493" target="pf149167051981418" source="pf14917615250494" outcome="login" redirect="true" fromaction="#{loginBean.logout}"/>
