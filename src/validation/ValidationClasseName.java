@@ -21,13 +21,13 @@ import services.ClasseService;
 
 @ManagedBean
 @RequestScoped
-@FacesValidator("ValidationClasse")
+@FacesValidator("ValidationClasseName")
 
 
-public class ValidationClasse implements Validator  {
+public class ValidationClasseName implements Validator  {
 
 
-	private static final Logger	log	= Logger.getLogger(ValidationClasse.class);
+	private static final Logger	log	= Logger.getLogger(ValidationClasseName.class);
 
 	private String name;
 	private Pattern pattern;
@@ -36,7 +36,7 @@ public class ValidationClasse implements Validator  {
 
 	private static final String CLASSE_PATTERN ="^[_A-Za-z0-9-]+";
 
-	public ValidationClasse(){
+	public ValidationClasseName(){
 		  pattern = Pattern.compile(CLASSE_PATTERN);
 	}
 	@Override
