@@ -3,6 +3,7 @@
  */
 package managedBean;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -14,6 +15,7 @@ import javax.persistence.*;
 import org.apache.log4j.Logger;
 
 import connexion.EMF;
+import entities.Race;
 import entities.SecretQuestion;
 import services.SecretQuestionService;
 
@@ -30,7 +32,8 @@ public class SecretQuestionBean implements Serializable {
 	private static final Logger	log	= Logger.getLogger(SecretQuestionBean.class);
 
 	private List <SecretQuestion> listSecretQuestion;
-	private SecretQuestion secretQuestion;
+	private SecretQuestion sqCreate;
+	private SecretQuestion sqUpdate;
 	private EntityManager em;
 
 	public SecretQuestionBean(){
@@ -41,6 +44,8 @@ public class SecretQuestionBean implements Serializable {
 	public void init(){
 		
 		em = EMF.getEM();
+		sqCreate= new SecretQuestion();
+		sqUpdate= new SecretQuestion();
 		SecretQuestionService sqService = new SecretQuestionService(em);
 		listSecretQuestion = sqService.findAllSecretQuestion();
 		log.info(listSecretQuestion);
@@ -48,43 +53,55 @@ public class SecretQuestionBean implements Serializable {
 		for(SecretQuestion sq : listSecretQuestion)
 			log.debug("Question: "+ sq + sq.getQuestion());
 		em.close();
+		sqUpdate=listSecretQuestion.get(1);
 
 	}
 	
 public String submitNewSecretQuestion(){
 
+	em = EMF.getEM();
 
 	    SecretQuestionService service = new SecretQuestionService(em);
 	    try{
 	    
-	    	service.secretQuestionCreate(secretQuestion);
+	    	service.secretQuestionCreate(sqCreate);
 	    	em.close();
-	    	System.out.println("User created");
+	    	System.out.println("Secret Question created");
 	    }
 	    catch(Exception e){
 	    	log.error(e,e);
-			log.info("User not created !"); 	
+			log.info("Secret Question not created !"); 	
 	    }
-	    
+	    em.close();
 	    return "";
 	}
+public SecretQuestion secretQuestionToUpdate(int idSecretQuestion)throws IOException{
+
+	log.info(idSecretQuestion);
+	sqUpdate = listSecretQuestion.get(idSecretQuestion-1);
+	log.info(sqUpdate);
+	return sqUpdate;
+}
 
 public String secretQuestionUpdate(){
 
-
+	em = EMF.getEM();
+	log.info(sqUpdate.getQuestion());
+	log.info(sqUpdate.getIdSecretQuestion());
     SecretQuestionService service = new SecretQuestionService(em);
 
     try{
     
-    	service.secretQuestionUpdate(secretQuestion);
+    	service.secretQuestionUpdate(sqUpdate);
     	em.close();
-    	System.out.println("Secret Question created");
+    	System.out.println("Secret Question updated");
     }
     catch(Exception e){
     	log.error(e,e);
-		log.info("User not created !"); 	
+		log.info("Secret Question not updated !");
+		
     }
-    
+    init();
     return "";
 }
 	/**
@@ -104,17 +121,32 @@ public String secretQuestionUpdate(){
 	}
 
 	/**
-	 * @return the secretQuestion
+	 * @return the sqCreate
 	 */
-	public SecretQuestion getSecretQuestion() {
-		return secretQuestion;
+	public SecretQuestion getSqCreate() {
+		return sqCreate;
 	}
 
 	/**
-	 * @param secretQuestion the secretQuestion to set
+	 * @param sqCreate the sqCreate to set
 	 */
-	public void setSecretQuestion(SecretQuestion secretQuestion) {
-		this.secretQuestion = secretQuestion;
+	public void setSqCreate(SecretQuestion sqCreate) {
+		this.sqCreate = sqCreate;
 	}
+
+	/**
+	 * @return the sqUpdate
+	 */
+	public SecretQuestion getSqUpdate() {
+		return sqUpdate;
+	}
+
+	/**
+	 * @param sqUpdate the sqUpdate to set
+	 */
+	public void setSqUpdate(SecretQuestion sqUpdate) {
+		this.sqUpdate = sqUpdate;
+	}
+
 
 }

@@ -3,6 +3,7 @@
  */
 package services;
 
+import entities.Race;
 import entities.SecretQuestion;
 
 import java.io.Serializable;
@@ -56,8 +57,9 @@ public class SecretQuestionService implements Serializable {
 	public SecretQuestion secretQuestionUpdate(SecretQuestion s) {
 			
 		em.getTransaction().begin();  		
-
-		em.persist(s);
+		SecretQuestion sqToUpdate=findSecretQuestionByID(s.getIdSecretQuestion());
+		sqToUpdate.setQuestion(s.getQuestion());
+		em.merge(sqToUpdate);
 	    em.getTransaction().commit(); 
 	    System.out.println("persist ok");
 	
@@ -85,6 +87,19 @@ public SecretQuestion findSecretQuestionByID(int idSecretQuestion) {
 	    	  System.out.println("erreur");
 	        return null;
 	      }
+}
+
+public SecretQuestion findSecretQuestionByName(String question){
+	
+    try {
+    	log.debug("Nom de la question dans service find by name "+question);    
+    	SecretQuestion sq = (SecretQuestion) em.createNamedQuery("SecretQuestion.findSecretQuestionByName").setParameter("question", question)
+            .getSingleResult();
+         return sq;
+      } catch (NoResultException e) {
+    	  System.out.println("question non trouvé");
+        return null;
+      }
 }
 
 	

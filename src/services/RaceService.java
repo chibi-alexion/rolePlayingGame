@@ -50,7 +50,7 @@ public Race raceCreate(Race r) {
 	}
 	public Race raceUpdate(Race r) {
 			
-		log.info("User service "+r); 
+		log.info("User service "+r);
 		em.getTransaction().begin();  		
 
 		em.merge(r);

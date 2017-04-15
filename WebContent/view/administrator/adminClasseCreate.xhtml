@@ -38,7 +38,7 @@
 								required="true"
 								requiredMessage="#{i18n['classe.empty']}"
 								validatorMessage="#{i18n['classe.number.validation']}">
-								<f:validateRegex pattern="(\\d{1,45})"></f:validateRegex>
+								<f:validateRegex pattern="(([0-9]).{0,45})"></f:validateRegex>
 							</h:inputText>
 						</div>
 						<h:message for="strength" styleClass="errorMessage"/>
@@ -52,7 +52,8 @@
 								required="true"
 								requiredMessage="#{i18n['classe.empty']}"
 								validatorMessage="#{i18n['classe.number.validation']}">
-
+								<f:validateRegex pattern="(([0-9]).{0,45})"></f:validateRegex>
+								
 							</h:inputText>
 						</div>
 						<h:message for="armor" styleClass="errorMessage"/>
@@ -66,7 +67,9 @@
 								value="#{classeBean.classeCreate.magic}"
 								required="true"
 								requiredMessage="#{i18n['classe.empty']}"
-								validatorMessage="#{i18n['classe.number.validation']}">				
+								validatorMessage="#{i18n['classe.number.validation']}">
+								<f:validateRegex pattern="(([0-9]).{0,45})"></f:validateRegex>
+											
 							</h:inputText>
 						</div>
 						<h:message for="magic" styleClass="errorMessage"/>
@@ -81,6 +84,8 @@
 							required="true"
 							requiredMessage="#{i18n['classe.empty']}"
 							validatorMessage="#{i18n['classe.number.validation']}">
+							<f:validateRegex pattern="(([0-9]).{0,45})"></f:validateRegex>
+							
 							</h:inputText>
 						</div>
 						<h:message for="intelligence" styleClass="errorMessage"/>
@@ -94,6 +99,8 @@
 								required="true"
 								requiredMessage="#{i18n['classe.hitPointCharacter.empty']}"
 								validatorMessage="#{i18n['classe.hitPointCharacter.validation']}">
+								<f:validateRegex pattern="(([0-9]).{0,45})"></f:validateRegex>
+								
 							</h:inputText>							
 						</div>
 						<br/>
