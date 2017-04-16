@@ -11,10 +11,14 @@ import java.util.List;
  */
 @Entity(name="Characters")
 @NamedQueries({
-		@NamedQuery(name="Character.findAll", query="SELECT c FROM Characters c"),
-		@NamedQuery(name="Character.findAllCharacterDeadByUser", query="SELECT c FROM Characters c where c.user.idUser = :id AND c.hitPointCharacter = 0"),
-		@NamedQuery(name="Character.findRankingByLevel", query="SELECT c from Characters c ORDER BY c.lvl DESC"),
-		@NamedQuery(name="Character.findAllAliveByUser", query="SELECT c FROM Characters c where c.user.idUser = :id AND c.hitPointCharacter > 0"),
+@NamedQuery(name="Character.findAll", query="SELECT c FROM Characters c"),
+@NamedQuery(name="Character.findAllCharacterDeadByUser", query="SELECT c FROM Characters c where c.user.idUser = :id AND c.hitPointCharacter = 0"),
+@NamedQuery(name="Character.findRankingByLevel", query="SELECT c from Characters c ORDER BY c.lvl DESC"),
+@NamedQuery(name="Character.findAllAliveByUser", query="SELECT c FROM Characters c where c.user.idUser = :id AND c.hitPointCharacter > 0"),
+@NamedQuery(name="Character.findAllAlive", query="SELECT c FROM Characters c where c.hitPointCharacter > 0"),
+@NamedQuery(name="Character.findCharacterByID", query="SELECT c FROM Characters c WHERE c.idCharacter = :id"),
+
+
 })
 
 public class Character implements Serializable {

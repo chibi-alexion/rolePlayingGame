@@ -1,0 +1,79 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	template="/WEB-INF/templates/templateAdmin.xhtml">
+
+	<ui:define name="content">
+		<h1>#{i18n['user.listing']}</h1>
+
+		<h:dataTable class="table table-striped" id="listUser"
+		value="#{userBean.listUser}" var="listUser">
+					    
+			<h:column style="width: 500px">
+				<f:facet name="header">
+					<h:outputText value="#{i18n['user.id']}" />
+				</f:facet>
+				<h:outputText value="#{listUser.idUser}" />
+			</h:column>
+			
+			<h:column style="width: 500px">
+				<f:facet name="header">
+					<h:outputText value="#{i18n['user.name']}" />
+				</f:facet>
+				<h:outputText value="#{listUser.login}" />
+			</h:column>
+						
+			<h:column>
+				<h:form>
+					<h:commandLink value="#{i18n['classe.update']}" 
+	    				onclick="$('#modalUpdateUser').modal('show');" immediate="true">
+	    				<f:setPropertyActionListener target="#{userBean.user}" value="#{listUser}" />
+	    				
+	    				<f:ajax execute="@this" render=":updateUser"/>
+					</h:commandLink>		
+				</h:form>
+			</h:column>
+		</h:dataTable>
+		
+		<div class="modal fade" id="modalUpdateUser" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+		    <div class="modal-dialog modal-sm">
+		        <div class="modal-content">
+		            <h:form id="updateUser">
+
+		                <div class="modal-header">
+		                    <h4 class="modal-title">#{userBean.user.login}</h4>
+		                </div>
+		                
+		                <div class="modal-body">
+		                									
+		                    <div class="input-group">
+								<h:outputText value="#{i18n['user.role']}"/>
+								<h:selectOneMenu class="form-control" 
+								id="role"
+				                value = "#{userBean.user.role}"    
+				                required="true"
+				                requiredMessage="#{i18n['user.role.empty']}"
+				                converter="#{roleConverter}">
+				                   <f:selectItem itemLabel="#{i18n['caracter.select.role']}" />
+			                       <f:selectItems     value = "#{roleBean.listRole}"
+			                       var="r"
+			                       itemValue="#{r}"
+			                       itemLabel="#{r.nameRole}
+			                       "/>
+				                </h:selectOneMenu>
+							</div>
+							<h:message for="role" styleClass="errorMessage"/>	
+						</div>
+			                <h:panelGroup layout="block" styleClass="modal-footer">
+								<h:commandButton class="btn btn-default" value="#{i18n['user.update']}" action="#{userBean.updateUserRole}"/>
+			                    <h:commandLink value="Close" immediate="true" styleClass="btn btn-default" oncomplete="$('#myModal').modal('hide');" />
+			                </h:panelGroup>
+		            </h:form>
+				</div>
+	        </div>
+	    </div>
+	</ui:define>
+</ui:composition>

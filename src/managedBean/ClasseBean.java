@@ -9,7 +9,9 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.persistence.*;
 
@@ -70,6 +72,11 @@ public String submitNewClasse(){
 	    try{
 	    
 	    	service.classeCreate(classeCreate);
+	    	FacesContext.getCurrentInstance().addMessage(
+					"SubmitCharacter",
+					new FacesMessage(FacesMessage.SEVERITY_WARN,
+							"Classe Created",
+							"Please enter correct username and Password"));
 	    	em.close();
 	    	System.out.println("Classe created");
 	    }
@@ -81,15 +88,7 @@ public String submitNewClasse(){
 	    return "";
 	}
 
-public Classe classeToUpdate(int idClasse)throws IOException{
-	
-	log.info(idClasse);
-	classeUpdate = listClasse.get(idClasse-1);
-	log.info(classeUpdate);
-	return classeUpdate;
-}
-
-public String classeUpdate(){
+public String classUpdate(){
 
 	
 	em = EMF.getEM();

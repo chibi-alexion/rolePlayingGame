@@ -10,15 +10,19 @@
     <ui:define name="content">
     
     	<h1>#{i18n['title.registration']}</h1>
-  
+
+  		
     	<h:panelGrid columns="3" class="modal-dialog">
+    	
 			<h:form id="SubmitUser" style=" text-align: center;">
+			    <h:message id="SubmitUser" value="#{facesContext.messageList}"/>
+			
 	    		<div class="loginmodal-container">
 						<div class="input-group">
 							<h:outputText value="#{i18n['user.login']}"/>
 							<h:inputText class="form-control"
 								id="userLogin"
-								value="#{userBean.user.login}"
+								value="#{userBean.userCreate.login}"
 								required="true"
 								requiredMessage="#{i18n['user.login.empty']}"
 								validatorMessage="#{facesContext.messageList}">
@@ -34,7 +38,7 @@
 							<h:outputText value="#{i18n['user.password']}"/>
 							<h:inputSecret class="form-control"
 								id="password"
-								value="#{userBean.user.password}"
+								value="#{userBean.userCreate.password}"
 								required="true"
 								requiredMessage="#{i18n['user.password.empty']}"
 								validatorMessage="#{i18n['user.password.validation']}">
@@ -48,7 +52,7 @@
 							<h:outputText value="#{i18n['user.mail']}"/>
 							<h:inputText class="form-control"
 								id="userMail"
-								value="#{userBean.user.e_mail}"
+								value="#{userBean.userCreate.e_mail}"
 								required="true"
 								requiredMessage="#{i18n['user.mail.empty']}"
 								validatorMessage="#{i18n['user.mail.validation']}">
@@ -62,7 +66,7 @@
 							<h:outputText value="#{i18n['user.secretQ']}"/>
 							<h:selectOneMenu class="form-control" 
 							id="secretquestion"
-			                value = "#{userBean.user.secretquestion}"    
+			                value = "#{userBean.userCreate.secretquestion}"    
 			                required="true"
 			                requiredMessage="#{i18n['user.question.empty']}"
 			                converter="#{secretQuestionConverter}">
@@ -80,7 +84,7 @@
 							<h:outputText value="#{i18n['user.answer']}"/>
 							<h:inputText class="form-control"
 								id="userAnswer"
-								value="#{userBean.user.answer}"
+								value="#{userBean.userCreate.answer}"
 								required="true"
 								requiredMessage="#{i18n['user.answer.empty']}"
 								validatorMessage="#{i18n['user.answer.validation']}">

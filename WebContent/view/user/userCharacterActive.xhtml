@@ -9,28 +9,52 @@
 	
     <ui:define name="content">
     	<h1>#{i18n['title.caracter.active']}</h1>
-    	
+    	<h:form style=" text-align: center;">
+				<h:commandButton class="btn btn-default" value="#{i18n['character.create.submit']}" action="userCharacterCreate.xhtml"/>
+		</h:form>	
+		
 		<h:dataTable class="table table-striped"
 			value="#{characterBean.character}" var="character">
 			<h:column style="width: 500px">
+				<f:facet name="header">
+					<h:outputText value="#{i18n['character.name']}" />
+				</f:facet>
 				<h:outputText value="#{character.nameCharacter}" />
 			</h:column>
 			<h:column style="width: 500px">
-			<h:outputText value="#{character.race.nameRace}" />
+				<f:facet name="header">
+					<h:outputText value="#{i18n['character.race']}" />
+				</f:facet>
+				<h:outputText value="#{character.race.nameRace}" />
 			</h:column>
 			<h:column style="width: 500px">
+				<f:facet name="header">
+					<h:outputText value="#{i18n['character.classe']}" />
+				</f:facet>
 				<h:outputText value="#{character.classe.nameClasse}" />	
 			</h:column>
 			<h:column style="width: 500px">
+				<f:facet name="header">
+					<h:outputText value="#{i18n['character.sexe']}" />
+				</f:facet>
 				<h:outputText value="#{character.sexe}" />
 			</h:column>
 			<h:column style="width: 500px">
+				<f:facet name="header">
+					<h:outputText value="#{i18n['character.level']}" />
+				</f:facet>
 				<h:outputText value="#{character.lvl}" />
 			</h:column>
 			<h:column style="width: 500px">
+				<f:facet name="header">
+					<h:outputText value="#{i18n['character.gold']}" />
+				</f:facet>
 				<h:outputText value="#{character.gold}" />
 			</h:column>
 			<h:column style="width: 500px">
+				<f:facet name="header">
+					<h:outputText value="#{i18n['character.hitPoint']}" />
+				</f:facet>
 				<h:outputText value="#{character.hitPointCharacter}" />
 			</h:column>
 		</h:dataTable>

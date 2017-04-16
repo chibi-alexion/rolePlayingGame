@@ -12,7 +12,9 @@ import connexion.EMF;
 
 import org.apache.log4j.Logger;
 
+import entities.Race;
 import entities.Role;
+import services.RaceService;
 import services.RoleService;
 
 
@@ -31,6 +33,7 @@ public class RoleBean implements Serializable {
 	
 	private List <Role> listRole;
 	private Role role;
+	EntityManager em;
 
 	public RoleBean(){
 	}
@@ -38,6 +41,16 @@ public class RoleBean implements Serializable {
 	@PostConstruct
 	public void init(){
 		role = new Role();
+		em = EMF.getEM();
+		
+		RoleService rService = new RoleService(em);
+		listRole = rService.findAllRole();
+		log.info(listRole);
+		log.info("Récuperation des Race depuis la db");
+		for(Role r : listRole)
+			log.debug("Role: " + r.getNameRole());
+		em.close();
+		//raceUpdate=listRace.get(1);
 	}
 	public String submitNewSecretQuestion(){
 

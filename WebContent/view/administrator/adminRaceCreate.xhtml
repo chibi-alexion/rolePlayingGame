@@ -10,9 +10,10 @@
     <ui:define name="content">
     
     	<h1>#{i18n['title.race.create']}</h1>
+  		<h:message for="raceName" value="#{facesContext.messageList}" styleClass="errorMessage"/>
   
     	<h:panelGrid columns="3" class="modal-dialog">
-			<h:form id="SubmitRace" style=" text-align: center;">
+			<h:form style=" text-align: center;">
 	    		<div class="loginmodal-container">
 							
 						<div class="input-group">
@@ -26,7 +27,6 @@
 								<f:validator validatorId="ValidationRaceName" />		
 							</h:inputText>							
 						</div>
-						<h:message for="raceName" value="#{facesContext.messageList}" styleClass="errorMessage"/>
 						<br/>
 						<h:commandButton class="btn btn-default" value="#{i18n['race.create']}" action="#{raceBean.submitNewRace}"/>
 					</div>

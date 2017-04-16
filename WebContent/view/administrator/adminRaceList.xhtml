@@ -31,8 +31,9 @@
 			
 			<h:column>
 				<h:form>
-					<h:commandLink value="#{i18n['race.update']}" action="#{raceBean.raceToUpdate(listRace.idRace)}"
+					<h:commandLink value="#{i18n['race.update']}" 
 	    				onclick="$('#modalUpdateRace').modal('show');" immediate="true">
+	  					<f:setPropertyActionListener target="#{raceBean.raceUpdate}" value="#{listRace}" />
 	    				<f:ajax execute="@this" render=":updateRace"/>
 					</h:commandLink>		
 				</h:form>
@@ -66,7 +67,7 @@
 						</div>
 		                
 		                <h:panelGroup layout="block" styleClass="modal-footer">
-							<h:commandButton class="btn btn-default" value="#{i18n['race.update']}" action="#{raceBean.raceUpdate}"/>
+							<h:commandButton class="btn btn-default" value="#{i18n['race.update']}" action="#{raceBean.racUpdate}"/>
 		                    <h:commandLink value="Close" immediate="true" styleClass="btn btn-default" oncomplete="$('#myModal').modal('hide');" />
 		                </h:panelGroup>
 		            </h:form>

@@ -5,8 +5,13 @@
                 xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
+
 	<h:panelGrid columns="3" class="modal-dialog" >
-		<h:form  style=" text-align: center;">
+		
+	
+		<h:form style=" text-align: center;">
+			<h:messages id="submitInformation" value="#{facesContext.messageList}"/>
+		
 			<div class="loginmodal-container">
 				<div class="input-group">
 				    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"/></span>
@@ -14,7 +19,7 @@
 						class="form-control" 
 						id="mail"
 						value="#{userBean.mail}"
-						pt:placeholder="#{sessionScope['mail']}"
+						pt:value="#{sessionScope['mail']}"
 						required="true"
 						requiredMessage="#{i18n['user.mail.empty']}"
 						validatorMessage="#{i18n['user.mail.validation']}">
@@ -31,7 +36,7 @@
 						class="form-control"
 						id="password"
 						value="#{userBean.password}"
-						pt:placeholder="#{sessionScope['password']}"
+						pt:value="#{sessionScope['password']}"
 						required="true"
 						requiredMessage="#{i18n['user.password.empty']}"
 						validatorMessage="#{i18n['user.password.validation']}">

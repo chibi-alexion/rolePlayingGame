@@ -13,21 +13,39 @@
 		<h:dataTable class="table table-striped"
 			value="#{characterBean.listCharacter}" var="listCharacter">
 			<h:column style="width: 500px">
+				<f:facet name="header">
+					<h:outputText value="#{i18n['character.name']}" />
+				</f:facet>
 				<h:outputText value="#{listCharacter.nameCharacter}" />
 			</h:column>
 			<h:column style="width: 500px">
-			<h:outputText value="#{listCharacter.race.nameRace}" />
+				<f:facet name="header">
+					<h:outputText value="#{i18n['character.race']}" />
+				</f:facet>
+				<h:outputText value="#{listCharacter.race.nameRace}" />
 			</h:column>
 			<h:column style="width: 500px">
+				<f:facet name="header">
+					<h:outputText value="#{i18n['character.classe']}" />
+				</f:facet>
 				<h:outputText value="#{listCharacter.classe.nameClasse}" />	
 			</h:column>
 			<h:column style="width: 500px">
+				<f:facet name="header">
+					<h:outputText value="#{i18n['character.sexe']}" />
+				</f:facet>
 				<h:outputText value="#{listCharacter.sexe}" />
 			</h:column>
 			<h:column style="width: 500px">
+				<f:facet name="header">
+					<h:outputText value="#{i18n['character.level']}" />
+				</f:facet>
 				<h:outputText value="#{listCharacter.lvl}" />
 			</h:column>
 			<h:column style="width: 500px">
+				<f:facet name="header">
+					<h:outputText value="#{i18n['character.gold']}" />
+				</f:facet>
 				<h:outputText value="#{listCharacter.gold}" />
 			</h:column>
 		</h:dataTable>

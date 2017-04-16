@@ -41,7 +41,6 @@ public class LoginBean implements Serializable {
 	private User userSession=null;
 	
 	public LoginBean() {
-		// TODO Auto-generated constructor stub
 	}
 	
 public String login(){

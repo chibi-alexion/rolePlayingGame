@@ -9,7 +9,9 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.persistence.*;
 
@@ -71,6 +73,11 @@ public String submitNewRace(){
 	    try{
 	    
 	    	service.raceCreate(raceCreate);
+	    	FacesContext.getCurrentInstance().addMessage(
+					"SubmitRace",
+					new FacesMessage(FacesMessage.SEVERITY_WARN,
+							"Race Created",
+							"Please enter correct username and Password"));
 	    	em.close();
 	    	System.out.println("Race created");
 	    }
@@ -82,15 +89,7 @@ public String submitNewRace(){
 	    return "";
 	}
 
-public Race raceToUpdate(int idRace)throws IOException{
-	
-	log.info(idRace);
-	raceUpdate = listRace.get(idRace-1);
-	log.info(raceUpdate);
-	return raceUpdate;
-}
-
-public String raceUpdate(){
+public String racUpdate(){
 
 	
 	em = EMF.getEM();

@@ -34,7 +34,7 @@ public class ValidationClasseName implements Validator  {
 	private Matcher matcher;
 	private EntityManager em;
 
-	private static final String CLASSE_PATTERN ="^[_A-Za-z0-9-]+";
+	private static final String CLASSE_PATTERN ="^[_A-Za-z-]+";
 
 	public ValidationClasseName(){
 		  pattern = Pattern.compile(CLASSE_PATTERN);
@@ -57,10 +57,11 @@ public class ValidationClasseName implements Validator  {
 				log.info(!matcher.matches());
 				if (!matcher.matches() || name.length()>45){
 					
-					FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Invalid format.",
+					FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,
+							"Invalid format.The classeName must contain only letters and numbers and be shorter than 45 letters",
 							"The classeName must contain only letters and numbers and be shorter than 45 letters");
 
-					FacesContext.getCurrentInstance().addMessage("SubmitClasse:classeName", msg);
+					FacesContext.getCurrentInstance().addMessage("submitClasse", msg);
 
 					throw new ValidatorException(msg);
 					
@@ -70,9 +71,10 @@ public class ValidationClasseName implements Validator  {
 			else {
 				log.info("Classe found found ");
 				em.close();
-				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Classe already taken",
-													"Chose another classeName ");
-				FacesContext.getCurrentInstance().addMessage("SubmitClasse:nameClasse", msg);
+				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,
+						"Classe already taken.Chose another classeName. ",
+						"Chose another classeName. ");
+				FacesContext.getCurrentInstance().addMessage("submitClasse", msg);
 					
 					throw new ValidatorException(msg);}
 			}

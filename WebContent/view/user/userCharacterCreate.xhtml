@@ -4,21 +4,22 @@
 				xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-                template="/WEB-INF/templates/template.xhtml">
+                template="/WEB-INF/templates/templateUser.xhtml">
 
 	
     <ui:define name="content">
     
 		<h1>#{i18n['title.createCharacter']}</h1>
-  
+  		<h:messages id="submitLogin" value="#{facesContext.messageList}"/>
+  		
     	<h:panelGrid columns="3" class="modal-dialog">
-			<h:form id="SubmitUser" style=" text-align: center;">
+			<h:form id="SubmitCharacter" style=" text-align: center;">
 	    		<div class="loginmodal-container">
 						 <div class="input-group">
 							<h:outputText value="#{i18n['character.name']}"/>
 							<h:inputText class="form-control"
 								id="nameCharacter"
-								value="#{characterBean.character.nameCharacter}"
+								value="#{characterBean.characterNew.nameCharacter}"
 								required="true"
 								requiredMessage="#{i18n['user.character.name.empty']}"
 								validatorMessage="#{i18n['user.character.name.validation']}">
@@ -32,7 +33,7 @@
 							<h:outputText value="#{i18n['character.sexe']}"/>
 							<h:selectOneMenu class="form-control" 
 							id="sexe"
-			                value = "#{characterBean.character.sexe}"    
+			                value = "#{characterBean.characterNew.sexe}"    
 			                required="true"
 			                requiredMessage="#{i18n['user.question.empty']}">
 			                    <f:selectItem itemValue="#{true}" itemLabel="homme" />
@@ -46,7 +47,7 @@
 							<h:outputText value="#{i18n['caracter.classe']}"/>
 							<h:selectOneMenu class="form-control" 
 							id="classe"
-			                value = "#{characterBean.character.classe}"    
+			                value = "#{characterBean.characterNew.classe}"    
 			                required="true"
 			                requiredMessage="#{i18n['character.classe.empty']}"
 			                converter="#{classeConverter}">
@@ -69,7 +70,7 @@
 							<h:outputText value="#{i18n['character.race']}"/>
 							<h:selectOneMenu class="form-control" 
 							id="race"
-			                value = "#{characterBean.character.race}"    
+			                value = "#{characterBean.characterNew.race}"    
 			                required="true"
 			                requiredMessage="#{i18n['character.race.empty']}"
 			                converter="#{raceConverter}">

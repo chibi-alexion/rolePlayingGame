@@ -3,6 +3,7 @@
  */
 package services;
 
+import entities.Race;
 import entities.SecretQuestion;
 import entities.User;
 
@@ -49,9 +50,10 @@ public User userCreate(User u) {
 	public User userUpdate(User u) {
 			
 		log.info("User service "+u); 
+		User us = findUserById(u.getIdUser());
 		em.getTransaction().begin();  		
-
-		em.persist(u);
+		
+		em.merge(us);
 	    em.getTransaction().commit(); 
 	    System.out.println("persist ok");
 	
@@ -73,6 +75,13 @@ public User userCreate(User u) {
 		    	  log.info("user non trouvé");
 		        return null;
 		      }		
+	}
+	
+	
+	public List<User> findAllUser(){
+		TypedQuery<User> query = em.createNamedQuery("User.findAll", User.class);		
+		log.info(query);
+        return query.getResultList();		
 	}
 	public User findUserById(int userId){
 		log.info("findUserById " +userId);

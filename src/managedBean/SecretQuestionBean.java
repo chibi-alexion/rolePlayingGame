@@ -9,6 +9,8 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.persistence.*;
 
@@ -65,7 +67,11 @@ public String submitNewSecretQuestion(){
 	    try{
 	    
 	    	service.secretQuestionCreate(sqCreate);
-	    	em.close();
+	    	FacesContext.getCurrentInstance().addMessage(
+					"SubmitCharacter",
+					new FacesMessage(FacesMessage.SEVERITY_WARN,
+							"Secret Question Created",
+							"Please enter correct username and Password"));
 	    	System.out.println("Secret Question created");
 	    }
 	    catch(Exception e){
@@ -75,13 +81,6 @@ public String submitNewSecretQuestion(){
 	    em.close();
 	    return "";
 	}
-public SecretQuestion secretQuestionToUpdate(int idSecretQuestion)throws IOException{
-
-	log.info(idSecretQuestion);
-	sqUpdate = listSecretQuestion.get(idSecretQuestion-1);
-	log.info(sqUpdate);
-	return sqUpdate;
-}
 
 public String secretQuestionUpdate(){
 

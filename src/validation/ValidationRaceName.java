@@ -57,10 +57,11 @@ public class ValidationRaceName implements Validator  {
 				log.info(!matcher.matches());
 				if (!matcher.matches() || name.length()>45){
 					
-					FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Invalid format.",
-							"The classeName must contain only letters and numbers and be shorter than 45 letters");
+					FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,
+							"Invalid format. The raceName must contain only letters and numbers and be shorter than 45 letters.",
+							"The raceName must contain only letters and numbers and be shorter than 45 letters.");
 
-					FacesContext.getCurrentInstance().addMessage("SubmitRace:raceName", msg);
+					FacesContext.getCurrentInstance().addMessage("raceName", msg);
 
 					throw new ValidatorException(msg);
 					
@@ -68,11 +69,11 @@ public class ValidationRaceName implements Validator  {
 				else{return;}
 			}
 			else {
-				log.info("Race found found ");
+				log.info("Race found ");
 				em.close();
 				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Classe already taken",
 													"Chose another raceName ");
-				FacesContext.getCurrentInstance().addMessage("SubmitRace:nameRace", msg);
+				FacesContext.getCurrentInstance().addMessage("raceName", msg);
 					
 					throw new ValidatorException(msg);}
 			}

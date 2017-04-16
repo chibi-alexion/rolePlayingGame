@@ -13,23 +13,41 @@
 		<h:dataTable class="table table-striped"
 			value="#{rankBean.listingRank}" var="listingRank">
 			<h:column style="width: 500px">
-				
-				
+				<f:facet name="header">
+					<h:outputText value="#{i18n['character.name']}" />
+				</f:facet>
 				<h:outputText value="#{listingRank.nameCharacter}" />
-				<!-- 
-				<h:outputText value="#{listingRank.nameCharacter}" />
-				<h:outputText value="#{listingRank.race.nameRace}" />
-				<h:outputText value="#{listingRank.classe.nameClasse}" />	
-				<h:outputText value="#{listingRank.sexe}" />
-				<h:outputText value="#{listingRank.lvl}" />
-				<h:outputText value="#{listingRank.hitPointCharacter}" /> -->
-				
-				
 			</h:column>
-			
-			
-		</h:dataTable>
-		
+			<h:column style="width: 500px">
+				<f:facet name="header">
+					<h:outputText value="#{i18n['character.race']}" />
+				</f:facet>
+				<h:outputText value="#{listingRank.race.nameRace}" />
+			</h:column>
+			<h:column style="width: 500px">
+				<f:facet name="header">
+					<h:outputText value="#{i18n['character.classe']}" />
+				</f:facet>
+				<h:outputText value="#{listingRank.classe.nameClasse}" />
+			</h:column>
+			<h:column style="width: 500px">
+				<f:facet name="header">
+					<h:outputText value="#{i18n['character.sexe']}" />
+				</f:facet>	
+				<h:outputText value="#{listingRank.sexe}" />
+			</h:column>
+			<h:column style="width: 500px">
+				<f:facet name="header">
+					<h:outputText value="#{i18n['character.lvl']}" />
+				</f:facet>
+				<h:outputText value="#{listingRank.lvl}" />
+			</h:column>
+			<h:column style="width: 500px">
+				<f:facet name="header">
+					<h:outputText value="#{i18n['character.hitPoint']}" />
+				</f:facet>
+				<h:outputText value="#{listingRank.hitPointCharacter}" />
+			</h:column>
+		</h:dataTable>		
     </ui:define>
-
 </ui:composition>

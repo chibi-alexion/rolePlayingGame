@@ -50,13 +50,16 @@
 			
 			<h:column>
 				<h:form>
-					<h:commandLink value="#{i18n['classe.update']}" action="#{classeBean.classeToUpdate(listClasse.idClasse)}"
+					<h:commandLink value="#{i18n['classe.update']}"
 	    				onclick="$('#modalUpdateClasse').modal('show');" immediate="true">
+	    				<f:setPropertyActionListener target="#{classeBean.classeUpdate}" value="#{listClasse}" />
+	    				
 	    				<f:ajax execute="@this" render=":updateClasse"/>
 					</h:commandLink>		
 				</h:form>
 			</h:column>
 		</h:dataTable>
+		
 		
 		<div class="modal fade" id="modalUpdateClasse" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true" data-keyboard="false" data-backdrop="static">
 		    <div class="modal-dialog modal-sm">
@@ -129,12 +132,13 @@
 						</div>
 		                
 		                <h:panelGroup layout="block" styleClass="modal-footer">
-							<h:commandButton class="btn btn-default" value="#{i18n['classe.update']}" action="#{classeBean.classeUpdate}"/>
+							<h:commandButton class="btn btn-default" value="#{i18n['classe.update']}" action="#{classeBean.classUpdate}"/>
 		                    <h:commandLink value="Close" immediate="true" styleClass="btn btn-default" oncomplete="$('#myModal').modal('hide');" />
 		                </h:panelGroup>
 		            </h:form>
 		            </div>
 		        </div>
 		    </div>
+		    
 	</ui:define>
 </ui:composition>

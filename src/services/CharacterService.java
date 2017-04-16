@@ -49,19 +49,37 @@ public class CharacterService implements Serializable {
 		return c;
 	}
 	public Character characterUpdate(Character c) {
-			
+		
+		Character ch =  findidCharacterByID(c.getIdCharacter());
+		ch.setGold(c.getGold());
+		ch.setHitPointCharacter(c.getHitPointCharacter());
+		ch.setExperience(c.getExperience());
 		em.getTransaction().begin();  		
 
-		em.persist(c);
+		
+		em.merge(ch);
 	    em.getTransaction().commit(); 
 	    System.out.println("persist ok");
 	
-			return c;
+			return ch;
 		}
+	
+	public List<Character> findCharacterAllAlive (){
+	    try {
+			
+	        TypedQuery<Character> query = em.createNamedQuery("Character.findAllAlive", Character.class);
+	        return query.getResultList();
+
+	      } catch (NoResultException e) {
+	    	  
+	    	  System.out.print(" no character alive found");
+
+	        return null;
+	      }
+	}
 	public Character findCharacterAlive (int idUser){
 	    try {
 			log.info(idUser);
-			log.info(em);
 			
 			Character user = (Character) em.createNamedQuery("Character.findAllAliveByUser").setParameter("id", idUser)
 		            .getSingleResult();
@@ -72,8 +90,7 @@ public class CharacterService implements Serializable {
 
 	      } catch (NoResultException e) {
 	    	  
-	    	  System.out.print(" no character alive found");
-
+	    	  log.info("no character alive found");
 	        return null;
 	      }
 	}
@@ -84,7 +101,7 @@ public Character findidCharacterByID(int idCharacter) {
 	    try {
 	    	log.info(idCharacter);
 	         
-	    	Character character = (Character) em.createNamedQuery("Character.findSecretQuestionByID").setParameter("id", idCharacter)
+	    	Character character = (Character) em.createNamedQuery("Character.findCharacterByID").setParameter("id", idCharacter)
 	            .getSingleResult();
 	         return character;
 	      } catch (NoResultException e) {
