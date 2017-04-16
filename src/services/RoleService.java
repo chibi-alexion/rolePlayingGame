@@ -32,6 +32,7 @@ public class RoleService implements Serializable{
 	public RoleService(EntityManager em) {
 		this.em = em;
 	}
+	/*
 	
 public Role roleCreate(Role r) {
 		
@@ -54,6 +55,7 @@ public Role roleCreate(Role r) {
 	
 			return r;
 		}
+		*/
 	
 	public List<Role> findAllRole(){
 		TypedQuery<Role> query = em.createNamedQuery("Role.findAll", Role.class);		
@@ -63,8 +65,6 @@ public Role roleCreate(Role r) {
 	
 	
 	public Role findRoleByID(int idRole) {
-		
-		
 	    try {
 	         Role role = (Role) em.createNamedQuery("Role.findRoleById").setParameter("id", idRole)
 	            .getSingleResult();

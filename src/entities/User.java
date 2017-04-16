@@ -2,6 +2,8 @@ package entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.Size;
+
 import java.util.List;
 
 
@@ -22,13 +24,16 @@ public class User implements Serializable {
 
 	@Id
 	private int idUser;
-
+	@Size(min=1, max=50)
 	private String answer;
-
+	
+	@Size(min=5, max=45)
 	private String e_mail;
-
+	
+	@Size(min=2, max=45)
 	private String login;
 
+	@Size(min=2, max=45)
 	private String password;
 
 	//bi-directional many-to-one association to Character

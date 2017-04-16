@@ -2,7 +2,7 @@ package entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
-
+import javax.validation.constraints.Size;
 
 import java.util.List;
 
@@ -24,6 +24,7 @@ public class SecretQuestion implements Serializable {
 	@Id
 	private Integer idSecretQuestion;
 
+	@Size(min=2, max=255)
 	private String question;
 
 	//bi-directional many-to-one association to UserBean

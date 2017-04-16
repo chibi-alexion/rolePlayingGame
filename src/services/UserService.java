@@ -59,14 +59,10 @@ public User userCreate(User u) {
 	
 			return u;
 		}
+
 	public User findUserSession(String name,String password){
-		
-		
-		 try {
-		    	log.info(name);
-		    	log.info(password);
-		    	
-		         
+
+		 try {	         
 				User user = (User) em.createNamedQuery("User.findUserSession").setParameter("login", name).setParameter("password", password)
 		            .getSingleResult();
 				log.info(user);
@@ -77,12 +73,12 @@ public User userCreate(User u) {
 		      }		
 	}
 	
-	
 	public List<User> findAllUser(){
 		TypedQuery<User> query = em.createNamedQuery("User.findAll", User.class);		
 		log.info(query);
         return query.getResultList();		
 	}
+	
 	public User findUserById(int userId){
 		log.info("findUserById " +userId);
 		log.info(em);
@@ -107,8 +103,7 @@ public User userCreate(User u) {
         }
 		else{
 			return query.getResultList();
-		}
-			
+		}		
         }
 		catch (NoResultException e) {
 	    	  log.info("user bug");

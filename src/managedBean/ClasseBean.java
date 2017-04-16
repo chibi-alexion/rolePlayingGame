@@ -60,52 +60,52 @@ public class ClasseBean implements Serializable {
 		classeUpdate=listClasse.get(1);
 	}
 	
-public String submitNewClasse(){
+	public String submitNewClasse(){
+	
+			em = EMF.getEM();
+	
+			log.info(classeCreate.getIntelligence());
+			log.info(classeCreate.getNameClasse());
+			log.info(classeCreate.getStrength());
+	
+		    ClasseService service = new ClasseService(em);
+		    try{
+		    
+		    	service.classeCreate(classeCreate);
+		    	FacesContext.getCurrentInstance().addMessage(
+						"SubmitCharacter",
+						new FacesMessage(FacesMessage.SEVERITY_WARN,
+								"Classe Created",
+								"Please enter correct username and Password"));
+		    	em.close();
+		    	System.out.println("Classe created");
+		    }
+		    catch(Exception e){
+		    	log.error(e,e);
+				log.info("Classe not created !"); 	
+		    }
+		    
+		    return "";
+		}
 
+	public String classUpdate(){
+	
+		
 		em = EMF.getEM();
-
-		log.info(classeCreate.getIntelligence());
-		log.info(classeCreate.getNameClasse());
-		log.info(classeCreate.getStrength());
-
 	    ClasseService service = new ClasseService(em);
+	
 	    try{
-	    
-	    	service.classeCreate(classeCreate);
-	    	FacesContext.getCurrentInstance().addMessage(
-					"SubmitCharacter",
-					new FacesMessage(FacesMessage.SEVERITY_WARN,
-							"Classe Created",
-							"Please enter correct username and Password"));
+	    	service.classeUpdate(classeUpdate);
 	    	em.close();
-	    	System.out.println("Classe created");
+	    	System.out.println("Classe upated");
 	    }
 	    catch(Exception e){
 	    	log.error(e,e);
-			log.info("Classe not created !"); 	
+			log.info("Classe not upated !"); 	
 	    }
-	    
+	    init();
 	    return "";
 	}
-
-public String classUpdate(){
-
-	
-	em = EMF.getEM();
-    ClasseService service = new ClasseService(em);
-
-    try{
-    	service.classeUpdate(classeUpdate);
-    	em.close();
-    	System.out.println("Classe upated");
-    }
-    catch(Exception e){
-    	log.error(e,e);
-		log.info("Classe not upated !"); 	
-    }
-    init();
-    return "";
-}
 	
 /**
  * @return the listClasse

@@ -2,6 +2,8 @@ package entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.Size;
+
 import java.util.List;
 
 
@@ -21,7 +23,7 @@ public class Race implements Serializable {
 
 	@Id
 	private Integer idRace;
-
+	@Size(min=2, max=45)
 	private String nameRace;
 
 	//bi-directional many-to-one association to Character

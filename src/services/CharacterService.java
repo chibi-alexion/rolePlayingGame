@@ -77,6 +77,7 @@ public class CharacterService implements Serializable {
 	        return null;
 	      }
 	}
+	
 	public Character findCharacterAlive (int idUser){
 	    try {
 			log.info(idUser);
@@ -95,39 +96,39 @@ public class CharacterService implements Serializable {
 	      }
 	}
 	
-public Character findidCharacterByID(int idCharacter) {
+	public Character findidCharacterByID(int idCharacter) {
+			
+			
+		    try {
+		    	log.info(idCharacter);
+		         
+		    	Character character = (Character) em.createNamedQuery("Character.findCharacterByID").setParameter("id", idCharacter)
+		            .getSingleResult();
+		         return character;
+		      } catch (NoResultException e) {
+		    	  log.info("no character found");
+		        return null;
+		      }
+	}
+	public List<Character> findAllCharacterDeadByUser(int idUser) {
 		
 		
 	    try {
-	    	log.info(idCharacter);
-	         
-	    	Character character = (Character) em.createNamedQuery("Character.findCharacterByID").setParameter("id", idCharacter)
-	            .getSingleResult();
-	         return character;
+	    	log.info("findAllCharacterByUser");
+	    	log.info("Id utilisateur "+idUser);
+	    	
+	    	TypedQuery<Character> query = em.createNamedQuery("Character.findAllCharacterDeadByUser", Character.class);
+	    	query.setParameter("id", idUser);
+	    	log.info(query);
+	    	log.info(query.getResultList());
+	    	
+	    	return query.getResultList(); 
+	    	
 	      } catch (NoResultException e) {
-	    	  log.info("no character found");
+	    	  System.out.println("erreur");
 	        return null;
 	      }
-}
-public List<Character> findAllCharacterDeadByUser(int idUser) {
-	
-	
-    try {
-    	log.info("findAllCharacterByUser");
-    	log.info("Id utilisateur "+idUser);
-    	
-    	TypedQuery<Character> query = em.createNamedQuery("Character.findAllCharacterDeadByUser", Character.class);
-    	query.setParameter("id", idUser);
-    	log.info(query);
-    	log.info(query.getResultList());
-    	
-    	return query.getResultList(); 
-    	
-      } catch (NoResultException e) {
-    	  System.out.println("erreur");
-        return null;
-      }
-}
+	}
 
 public Character characterTest(int idUser) {
 	

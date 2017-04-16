@@ -2,6 +2,8 @@ package entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.Size;
+
 import java.util.List;
 
 
@@ -30,6 +32,7 @@ public class Classe implements Serializable {
 
 	private int magic;
 
+	@Size(min=1, max=45)
 	private String nameClasse;
 
 	private int strength;

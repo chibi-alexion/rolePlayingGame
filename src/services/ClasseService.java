@@ -36,17 +36,18 @@ public class ClasseService implements Serializable {
 
 	}
 	
-public Classe classeCreate(Classe cl) {
-		
-	    em.getTransaction().begin(); 
-
-		em.persist(cl);
-	    em.getTransaction().commit();  		
-
-		System.out.println("Classe persist ok");
-
-		return cl;
-	}
+	public Classe classeCreate(Classe cl) {
+			
+		    em.getTransaction().begin(); 
+	
+			em.persist(cl);
+		    em.getTransaction().commit();  		
+	
+			System.out.println("Classe persist ok");
+	
+			return cl;
+		}
+	
 	public Classe classeUpdate(Classe cl) {
 			
 		log.info("User service "+cl); 
@@ -77,6 +78,7 @@ public Classe classeCreate(Classe cl) {
 	        return null;
 	      }
 	}
+	
 	public Classe findClasseByName(String classeName){
 		
         try {

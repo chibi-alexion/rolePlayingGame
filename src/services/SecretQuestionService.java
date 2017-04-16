@@ -65,6 +65,7 @@ public class SecretQuestionService implements Serializable {
 	
 			return s;
 		}
+	
 	public List<SecretQuestion> findAllSecretQuestion (){
 	    try {
 			log.info("service find all secret question");
@@ -76,7 +77,7 @@ public class SecretQuestionService implements Serializable {
 	      }
 	}
 	
-public SecretQuestion findSecretQuestionByID(int idSecretQuestion) {
+	public SecretQuestion findSecretQuestionByID(int idSecretQuestion) {
 		
 	    try {
 	    	log.debug(idSecretQuestion);    
@@ -87,22 +88,18 @@ public SecretQuestion findSecretQuestionByID(int idSecretQuestion) {
 	    	  System.out.println("erreur");
 	        return null;
 	      }
-}
+	}
 
-public SecretQuestion findSecretQuestionByName(String question){
+	public SecretQuestion findSecretQuestionByName(String question){
 	
-    try {
-    	log.debug("Nom de la question dans service find by name "+question);    
-    	SecretQuestion sq = (SecretQuestion) em.createNamedQuery("SecretQuestion.findSecretQuestionByName").setParameter("question", question)
-            .getSingleResult();
-         return sq;
-      } catch (NoResultException e) {
-    	  System.out.println("question non trouvé");
-        return null;
-      }
-}
-
-	
-	
-	
+	    try {
+	    	log.debug("Nom de la question dans service find by name "+question);    
+	    	SecretQuestion sq = (SecretQuestion) em.createNamedQuery("SecretQuestion.findSecretQuestionByName").setParameter("question", question)
+	            .getSingleResult();
+	         return sq;
+	      } catch (NoResultException e) {
+	    	  System.out.println("question non trouvé");
+	        return null;
+	      }
+	}
 }

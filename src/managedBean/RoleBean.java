@@ -52,6 +52,7 @@ public class RoleBean implements Serializable {
 		em.close();
 		//raceUpdate=listRace.get(1);
 	}
+	/*
 	public String submitNewSecretQuestion(){
 
 		
@@ -96,7 +97,7 @@ public class RoleBean implements Serializable {
 	    }
 	    
 	    return "";
-	}
+	}*/
 
 	/**
 	 * @return the listRole

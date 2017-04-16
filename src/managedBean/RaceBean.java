@@ -89,24 +89,24 @@ public String submitNewRace(){
 	    return "";
 	}
 
-public String racUpdate(){
-
+	public String racUpdate(){
 	
-	em = EMF.getEM();
-    RaceService rservice = new RaceService(em);
-
-    try{
-    	rservice.raceUpdate(raceUpdate);
-    	em.close();
-    	System.out.println("Race upated");
-    }
-    catch(Exception e){
-    	log.error(e,e);
-		log.info("Race not upated !"); 	
-    }
-    init();
-    return "";
-}
+		
+		em = EMF.getEM();
+	    RaceService rservice = new RaceService(em);
+	
+	    try{
+	    	rservice.raceUpdate(raceUpdate);
+	    	em.close();
+	    	System.out.println("Race upated");
+	    }
+	    catch(Exception e){
+	    	log.error(e,e);
+			log.info("Race not upated !"); 	
+	    }
+	    init();
+	    return "";
+	}
 
 /**
  * @return the listRace

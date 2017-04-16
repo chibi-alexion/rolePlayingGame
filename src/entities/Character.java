@@ -2,6 +2,8 @@ package entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.Size;
+
 import java.util.List;
 
 
@@ -34,7 +36,7 @@ public class Character implements Serializable {
 	private int hitPointCharacter;
 
 	private int lvl;
-
+	@Size(min=2, max=45)
 	private String nameCharacter;
 
 	private Boolean sexe;
